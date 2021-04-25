@@ -1,0 +1,112 @@
+{
+    "Bandit": {
+        "attunement": 8,
+        "dexterity": 9,
+        "endurance": 14,
+        "faith": 10,
+        "intelligence": 8,
+        "level": 4,
+        "resist": 11,
+        "strength": 14,
+        "vitality": 12
+    },
+    "Cleric": {
+        "attunement": 11,
+        "dexterity": 8,
+        "endurance": 9,
+        "faith": 14,
+        "intelligence": 8,
+        "level": 2,
+        "resist": 11,
+        "strength": 12,
+        "vitality": 11
+    },
+    "Deprived": {
+        "attunement": 11,
+        "dexterity": 11,
+        "endurance": 11,
+        "faith": 11,
+        "intelligence": 11,
+        "level": 6,
+        "resist": 11,
+        "strength": 11,
+        "vitality": 11
+    },
+    "Hunter": {
+        "attunement": 9,
+        "dexterity": 14,
+        "endurance": 11,
+        "faith": 9,
+        "intelligence": 9,
+        "level": 4,
+        "resist": 11,
+        "strength": 12,
+        "vitality": 11
+    },
+    "Knight": {
+        "attunement": 10,
+        "dexterity": 11,
+        "endurance": 10,
+        "faith": 11,
+        "intelligence": 9,
+        "level": 5,
+        "resist": 10,
+        "strength": 11,
+        "vitality": 14
+    },
+    "Pyromancer": {
+        "attunement": 12,
+        "dexterity": 9,
+        "endurance": 11,
+        "faith": 8,
+        "intelligence": 10,
+        "level": 1,
+        "resist": 12,
+        "strength": 12,
+        "vitality": 10
+    },
+    "Sorcerer": {
+        "attunement": 15,
+        "dexterity": 11,
+        "endurance": 8,
+        "faith": 8,
+        "intelligence": 15,
+        "level": 3,
+        "resist": 8,
+        "strength": 9,
+        "vitality": 8
+    },
+    "Thief": {
+        "attunement": 11,
+        "dexterity": 15,
+        "endurance": 9,
+        "faith": 11,
+        "intelligence": 12,
+        "level": 5,
+        "resist": 10,
+        "strength": 9,
+        "vitality": 9
+    },
+    "Wanderer": {
+        "attunement": 11,
+        "dexterity": 14,
+        "endurance": 10,
+        "faith": 8,
+        "intelligence": 11,
+        "level": 3,
+        "resist": 12,
+        "strength": 10,
+        "vitality": 10
+    },
+    "Warrior": {
+        "attunement": 8,
+        "dexterity": 13,
+        "endurance": 12,
+        "faith": 9,
+        "intelligence": 9,
+        "level": 4,
+        "resist": 11,
+        "strength": 13,
+        "vitality": 11
+    }
+}
