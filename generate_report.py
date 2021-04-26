@@ -3,7 +3,6 @@
 # requires python 3.7+ for dicts being in insertion order
 
 from enum import Enum, auto
-from collections import defaultdict
 import json
 import bisect
 import itertools
