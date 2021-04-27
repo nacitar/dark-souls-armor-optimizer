@@ -6,6 +6,7 @@ from enum import Enum, auto
 import json
 import bisect
 import itertools
+import functools
 
 CHARACTER_CLASS_STATS_JSON = 'darksouls-character-classes.json'
 EQUIPMENT_STATS_JSON = 'darksouls-equipment-stats-10.json'
@@ -13,9 +14,50 @@ WEIGHT_KEY = 'weight'
 VALUE_KEY = 'physical'
 EQUIPMENT_TYPES = ['Head', 'Torso', 'Arms', 'Legs' ]
 
+
+# A weight that incorporates a modifier
+@functools.total_ordering
+class KnapsackWeight(object):
+    def __init__(self, weight, modifier = 0.0):
+        self.weight = weight
+        self.modifier = modifier
+
+    # to simplify __hash__ and __eq__
+    def __key(self):
+        return (self.weight, self.modifier)
+
+    def __hash__(self):
+        return hash(self.__key())
+
+    def __eq__(self, other):
+        if isinstance(other, KnapsackWeight):
+            return self.__key() == other.__key()
+        return NotImplemented
+
+    # the inverted sorted of the modifier makes using __key() not super viable
+    def __lt__(self, other):
+        # sort my weight then inverted modifier.  smallest weight, largest modifier.
+        return (self.weight < other.weight or
+            self.weight == other.weight and self.modifier > other.modifier)
+
+    def __add__(self, other):
+        if isinstance(other, KnapsackWeight):
+            return KnapsackWeight(
+                    weight = self.weight + other.weight,
+                    modifier = self.modifier + other.modifier)
+        return NotImplemented
+
+    def __str__(self):
+        if self.modifier == 0:
+            return str(self.weight)
+        return "{} ({:+f})".format(self.weight, self.modifier)
+
+
 # TODO: factor in rings/character endurance for equip load % gear adjustments
 class KnapsackItem(object):
     def __init__(self, weight, value, name, alternatives=None):
+        if not isinstance(weight, KnapsackWeight):
+            weight = KnapsackWeight(weight = weight)
         self.weight = weight
         self.value = value
         if not isinstance(name, tuple):
@@ -110,6 +152,9 @@ class KnapsackItemGroup(object):
         return len(self.items)
 
     def best_for_weight(self, weight, count=1):
+        # TODO: don't do this KnapsackWeight conversion, but make sure things have been flattened?
+        if not isinstance(weight, KnapsackWeight):
+            weight = KnapsackWeight(weight = weight)
         index = bisect.bisect_right(self._sorted_weights, weight) - 1
         if index == -1:
             return None
@@ -152,3 +197,26 @@ print(f"optimal sets for {VALUE_KEY}: {len(solution)}")
 top_ten = solution.best_for_weight(51.0, 10)
 for entry in top_ten:
     print(entry)
+
+
+exit(1)
+
+# if a piece gives any extra weight, even the tiniest amount, this could mean
+# that another category of item could be upgraded to something else, and that
+# item could be massively better.  For this reason, until reaching the final
+# category you cannot prune them out.
+#
+# if the modifier is higher, you can remove a lower one, but you must keep the highest for any given weight
+
+# (weight, modifier)
+# (12, 1.0) = 9.0
+# (14, 1.5) = 8.0
+# x(14, 1.5) = 6.0
+# (14, 1.0) = 12.0
+# (14, 1.0) = 10.0
+# (15, 1.0) = 22.0
+# (16, 1.0) = 32.0
+
+# this would nullify the other 14 entries because  the value is > or == and same weight with higher multiplier
+# (14, 1.5) = 10.0
+
