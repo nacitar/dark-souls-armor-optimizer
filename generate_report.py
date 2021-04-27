@@ -3,6 +3,7 @@
 # requires python 3.7+ for dicts being in insertion order
 
 from enum import Enum, auto
+from collections import defaultdict
 import json
 import bisect
 import itertools
@@ -18,13 +19,13 @@ EQUIPMENT_TYPES = ['Head', 'Torso', 'Arms', 'Legs' ]
 # A weight that incorporates a modifier
 @functools.total_ordering
 class KnapsackWeight(object):
-    def __init__(self, weight, modifier = 0.0):
-        self.weight = weight
+    def __init__(self, cost, modifier = 0.0):
+        self.cost = cost
         self.modifier = modifier
 
     # to simplify __hash__ and __eq__
     def __key(self):
-        return (self.weight, self.modifier)
+        return (self.cost, self.modifier)
 
     def __hash__(self):
         return hash(self.__key())
@@ -36,28 +37,28 @@ class KnapsackWeight(object):
 
     # the inverted sorted of the modifier makes using __key() not super viable
     def __lt__(self, other):
-        # sort my weight then inverted modifier.  smallest weight, largest modifier.
-        return (self.weight < other.weight or
-            self.weight == other.weight and self.modifier > other.modifier)
+        # sort my cost then inverted modifier.  smallest weight, largest modifier.
+        return (self.cost < other.cost or
+            self.cost == other.cost and self.modifier > other.modifier)
 
     def __add__(self, other):
         if isinstance(other, KnapsackWeight):
             return KnapsackWeight(
-                    weight = self.weight + other.weight,
+                    cost = self.cost + other.cost,
                     modifier = self.modifier + other.modifier)
         return NotImplemented
 
     def __str__(self):
         if self.modifier == 0:
-            return str(self.weight)
-        return "{} ({:+f})".format(self.weight, self.modifier)
+            return str(self.cost)
+        return "{} ({:+f})".format(self.cost, self.modifier)
 
 
 # TODO: factor in rings/character endurance for equip load % gear adjustments
 class KnapsackItem(object):
     def __init__(self, weight, value, name, alternatives=None):
         if not isinstance(weight, KnapsackWeight):
-            weight = KnapsackWeight(weight = weight)
+            weight = KnapsackWeight(cost = weight)
         self.weight = weight
         self.value = value
         if not isinstance(name, tuple):
@@ -109,26 +110,41 @@ class KnapsackItemGroup(object):
             # dominance filter
             before_dominance = len(items)
             items = sorted(items)
-            # the last survivor will have the highest value so far too
             last_survivor = None
             index = 0
+
+            # {modifier:KnapackItem}
+            last_survivor = None
+            # by modifier, the last survivor will be the highest value with that modifier so far
+            last_survivor_by_modifier = {}
             while index < len(items):
                 item = items[index]
+
                 # TODO: implement some sort of weight limit per-piece to help pruning?
                 if last_survivor is not None:
-                    if (item.value < last_survivor.value
-                            or item.value == last_survivor.value and item.weight > last_survivor.weight):
+                    if (item.weight.cost == last_survivor.weight.cost
+                            and item.weight.modifier < last_survivor.weight.modifier
+                            and item.value <= last_survivor.value) :
                         if self.debug > 1:
-                            print(f"REMOVED: {item.name} is dominated by {last_survivor.name}")
-                        del items[index]
-                        continue
-                    elif item.value == last_survivor.value and item.weight == last_survivor.weight:
-                        if self.debug > 1:
-                            print(f"COMBINED: {item.name} is an equal alternative to {last_survivor.name}")
-                        last_survivor.alternatives.add(item.name)
-                        del items[index]
-                        continue
-                last_survivor = item
+                            print(f"REMOVED: {item.name} is modifier dominated by {last_survivor.name}")
+                            del items[index]
+                            continue
+
+                    last_modifier_survivor = last_survivor_by_modifier.get(item.weight.modifier)
+                    if last_modifier_survivor is not None:
+                        if (item.value < last_modifier_survivor.value
+                                or item.value == last_modifier_survivor.value and item.weight > last_modifier_survivor.weight):
+                            if self.debug > 1:
+                                print(f"REMOVED: {item.name} is dominated by {last_modifier_survivor.name}")
+                            del items[index]
+                            continue
+                        elif item.value == last_modifier_survivor.value and item.weight == last_modifier_survivor.weight:
+                            if self.debug > 1:
+                                print(f"COMBINED: {item.name} is an equal alternative to {last_modifier_survivor.name}")
+                            last_modifier_survivor.alternatives.add(item.name)
+                            del items[index]
+                            continue
+                last_survivor_by_modifier[item.weight.modifier] = last_survivor = item
                 if self.debug > 1:
                     print(f"KEPT: {item.weight} {item.name}")
                 index += 1
@@ -154,7 +170,7 @@ class KnapsackItemGroup(object):
     def best_for_weight(self, weight, count=1):
         # TODO: don't do this KnapsackWeight conversion, but make sure things have been flattened?
         if not isinstance(weight, KnapsackWeight):
-            weight = KnapsackWeight(weight = weight)
+            weight = KnapsackWeight(cost = weight)
         index = bisect.bisect_right(self._sorted_weights, weight) - 1
         if index == -1:
             return None
