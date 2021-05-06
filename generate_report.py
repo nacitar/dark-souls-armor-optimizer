@@ -68,6 +68,7 @@ class KnapsackItem(object):
         item = copy.copy(self)
         item.weight = copy.copy(item.weight)
         # convert the cost into a percentage of the weight
+        # TODO: is there precision loss here that matters?
         item.weight.cost = (item.weight.cost + extra_weight_cost) / (max_weight_cost * item.weight.modifier)
         item.weight.modifier = 1.0
         return item
