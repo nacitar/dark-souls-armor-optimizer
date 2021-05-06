@@ -44,6 +44,10 @@ def convert_armor_csv_to_json(in_csv_filename, out_json_filename):
             for field in ['weight', 'physical', 'magic', 'fire', 'lightning',
                     'bleed', 'poison', 'curse']:
                 entry[field] = float(entry[field])
+            if name == "Mask of the Father":
+                entry['weight_modifier'] = 1.05  # +5%
+            else:
+                entry['weight_modifier'] = 1.00
             slot_entries[name] = entry
 
     with open(out_json_filename, 'w') as outfile:

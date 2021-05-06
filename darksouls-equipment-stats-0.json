@@ -12,7 +12,8 @@
             "poison": 8.0,
             "set": "Antiquated Set",
             "url1": "http://darksoulswiki.wikispaces.com/Antiquated+Set",
-            "weight": 0.6
+            "weight": 0.6,
+            "weight_modifier": 1.0
         },
         "Balder Gauntlets": {
             "bleed": 6.0,
@@ -26,7 +27,8 @@
             "poison": 5.0,
             "set": "Balder Set",
             "url1": "http://darksoulswiki.wikispaces.com/Balder+Set",
-            "weight": 3.5
+            "weight": 3.5,
+            "weight_modifier": 1.0
         },
         "Black Iron Gauntlets": {
             "bleed": 25.0,
@@ -40,7 +42,8 @@
             "poison": 14.0,
             "set": "Black Iron Set",
             "url1": "http://darksoulswiki.wikispaces.com/Black+Iron+Set",
-            "weight": 9.2
+            "weight": 9.2,
+            "weight_modifier": 1.0
         },
         "Black Knight Gauntlets": {
             "bleed": 15.0,
@@ -54,7 +57,8 @@
             "poison": 8.0,
             "set": "Black Knight Set",
             "url1": "http://darksoulswiki.wikispaces.com/Black+Knight+Set",
-            "weight": 6.0
+            "weight": 6.0,
+            "weight_modifier": 1.0
         },
         "Black Leather Gloves": {
             "bleed": 14.0,
@@ -68,7 +72,8 @@
             "poison": 18.0,
             "set": "Thief Set",
             "url1": "http://darksoulswiki.wikispaces.com/Thief+Set",
-            "weight": 1.8
+            "weight": 1.8,
+            "weight_modifier": 1.0
         },
         "Black Manchette": {
             "bleed": 10.0,
@@ -82,7 +87,8 @@
             "poison": 10.0,
             "set": "Black Set",
             "url1": "http://darksoulswiki.wikispaces.com/Black+Set",
-            "weight": 1.8
+            "weight": 1.8,
+            "weight_modifier": 1.0
         },
         "Black Sorcerer Gauntlets": {
             "bleed": 18.0,
@@ -96,7 +102,8 @@
             "poison": 18.0,
             "set": "Black Sorcerer Set",
             "url1": "http://darksoulswiki.wikispaces.com/Black+Sorcerer+Set",
-            "weight": 1.0
+            "weight": 1.0,
+            "weight_modifier": 1.0
         },
         "Bracelet of the Great Lord": {
             "bleed": 14.0,
@@ -110,7 +117,8 @@
             "poison": 7.0,
             "set": "Set of Gwyn",
             "url1": "http://darksoulswiki.wikispaces.com/Great+Lord+Armor",
-            "weight": 2.8
+            "weight": 2.8,
+            "weight_modifier": 1.0
         },
         "Brass Gauntlets": {
             "bleed": 12.0,
@@ -124,7 +132,8 @@
             "poison": 10.0,
             "set": "Shiny Brass Set",
             "url1": "http://darksoulswiki.wikispaces.com/Brass+Set",
-            "weight": 5.4
+            "weight": 5.4,
+            "weight_modifier": 1.0
         },
         "Brigand Gauntlets": {
             "bleed": 12.0,
@@ -138,7 +147,8 @@
             "poison": 12.0,
             "set": "Bandit Set",
             "url1": "http://darksoulswiki.wikispaces.com/Bandit+Set",
-            "weight": 1.8
+            "weight": 1.8,
+            "weight_modifier": 1.0
         },
         "Catarina Gauntlets": {
             "bleed": 21.0,
@@ -152,7 +162,8 @@
             "poison": 13.0,
             "set": "Catarina Set",
             "url1": "http://darksoulswiki.wikispaces.com/Catarina+Set",
-            "weight": 6.9
+            "weight": 6.9,
+            "weight_modifier": 1.0
         },
         "Cleric Gauntlets": {
             "bleed": 14.0,
@@ -166,7 +177,8 @@
             "poison": 9.0,
             "set": "Heavy Cleric Set",
             "url1": "http://darksoulswiki.wikispaces.com/Heavy+Cleric+Set",
-            "weight": 7.4
+            "weight": 7.4,
+            "weight_modifier": 1.0
         },
         "Crimson Gloves": {
             "bleed": 4.0,
@@ -180,7 +192,8 @@
             "poison": 4.0,
             "set": "Crimson Set",
             "url1": "http://darksoulswiki.wikispaces.com/Crimson+Set",
-            "weight": 0.8
+            "weight": 0.8,
+            "weight_modifier": 1.0
         },
         "Crystalline Gauntlets": {
             "bleed": 9.0,
@@ -194,7 +207,8 @@
             "poison": 0.0,
             "set": "Crystalline Set",
             "url1": "http://darksoulswiki.wikispaces.com/Crystalline+Set",
-            "weight": 6.4
+            "weight": 6.4,
+            "weight_modifier": 1.0
         },
         "Dark Gauntlets": {
             "bleed": 18.0,
@@ -208,7 +222,8 @@
             "poison": 12.0,
             "set": "Dark Set",
             "url1": "http://darksoulswiki.wikispaces.com/Dark+Set",
-            "weight": 5.8
+            "weight": 5.8,
+            "weight_modifier": 1.0
         },
         "Dingy Gloves": {
             "bleed": 14.0,
@@ -222,7 +237,8 @@
             "poison": 10.0,
             "set": "Dingy Set",
             "url1": "http://darksoulswiki.wikispaces.com/Dingy+Set",
-            "weight": 1.2
+            "weight": 1.2,
+            "weight_modifier": 1.0
         },
         "Eastern Gauntlets": {
             "bleed": 5.0,
@@ -236,7 +252,8 @@
             "poison": 4.0,
             "set": "Eastern Set",
             "url1": "http://darksoulswiki.wikispaces.com/Eastern+Set",
-            "weight": 1.5
+            "weight": 1.5,
+            "weight_modifier": 1.0
         },
         "Elite Knight Gauntlets": {
             "bleed": 7.0,
@@ -250,7 +267,8 @@
             "poison": 5.0,
             "set": "Elite Knight Set",
             "url1": "http://darksoulswiki.wikispaces.com/Elite+Knight+Set",
-            "weight": 3.7
+            "weight": 3.7,
+            "weight_modifier": 1.0
         },
         "Gauntlets Of The Vanquisher": {
             "bleed": 6.0,
@@ -264,7 +282,8 @@
             "poison": 5.0,
             "set": "Adventurer Set",
             "url1": "http://darksoulswiki.wikispaces.com/Adventurer%27s+Set",
-            "weight": 3.0
+            "weight": 3.0,
+            "weight_modifier": 1.0
         },
         "Gauntlets of Favor": {
             "bleed": 11.0,
@@ -278,7 +297,8 @@
             "poison": 10.0,
             "set": "Set of Favor",
             "url1": "http://darksoulswiki.wikispaces.com/Favor+Set",
-            "weight": 5.0
+            "weight": 5.0,
+            "weight_modifier": 1.0
         },
         "Gauntlets of Thorns": {
             "bleed": 16.0,
@@ -292,7 +312,8 @@
             "poison": 17.0,
             "set": "Set of Thorns",
             "url1": "http://darksoulswiki.wikispaces.com/Thorns+Set",
-            "weight": 6.2
+            "weight": 6.2,
+            "weight_modifier": 1.0
         },
         "Gauntlets of the Channelers": {
             "bleed": 0.0,
@@ -306,7 +327,8 @@
             "poison": 0.0,
             "set": "Set of the Channelers",
             "url1": "http://darksoulswiki.wikispaces.com/Channeler+Set",
-            "weight": 3.0
+            "weight": 3.0,
+            "weight_modifier": 1.0
         },
         "Giant Gauntlets": {
             "bleed": 19.0,
@@ -320,7 +342,8 @@
             "poison": 11.0,
             "set": "Giant Set",
             "url1": "http://darksoulswiki.wikispaces.com/Giant+Armor+Set",
-            "weight": 9.7
+            "weight": 9.7,
+            "weight_modifier": 1.0
         },
         "Gold-Hemmed Black Gloves": {
             "bleed": 14.0,
@@ -334,7 +357,8 @@
             "poison": 32.0,
             "set": "Gold-Hemmed Black Set",
             "url1": "http://darksoulswiki.wikispaces.com/Gold-Hemmed+Black+Set",
-            "weight": 1.2
+            "weight": 1.2,
+            "weight_modifier": 1.0
         },
         "Golem Gauntlets": {
             "bleed": 27.0,
@@ -348,7 +372,8 @@
             "poison": 17.0,
             "set": "Golem Set",
             "url1": "http://darksoulswiki.wikispaces.com/Iron+Golem+Set",
-            "weight": 9.7
+            "weight": 9.7,
+            "weight_modifier": 1.0
         },
         "Hard Leather Gauntlets": {
             "bleed": 14.0,
@@ -362,7 +387,8 @@
             "poison": 12.0,
             "set": "Warrior Set",
             "url1": "http://darksoulswiki.wikispaces.com/Warrior+Set",
-            "weight": 3.5
+            "weight": 3.5,
+            "weight_modifier": 1.0
         },
         "Havel's Gauntlets": {
             "bleed": 27.0,
@@ -376,7 +402,8 @@
             "poison": 5.0,
             "set": "Havel Set",
             "url1": "http://darksoulswiki.wikispaces.com/Havel%27s+Set",
-            "weight": 11.5
+            "weight": 11.5,
+            "weight_modifier": 1.0
         },
         "Iron Bracelet": {
             "bleed": 11.0,
@@ -390,7 +417,8 @@
             "poison": 7.0,
             "set": "Iron and Sun Set",
             "url1": "http://darksoulswiki.wikispaces.com/Armor#Unique%20Armor%20Pieces-Solaire%20Sun%20Armor%20Set",
-            "weight": 4.3
+            "weight": 4.3,
+            "weight_modifier": 1.0
         },
         "Knight Gauntlets": {
             "bleed": 8.0,
@@ -404,7 +432,8 @@
             "poison": 5.0,
             "set": "Knight Set",
             "url1": "http://darksoulswiki.wikispaces.com/Knight+Set",
-            "weight": 3.5
+            "weight": 3.5,
+            "weight_modifier": 1.0
         },
         "Leather Gauntlets": {
             "bleed": 12.0,
@@ -418,7 +447,8 @@
             "poison": 7.0,
             "set": "Chain Set",
             "url1": "http://darksoulswiki.wikispaces.com/Chain+Set",
-            "weight": 3.6
+            "weight": 3.6,
+            "weight_modifier": 1.0
         },
         "Leather Gloves": {
             "bleed": 13.0,
@@ -432,7 +462,8 @@
             "poison": 12.0,
             "set": "Hunter Set",
             "url1": "http://darksoulswiki.wikispaces.com/Hunter+Set",
-            "weight": 2.8
+            "weight": 2.8,
+            "weight_modifier": 1.0
         },
         "Maiden Gloves": {
             "bleed": 14.0,
@@ -446,7 +477,8 @@
             "poison": 10.0,
             "set": "Maiden Set",
             "url1": "http://darksoulswiki.wikispaces.com/Maiden+Set",
-            "weight": 1.2
+            "weight": 1.2,
+            "weight_modifier": 1.0
         },
         "Moonlight Gloves": {
             "bleed": 4.0,
@@ -460,7 +492,8 @@
             "poison": 4.0,
             "set": "Moonlight Set",
             "url1": "http://darksoulswiki.wikispaces.com/Gwyndolin+Moonlight+Set",
-            "weight": 0.5
+            "weight": 0.5,
+            "weight_modifier": 1.0
         },
         "Naked Arms": {
             "bleed": 0.0,
@@ -474,7 +507,8 @@
             "poison": 0.0,
             "set": "Naked",
             "url1": "",
-            "weight": 0.0
+            "weight": 0.0,
+            "weight_modifier": 1.0
         },
         "Ornstein's Gauntlets": {
             "bleed": 12.0,
@@ -488,7 +522,8 @@
             "poison": 6.0,
             "set": "Ornstein's Set",
             "url1": "http://darksoulswiki.wikispaces.com/Ornstein%27s+Set",
-            "weight": 4.0
+            "weight": 4.0,
+            "weight_modifier": 1.0
         },
         "Painting Guardian Gloves": {
             "bleed": 18.0,
@@ -502,7 +537,8 @@
             "poison": 46.0,
             "set": "Painting Guardian Set",
             "url1": "http://darksoulswiki.wikispaces.com/Painting+Guardian+Set",
-            "weight": 0.9
+            "weight": 0.9,
+            "weight_modifier": 1.0
         },
         "Paladin Gauntlets": {
             "bleed": 21.0,
@@ -516,7 +552,8 @@
             "poison": 13.0,
             "set": "Paladin Set",
             "url1": "http://darksoulswiki.wikispaces.com/Paladin+Set",
-            "weight": 7.6
+            "weight": 7.6,
+            "weight_modifier": 1.0
         },
         "Shadow Gauntlets": {
             "bleed": 23.0,
@@ -530,7 +567,8 @@
             "poison": 28.0,
             "set": "Shadow Set",
             "url1": "http://darksoulswiki.wikispaces.com/Shadow+Set",
-            "weight": 1.4
+            "weight": 1.4,
+            "weight_modifier": 1.0
         },
         "Silver Knight Gauntlets": {
             "bleed": 11.0,
@@ -544,7 +582,8 @@
             "poison": 6.0,
             "set": "Silver Knight Set",
             "url1": "http://darksoulswiki.wikispaces.com/Silver+Knight+Set",
-            "weight": 5.5
+            "weight": 5.5,
+            "weight_modifier": 1.0
         },
         "Smough's Gauntlets": {
             "bleed": 33.0,
@@ -558,7 +597,8 @@
             "poison": 16.0,
             "set": "Smough's Set",
             "url1": "http://darksoulswiki.wikispaces.com/Smough%27s+Set",
-            "weight": 10.4
+            "weight": 10.4,
+            "weight_modifier": 1.0
         },
         "Sorcerer Gauntlets": {
             "bleed": 9.0,
@@ -572,7 +612,8 @@
             "poison": 7.0,
             "set": "Sorcerer Set",
             "url1": "http://darksoulswiki.wikispaces.com/Sorcerer+Set",
-            "weight": 1.4
+            "weight": 1.4,
+            "weight_modifier": 1.0
         },
         "Steel Gauntlets": {
             "bleed": 14.0,
@@ -586,7 +627,8 @@
             "poison": 9.0,
             "set": "Steel Set",
             "url1": "http://darksoulswiki.wikispaces.com/Steel+Set",
-            "weight": 8.3
+            "weight": 8.3,
+            "weight_modifier": 1.0
         },
         "Stone Gauntlets": {
             "bleed": 27.0,
@@ -600,7 +642,8 @@
             "poison": 10.0,
             "set": "Stone Set",
             "url1": "http://darksoulswiki.wikispaces.com/Stone+Knight+Set",
-            "weight": 10.4
+            "weight": 10.4,
+            "weight_modifier": 1.0
         },
         "Tattered Cloth Manchette": {
             "bleed": 14.0,
@@ -614,7 +657,8 @@
             "poison": 35.0,
             "set": "Pyromancer Set",
             "url1": "http://darksoulswiki.wikispaces.com/Pyromancer+Set",
-            "weight": 1.6
+            "weight": 1.6,
+            "weight_modifier": 1.0
         },
         "Traveling Gloves": {
             "bleed": 5.0,
@@ -628,7 +672,8 @@
             "poison": 4.0,
             "set": "Big Hat's Set",
             "url1": "http://darksoulswiki.wikispaces.com/Big+Hat%27s+Set",
-            "weight": 0.7
+            "weight": 0.7,
+            "weight_modifier": 1.0
         },
         "Wanderer Manchette": {
             "bleed": 13.0,
@@ -642,7 +687,8 @@
             "poison": 13.0,
             "set": "Wanderer Set",
             "url1": "http://darksoulswiki.wikispaces.com/Wanderer+Set",
-            "weight": 2.1
+            "weight": 2.1,
+            "weight_modifier": 1.0
         },
         "Witch Gloves": {
             "bleed": 16.0,
@@ -656,7 +702,8 @@
             "poison": 16.0,
             "set": "Witch Set",
             "url1": "http://darksoulswiki.wikispaces.com/Witch+Set",
-            "weight": 1.7
+            "weight": 1.7,
+            "weight_modifier": 1.0
         },
         "Xanthous Gloves": {
             "bleed": 12.0,
@@ -670,7 +717,8 @@
             "poison": 18.0,
             "set": "Xanthous Set",
             "url1": "http://darksoulswiki.wikispaces.com/Xanthous+Set",
-            "weight": 2.3
+            "weight": 2.3,
+            "weight_modifier": 1.0
         }
     },
     "Head": {
@@ -686,7 +734,8 @@
             "poison": 6.0,
             "set": "Balder Set",
             "url1": "http://darksoulswiki.wikispaces.com/Balder+Set",
-            "weight": 4.2
+            "weight": 4.2,
+            "weight_modifier": 1.0
         },
         "Big Hat": {
             "bleed": 13.0,
@@ -700,7 +749,8 @@
             "poison": 13.0,
             "set": "Big Hat's Set",
             "url1": "http://darksoulswiki.wikispaces.com/Big+Hat%27s+Set",
-            "weight": 3.0
+            "weight": 3.0,
+            "weight_modifier": 1.0
         },
         "Black Iron Helm": {
             "bleed": 17.0,
@@ -714,7 +764,8 @@
             "poison": 10.0,
             "set": "Black Iron Set",
             "url1": "http://darksoulswiki.wikispaces.com/Black+Iron+Set",
-            "weight": 6.0
+            "weight": 6.0,
+            "weight_modifier": 1.0
         },
         "Black Knight Helm": {
             "bleed": 12.0,
@@ -728,7 +779,8 @@
             "poison": 6.0,
             "set": "Black Knight Set",
             "url1": "http://darksoulswiki.wikispaces.com/Black+Knight+Set",
-            "weight": 5.0
+            "weight": 5.0,
+            "weight_modifier": 1.0
         },
         "Black Sorcerer Hat": {
             "bleed": 12.0,
@@ -742,7 +794,8 @@
             "poison": 12.0,
             "set": "Black Sorcerer Set",
             "url1": "http://darksoulswiki.wikispaces.com/Black+Sorcerer+Set",
-            "weight": 0.7
+            "weight": 0.7,
+            "weight_modifier": 1.0
         },
         "Brass Helm": {
             "bleed": 11.0,
@@ -756,7 +809,8 @@
             "poison": 9.0,
             "set": "Shiny Brass Set",
             "url1": "http://darksoulswiki.wikispaces.com/Brass+Set",
-            "weight": 5.1
+            "weight": 5.1,
+            "weight_modifier": 1.0
         },
         "Brigand Hood": {
             "bleed": 8.0,
@@ -770,7 +824,8 @@
             "poison": 8.0,
             "set": "Bandit Set",
             "url1": "http://darksoulswiki.wikispaces.com/Bandit+Set",
-            "weight": 1.2
+            "weight": 1.2,
+            "weight_modifier": 1.0
         },
         "Catarina Helm": {
             "bleed": 13.0,
@@ -784,7 +839,8 @@
             "poison": 9.0,
             "set": "Catarina Set",
             "url1": "http://darksoulswiki.wikispaces.com/Catarina+Set",
-            "weight": 4.5
+            "weight": 4.5,
+            "weight_modifier": 1.0
         },
         "Chain Helm": {
             "bleed": 10.0,
@@ -798,7 +854,8 @@
             "poison": 6.0,
             "set": "Chain Set",
             "url1": "http://darksoulswiki.wikispaces.com/Chain+Set",
-            "weight": 3.0
+            "weight": 3.0,
+            "weight_modifier": 1.0
         },
         "Cleric Helm": {
             "bleed": 9.0,
@@ -812,7 +869,8 @@
             "poison": 6.0,
             "set": "Heavy Cleric Set",
             "url1": "http://darksoulswiki.wikispaces.com/Heavy+Cleric+Set",
-            "weight": 4.8
+            "weight": 4.8,
+            "weight_modifier": 1.0
         },
         "Crown of Dusk": {
             "bleed": 5.0,
@@ -826,7 +884,8 @@
             "poison": 5.0,
             "set": "Antiquated Set",
             "url1": "http://darksoulswiki.wikispaces.com/Antiquated+Set",
-            "weight": 0.4
+            "weight": 0.4,
+            "weight_modifier": 1.0
         },
         "Crown of the Dark Sun": {
             "bleed": 9.0,
@@ -840,7 +899,8 @@
             "poison": 9.0,
             "set": "Moonlight Set",
             "url1": "http://darksoulswiki.wikispaces.com/Gwyndolin+Moonlight+Set",
-            "weight": 3.0
+            "weight": 3.0,
+            "weight_modifier": 1.0
         },
         "Crown of the Great Lord": {
             "bleed": 15.0,
@@ -854,7 +914,8 @@
             "poison": 8.0,
             "set": "Set of Gwyn",
             "url1": "http://darksoulswiki.wikispaces.com/Great+Lord+Armor",
-            "weight": 3.0
+            "weight": 3.0,
+            "weight_modifier": 1.0
         },
         "Crystalline Helm": {
             "bleed": 6.0,
@@ -868,7 +929,8 @@
             "poison": 0.0,
             "set": "Crystalline Set",
             "url1": "http://darksoulswiki.wikispaces.com/Crystalline+Set",
-            "weight": 4.2
+            "weight": 4.2,
+            "weight_modifier": 1.0
         },
         "Dark Mask": {
             "bleed": 12.0,
@@ -882,7 +944,8 @@
             "poison": 8.0,
             "set": "Dark Set",
             "url1": "http://darksoulswiki.wikispaces.com/Dark+Set",
-            "weight": 3.8
+            "weight": 3.8,
+            "weight_modifier": 1.0
         },
         "Dingy Hood": {
             "bleed": 9.0,
@@ -896,7 +959,8 @@
             "poison": 7.0,
             "set": "Dingy Set",
             "url1": "http://darksoulswiki.wikispaces.com/Dingy+Set",
-            "weight": 0.8
+            "weight": 0.8,
+            "weight_modifier": 1.0
         },
         "Eastern Helm": {
             "bleed": 15.0,
@@ -910,7 +974,8 @@
             "poison": 11.0,
             "set": "Eastern Set",
             "url1": "http://darksoulswiki.wikispaces.com/Eastern+Set",
-            "weight": 4.7
+            "weight": 4.7,
+            "weight_modifier": 1.0
         },
         "Elite Knight Helm": {
             "bleed": 9.0,
@@ -924,7 +989,8 @@
             "poison": 6.0,
             "set": "Elite Knight Set",
             "url1": "http://darksoulswiki.wikispaces.com/Elite+Knight+Set",
-            "weight": 4.5
+            "weight": 4.5,
+            "weight_modifier": 1.0
         },
         "Fang Boar Helm": {
             "bleed": 13.0,
@@ -938,7 +1004,8 @@
             "poison": 8.0,
             "set": "",
             "url1": "http://darksoulswiki.wikispaces.com/Fang+Boar+Helm",
-            "weight": 8.0
+            "weight": 8.0,
+            "weight_modifier": 1.0
         },
         "Gargoyle Helm": {
             "bleed": 22.0,
@@ -952,7 +1019,8 @@
             "poison": 19.0,
             "set": "",
             "url1": "http://darksoulswiki.wikispaces.com/Gargoyle+Helm",
-            "weight": 3.5
+            "weight": 3.5,
+            "weight_modifier": 1.0
         },
         "Giant Helm": {
             "bleed": 13.0,
@@ -966,7 +1034,8 @@
             "poison": 8.0,
             "set": "Giant Set",
             "url1": "http://darksoulswiki.wikispaces.com/Giant+Armor+Set",
-            "weight": 6.3
+            "weight": 6.3,
+            "weight_modifier": 1.0
         },
         "Gold-Hemmed Black Hood": {
             "bleed": 16.0,
@@ -980,7 +1049,8 @@
             "poison": 36.0,
             "set": "Gold-Hemmed Black Set",
             "url1": "http://darksoulswiki.wikispaces.com/Gold-Hemmed+Black+Set",
-            "weight": 1.4
+            "weight": 1.4,
+            "weight_modifier": 1.0
         },
         "Golem Helm": {
             "bleed": 17.0,
@@ -994,7 +1064,8 @@
             "poison": 12.0,
             "set": "Golem Set",
             "url1": "http://darksoulswiki.wikispaces.com/Iron+Golem+Set",
-            "weight": 6.3
+            "weight": 6.3,
+            "weight_modifier": 1.0
         },
         "Havel's Helm": {
             "bleed": 18.0,
@@ -1008,7 +1079,8 @@
             "poison": 4.0,
             "set": "Havel Set",
             "url1": "http://darksoulswiki.wikispaces.com/Havel%27s+Set",
-            "weight": 7.5
+            "weight": 7.5,
+            "weight_modifier": 1.0
         },
         "Helm of Favor": {
             "bleed": 11.0,
@@ -1022,7 +1094,8 @@
             "poison": 8.0,
             "set": "Set of Favor",
             "url1": "http://darksoulswiki.wikispaces.com/Favor+Set",
-            "weight": 4.5
+            "weight": 4.5,
+            "weight_modifier": 1.0
         },
         "Helm of Thorns": {
             "bleed": 10.0,
@@ -1036,7 +1109,8 @@
             "poison": 7.0,
             "set": "Set of Thorns",
             "url1": "http://darksoulswiki.wikispaces.com/Thorns+Set",
-            "weight": 4.1
+            "weight": 4.1,
+            "weight_modifier": 1.0
         },
         "Helm of the Wise": {
             "bleed": 11.0,
@@ -1050,7 +1124,8 @@
             "poison": 7.0,
             "set": "Adventurer Set",
             "url1": "http://darksoulswiki.wikispaces.com/Adventurer%27s+Set",
-            "weight": 5.1
+            "weight": 5.1,
+            "weight_modifier": 1.0
         },
         "Hollow Soldier Helm": {
             "bleed": 7.0,
@@ -1064,7 +1139,8 @@
             "poison": 5.0,
             "set": "Hollow Soldier Set",
             "url1": "http://darksoulswiki.wikispaces.com/Hollow+Soldier+Set",
-            "weight": 3.0
+            "weight": 3.0,
+            "weight_modifier": 1.0
         },
         "Hollow Thief Hood": {
             "bleed": 6.0,
@@ -1078,7 +1154,8 @@
             "poison": 11.0,
             "set": "Hollow Thief Set",
             "url1": "http://darksoulswiki.wikispaces.com/Armor#Light%20Armor-Hollow%20Thief%20Set",
-            "weight": 1.1
+            "weight": 1.1,
+            "weight_modifier": 1.0
         },
         "Hollow Warrior Helm": {
             "bleed": 5.0,
@@ -1092,7 +1169,8 @@
             "poison": 5.0,
             "set": "Hollow Warrior Set",
             "url1": "http://darksoulswiki.wikispaces.com/Hollow+Warrior+Set",
-            "weight": 2.6
+            "weight": 2.6,
+            "weight_modifier": 1.0
         },
         "Iron Helm": {
             "bleed": 12.0,
@@ -1106,7 +1184,8 @@
             "poison": 8.0,
             "set": "Iron and Sun Set",
             "url1": "http://darksoulswiki.wikispaces.com/Armor#Unique%20Armor%20Pieces-Solaire%20Sun%20Armor%20Set",
-            "weight": 4.5
+            "weight": 4.5,
+            "weight_modifier": 1.0
         },
         "Knight Helm": {
             "bleed": 9.0,
@@ -1120,7 +1199,8 @@
             "poison": 6.0,
             "set": "Knight Set",
             "url1": "http://darksoulswiki.wikispaces.com/Knight+Set",
-            "weight": 4.2
+            "weight": 4.2,
+            "weight_modifier": 1.0
         },
         "Maiden Hood": {
             "bleed": 9.0,
@@ -1134,7 +1214,8 @@
             "poison": 7.0,
             "set": "Maiden Set",
             "url1": "http://darksoulswiki.wikispaces.com/Maiden+Set",
-            "weight": 0.8
+            "weight": 0.8,
+            "weight_modifier": 1.0
         },
         "Mask of Velka": {
             "bleed": 9.0,
@@ -1148,7 +1229,8 @@
             "poison": 9.0,
             "set": "Black Set",
             "url1": "http://darksoulswiki.wikispaces.com/Black+Set",
-            "weight": 2.5
+            "weight": 2.5,
+            "weight_modifier": 1.0
         },
         "Mask of the Child": {
             "bleed": 6.0,
@@ -1162,7 +1244,8 @@
             "poison": 0.0,
             "set": "",
             "url1": "http://darksoulswiki.wikispaces.com/Mask+of+the+Child",
-            "weight": 1.2
+            "weight": 1.2,
+            "weight_modifier": 1.0
         },
         "Mask of the Father": {
             "bleed": 6.0,
@@ -1176,7 +1259,8 @@
             "poison": 0.0,
             "set": "",
             "url1": "http://darksoulswiki.wikispaces.com/Mask+of+the+Father",
-            "weight": 1.2
+            "weight": 1.2,
+            "weight_modifier": 1.05
         },
         "Mask of the Mother": {
             "bleed": 10.0,
@@ -1190,7 +1274,8 @@
             "poison": 0.0,
             "set": "",
             "url1": "http://darksoulswiki.wikispaces.com/Mask+of+the+Mother",
-            "weight": 1.2
+            "weight": 1.2,
+            "weight_modifier": 1.0
         },
         "Mask of the Sealer": {
             "bleed": 8.0,
@@ -1204,7 +1289,8 @@
             "poison": 8.0,
             "set": "Crimson Set",
             "url1": "http://darksoulswiki.wikispaces.com/Crimson+Set",
-            "weight": 1.5
+            "weight": 1.5,
+            "weight_modifier": 1.0
         },
         "Naked Head": {
             "bleed": 0.0,
@@ -1218,7 +1304,8 @@
             "poison": 0.0,
             "set": "Naked",
             "url1": "",
-            "weight": 0.0
+            "weight": 0.0,
+            "weight_modifier": 1.0
         },
         "Ornstein's Helm": {
             "bleed": 18.0,
@@ -1232,7 +1319,8 @@
             "poison": 8.0,
             "set": "Ornstein's Set",
             "url1": "http://darksoulswiki.wikispaces.com/Ornstein%27s+Set",
-            "weight": 5.5
+            "weight": 5.5,
+            "weight_modifier": 1.0
         },
         "Painting Guardian Hood": {
             "bleed": 12.0,
@@ -1246,7 +1334,8 @@
             "poison": 30.0,
             "set": "Painting Guardian Set",
             "url1": "http://darksoulswiki.wikispaces.com/Painting+Guardian+Set",
-            "weight": 0.6
+            "weight": 0.6,
+            "weight_modifier": 1.0
         },
         "Paladin Helm": {
             "bleed": 13.0,
@@ -1260,7 +1349,8 @@
             "poison": 9.0,
             "set": "Paladin Set",
             "url1": "http://darksoulswiki.wikispaces.com/Paladin+Set",
-            "weight": 5.0
+            "weight": 5.0,
+            "weight_modifier": 1.0
         },
         "Pharis' Hat": {
             "bleed": 6.0,
@@ -1274,7 +1364,8 @@
             "poison": 5.0,
             "set": "Hunter Set",
             "url1": "http://darksoulswiki.wikispaces.com/Hunter+Set",
-            "weight": 1.2
+            "weight": 1.2,
+            "weight_modifier": 1.0
         },
         "Priest's Hat": {
             "bleed": 9.0,
@@ -1288,7 +1379,8 @@
             "poison": 8.0,
             "set": "Cleric Set",
             "url1": "http://darksoulswiki.wikispaces.com/Cleric+Set",
-            "weight": 1.2
+            "weight": 1.2,
+            "weight_modifier": 1.0
         },
         "Royal Helm": {
             "bleed": 16.0,
@@ -1302,7 +1394,8 @@
             "poison": 12.0,
             "set": "",
             "url1": "http://darksoulswiki.wikispaces.com/Royal+Helm",
-            "weight": 4.5
+            "weight": 4.5,
+            "weight_modifier": 1.0
         },
         "Sack": {
             "bleed": 12.0,
@@ -1316,7 +1409,8 @@
             "poison": 10.0,
             "set": "",
             "url1": "http://darksoulswiki.wikispaces.com/Sack",
-            "weight": 0.6
+            "weight": 0.6,
+            "weight_modifier": 1.0
         },
         "Shadow Mask": {
             "bleed": 15.0,
@@ -1330,7 +1424,8 @@
             "poison": 18.0,
             "set": "Shadow Set",
             "url1": "http://darksoulswiki.wikispaces.com/Shadow+Set",
-            "weight": 0.9
+            "weight": 0.9,
+            "weight_modifier": 1.0
         },
         "Silver Knight Helm": {
             "bleed": 9.0,
@@ -1344,7 +1439,8 @@
             "poison": 5.0,
             "set": "Silver Knight Set",
             "url1": "http://darksoulswiki.wikispaces.com/Silver+Knight+Set",
-            "weight": 4.8
+            "weight": 4.8,
+            "weight_modifier": 1.0
         },
         "Six-Eyed Helm of the Channelers": {
             "bleed": 15.0,
@@ -1358,7 +1454,8 @@
             "poison": 13.0,
             "set": "Set of the Channelers",
             "url1": "http://darksoulswiki.wikispaces.com/Channeler+Set",
-            "weight": 3.9
+            "weight": 3.9,
+            "weight_modifier": 1.0
         },
         "Smough's Helm": {
             "bleed": 21.0,
@@ -1372,7 +1469,8 @@
             "poison": 12.0,
             "set": "Smough's Set",
             "url1": "http://darksoulswiki.wikispaces.com/Smough%27s+Set",
-            "weight": 6.8
+            "weight": 6.8,
+            "weight_modifier": 1.0
         },
         "Sorcerer Hat": {
             "bleed": 6.0,
@@ -1386,7 +1484,8 @@
             "poison": 5.0,
             "set": "Sorcerer Set",
             "url1": "http://darksoulswiki.wikispaces.com/Sorcerer+Set",
-            "weight": 0.9
+            "weight": 0.9,
+            "weight_modifier": 1.0
         },
         "Standard Helm": {
             "bleed": 9.0,
@@ -1400,7 +1499,8 @@
             "poison": 8.0,
             "set": "Warrior Set",
             "url1": "http://darksoulswiki.wikispaces.com/Warrior+Set",
-            "weight": 3.5
+            "weight": 3.5,
+            "weight_modifier": 1.0
         },
         "Steel Helm": {
             "bleed": 9.0,
@@ -1414,7 +1514,8 @@
             "poison": 6.0,
             "set": "Steel Set",
             "url1": "http://darksoulswiki.wikispaces.com/Steel+Set",
-            "weight": 5.4
+            "weight": 5.4,
+            "weight_modifier": 1.0
         },
         "Stone Helm": {
             "bleed": 17.0,
@@ -1428,7 +1529,8 @@
             "poison": 6.0,
             "set": "Stone Set",
             "url1": "http://darksoulswiki.wikispaces.com/Stone+Knight+Set",
-            "weight": 6.8
+            "weight": 6.8,
+            "weight_modifier": 1.0
         },
         "Sunlight Maggot": {
             "bleed": 0.0,
@@ -1442,7 +1544,8 @@
             "poison": 0.0,
             "set": "",
             "url1": "http://darksoulswiki.wikispaces.com/Sunlight+Maggot",
-            "weight": 1.4
+            "weight": 1.4,
+            "weight_modifier": 1.0
         },
         "Symbol of Avarice": {
             "bleed": 10.0,
@@ -1456,7 +1559,8 @@
             "poison": 0.0,
             "set": "",
             "url1": "http://darksoulswiki.wikispaces.com/Symbol+of+Avarice",
-            "weight": 10.0
+            "weight": 10.0,
+            "weight_modifier": 1.0
         },
         "Tattered Cloth Hood": {
             "bleed": 9.0,
@@ -1470,7 +1574,8 @@
             "poison": 23.0,
             "set": "Pyromancer Set",
             "url1": "http://darksoulswiki.wikispaces.com/Pyromancer+Set",
-            "weight": 1.1
+            "weight": 1.1,
+            "weight_modifier": 1.0
         },
         "Thief Mask": {
             "bleed": 9.0,
@@ -1484,7 +1589,8 @@
             "poison": 12.0,
             "set": "Thief Set",
             "url1": "http://darksoulswiki.wikispaces.com/Thief+Set",
-            "weight": 1.2
+            "weight": 1.2,
+            "weight_modifier": 1.0
         },
         "Wanderer Hood": {
             "bleed": 8.0,
@@ -1498,7 +1604,8 @@
             "poison": 8.0,
             "set": "Wanderer Set",
             "url1": "http://darksoulswiki.wikispaces.com/Wanderer+Set",
-            "weight": 1.4
+            "weight": 1.4,
+            "weight_modifier": 1.0
         },
         "Witch Hat": {
             "bleed": 10.0,
@@ -1512,7 +1619,8 @@
             "poison": 10.0,
             "set": "Witch Set",
             "url1": "http://darksoulswiki.wikispaces.com/Witch+Set",
-            "weight": 1.1
+            "weight": 1.1,
+            "weight_modifier": 1.0
         },
         "Xanthous Crown": {
             "bleed": 8.0,
@@ -1526,7 +1634,8 @@
             "poison": 11.0,
             "set": "Xanthous Set",
             "url1": "http://darksoulswiki.wikispaces.com/Xanthous+Set",
-            "weight": 5.0
+            "weight": 5.0,
+            "weight_modifier": 1.0
         }
     },
     "Legs": {
@@ -1542,7 +1651,8 @@
             "poison": 7.0,
             "set": "Set of Gwyn",
             "url1": "http://darksoulswiki.wikispaces.com/Great+Lord+Armor",
-            "weight": 2.8
+            "weight": 2.8,
+            "weight_modifier": 1.0
         },
         "Antiquated Skirt": {
             "bleed": 40.0,
@@ -1556,7 +1666,8 @@
             "poison": 40.0,
             "set": "Antiquated Set",
             "url1": "http://darksoulswiki.wikispaces.com/Antiquated+Set",
-            "weight": 3.0
+            "weight": 3.0,
+            "weight_modifier": 1.0
         },
         "Balder Leggings": {
             "bleed": 14.0,
@@ -1570,7 +1681,8 @@
             "poison": 12.0,
             "set": "Balder Set",
             "url1": "http://darksoulswiki.wikispaces.com/Balder+Set",
-            "weight": 6.4
+            "weight": 6.4,
+            "weight_modifier": 1.0
         },
         "Black Iron Leggings": {
             "bleed": 25.0,
@@ -1584,7 +1696,8 @@
             "poison": 14.0,
             "set": "Black Iron Set",
             "url1": "http://darksoulswiki.wikispaces.com/Black+Iron+Set",
-            "weight": 9.2
+            "weight": 9.2,
+            "weight_modifier": 1.0
         },
         "Black Knight Leggings": {
             "bleed": 17.0,
@@ -1598,7 +1711,8 @@
             "poison": 9.0,
             "set": "Black Knight Set",
             "url1": "http://darksoulswiki.wikispaces.com/Black+Knight+Set",
-            "weight": 7.0
+            "weight": 7.0,
+            "weight_modifier": 1.0
         },
         "Black Leather Boots": {
             "bleed": 23.0,
@@ -1612,7 +1726,8 @@
             "poison": 31.0,
             "set": "Thief Set",
             "url1": "http://darksoulswiki.wikispaces.com/Thief+Set",
-            "weight": 3.0
+            "weight": 3.0,
+            "weight_modifier": 1.0
         },
         "Black Sorcerer Boots": {
             "bleed": 18.0,
@@ -1626,7 +1741,8 @@
             "poison": 18.0,
             "set": "Black Sorcerer Set",
             "url1": "http://darksoulswiki.wikispaces.com/Black+Sorcerer+Set",
-            "weight": 1.0
+            "weight": 1.0,
+            "weight_modifier": 1.0
         },
         "Black Tights": {
             "bleed": 15.0,
@@ -1640,7 +1756,8 @@
             "poison": 15.0,
             "set": "Black Set",
             "url1": "http://darksoulswiki.wikispaces.com/Black+Set",
-            "weight": 2.8
+            "weight": 2.8,
+            "weight_modifier": 1.0
         },
         "Blood-Stained Skirt": {
             "bleed": 29.0,
@@ -1654,7 +1771,8 @@
             "poison": 22.0,
             "set": "Dingy Set",
             "url1": "http://darksoulswiki.wikispaces.com/Dingy+Set",
-            "weight": 2.5
+            "weight": 2.5,
+            "weight_modifier": 1.0
         },
         "Boots Of The Explorer": {
             "bleed": 8.0,
@@ -1668,7 +1786,8 @@
             "poison": 6.0,
             "set": "Adventurer Set",
             "url1": "http://darksoulswiki.wikispaces.com/Adventurer%27s+Set",
-            "weight": 4.0
+            "weight": 4.0,
+            "weight_modifier": 1.0
         },
         "Brass Leggings": {
             "bleed": 14.0,
@@ -1682,7 +1801,8 @@
             "poison": 12.0,
             "set": "Shiny Brass Set",
             "url1": "http://darksoulswiki.wikispaces.com/Brass+Set",
-            "weight": 6.4
+            "weight": 6.4,
+            "weight_modifier": 1.0
         },
         "Brigand Trousers": {
             "bleed": 12.0,
@@ -1696,7 +1816,8 @@
             "poison": 12.0,
             "set": "Bandit Set",
             "url1": "http://darksoulswiki.wikispaces.com/Bandit+Set",
-            "weight": 1.8
+            "weight": 1.8,
+            "weight_modifier": 1.0
         },
         "Catarina Leggings": {
             "bleed": 21.0,
@@ -1710,7 +1831,8 @@
             "poison": 13.0,
             "set": "Catarina Set",
             "url1": "http://darksoulswiki.wikispaces.com/Catarina+Set",
-            "weight": 6.9
+            "weight": 6.9,
+            "weight_modifier": 1.0
         },
         "Chain Leggings": {
             "bleed": 15.0,
@@ -1724,7 +1846,8 @@
             "poison": 9.0,
             "set": "Chain Set",
             "url1": "http://darksoulswiki.wikispaces.com/Chain+Set",
-            "weight": 4.6
+            "weight": 4.6,
+            "weight_modifier": 1.0
         },
         "Cleric Leggings": {
             "bleed": 25.0,
@@ -1738,7 +1861,8 @@
             "poison": 9.0,
             "set": "Heavy Cleric Set",
             "url1": "http://darksoulswiki.wikispaces.com/Heavy+Cleric+Set",
-            "weight": 7.4
+            "weight": 7.4,
+            "weight_modifier": 1.0
         },
         "Crimson Waistcloth": {
             "bleed": 19.0,
@@ -1752,7 +1876,8 @@
             "poison": 19.0,
             "set": "Crimson Set",
             "url1": "http://darksoulswiki.wikispaces.com/Crimson+Set",
-            "weight": 3.5
+            "weight": 3.5,
+            "weight_modifier": 1.0
         },
         "Crystalline Leggings": {
             "bleed": 9.0,
@@ -1766,7 +1891,8 @@
             "poison": 0.0,
             "set": "Crystalline Set",
             "url1": "http://darksoulswiki.wikispaces.com/Crystalline+Set",
-            "weight": 6.4
+            "weight": 6.4,
+            "weight_modifier": 1.0
         },
         "Dark Leggings": {
             "bleed": 18.0,
@@ -1780,7 +1906,8 @@
             "poison": 12.0,
             "set": "Dark Set",
             "url1": "http://darksoulswiki.wikispaces.com/Dark+Set",
-            "weight": 5.8
+            "weight": 5.8,
+            "weight_modifier": 1.0
         },
         "Eastern Leggings": {
             "bleed": 12.0,
@@ -1794,7 +1921,8 @@
             "poison": 10.0,
             "set": "Eastern Set",
             "url1": "http://darksoulswiki.wikispaces.com/Eastern+Set",
-            "weight": 4.0
+            "weight": 4.0,
+            "weight_modifier": 1.0
         },
         "Elite Knight Leggings": {
             "bleed": 14.0,
@@ -1808,7 +1936,8 @@
             "poison": 9.0,
             "set": "Elite Knight Set",
             "url1": "http://darksoulswiki.wikispaces.com/Elite+Knight+Set",
-            "weight": 6.9
+            "weight": 6.9,
+            "weight_modifier": 1.0
         },
         "Giant Leggings": {
             "bleed": 19.0,
@@ -1822,7 +1951,8 @@
             "poison": 11.0,
             "set": "Giant Set",
             "url1": "http://darksoulswiki.wikispaces.com/Giant+Armor+Set",
-            "weight": 9.7
+            "weight": 9.7,
+            "weight_modifier": 1.0
         },
         "Gold-Hemmed Black Skirt": {
             "bleed": 32.0,
@@ -1836,7 +1966,8 @@
             "poison": 78.0,
             "set": "Gold-Hemmed Black Set",
             "url1": "http://darksoulswiki.wikispaces.com/Gold-Hemmed+Black+Set",
-            "weight": 3.0
+            "weight": 3.0,
+            "weight_modifier": 1.0
         },
         "Golem Leggings": {
             "bleed": 27.0,
@@ -1850,7 +1981,8 @@
             "poison": 17.0,
             "set": "Golem Set",
             "url1": "http://darksoulswiki.wikispaces.com/Iron+Golem+Set",
-            "weight": 9.7
+            "weight": 9.7,
+            "weight_modifier": 1.0
         },
         "Hard Leather Boots": {
             "bleed": 14.0,
@@ -1864,7 +1996,8 @@
             "poison": 12.0,
             "set": "Warrior Set",
             "url1": "http://darksoulswiki.wikispaces.com/Warrior+Set",
-            "weight": 3.5
+            "weight": 3.5,
+            "weight_modifier": 1.0
         },
         "Havel's Leggings": {
             "bleed": 27.0,
@@ -1878,7 +2011,8 @@
             "poison": 5.0,
             "set": "Havel Set",
             "url1": "http://darksoulswiki.wikispaces.com/Havel%27s+Set",
-            "weight": 11.5
+            "weight": 11.5,
+            "weight_modifier": 1.0
         },
         "Heavy Boots": {
             "bleed": 14.0,
@@ -1892,7 +2026,8 @@
             "poison": 35.0,
             "set": "Pyromancer Set",
             "url1": "http://darksoulswiki.wikispaces.com/Pyromancer+Set",
-            "weight": 1.6
+            "weight": 1.6,
+            "weight_modifier": 1.0
         },
         "Hollow Soldier Waistcloth": {
             "bleed": 7.0,
@@ -1906,7 +2041,8 @@
             "poison": 10.0,
             "set": "Hollow Soldier Set",
             "url1": "http://darksoulswiki.wikispaces.com/Hollow+Soldier+Set",
-            "weight": 1.5
+            "weight": 1.5,
+            "weight_modifier": 1.0
         },
         "Hollow Thief Tights": {
             "bleed": 9.0,
@@ -1920,7 +2056,8 @@
             "poison": 17.0,
             "set": "Hollow Thief Set",
             "url1": "http://darksoulswiki.wikispaces.com/Armor#Light%20Armor-Hollow%20Thief%20Set",
-            "weight": 1.7
+            "weight": 1.7,
+            "weight_modifier": 1.0
         },
         "Hollow Warrior Waistcloth": {
             "bleed": 6.0,
@@ -1934,7 +2071,8 @@
             "poison": 6.0,
             "set": "Hollow Warrior Set",
             "url1": "http://darksoulswiki.wikispaces.com/Hollow+Warrior+Set",
-            "weight": 1.4
+            "weight": 1.4,
+            "weight_modifier": 1.0
         },
         "Holy Trousers": {
             "bleed": 15.0,
@@ -1948,7 +2086,8 @@
             "poison": 13.0,
             "set": "Cleric Set",
             "url1": "http://darksoulswiki.wikispaces.com/Cleric+Set",
-            "weight": 2.0
+            "weight": 2.0,
+            "weight_modifier": 1.0
         },
         "Iron Leggings": {
             "bleed": 14.0,
@@ -1962,7 +2101,8 @@
             "poison": 9.0,
             "set": "Iron and Sun Set",
             "url1": "http://darksoulswiki.wikispaces.com/Armor#Unique%20Armor%20Pieces-Solaire%20Sun%20Armor%20Set",
-            "weight": 5.3
+            "weight": 5.3,
+            "weight_modifier": 1.0
         },
         "Knight Leggings": {
             "bleed": 14.0,
@@ -1976,7 +2116,8 @@
             "poison": 9.0,
             "set": "Knight Set",
             "url1": "http://darksoulswiki.wikispaces.com/Knight+Set",
-            "weight": 6.4
+            "weight": 6.4,
+            "weight_modifier": 1.0
         },
         "Leather Boots": {
             "bleed": 13.0,
@@ -1990,7 +2131,8 @@
             "poison": 12.0,
             "set": "Hunter Set",
             "url1": "http://darksoulswiki.wikispaces.com/Hunter+Set",
-            "weight": 2.8
+            "weight": 2.8,
+            "weight_modifier": 1.0
         },
         "Leggings of Favor": {
             "bleed": 15.0,
@@ -2004,7 +2146,8 @@
             "poison": 14.0,
             "set": "Set of Favor",
             "url1": "http://darksoulswiki.wikispaces.com/Favor+Set",
-            "weight": 6.9
+            "weight": 6.9,
+            "weight_modifier": 1.0
         },
         "Leggings of Thorns": {
             "bleed": 16.0,
@@ -2018,7 +2161,8 @@
             "poison": 17.0,
             "set": "Set of Thorns",
             "url1": "http://darksoulswiki.wikispaces.com/Thorns+Set",
-            "weight": 6.2
+            "weight": 6.2,
+            "weight_modifier": 1.0
         },
         "Maiden Skirt": {
             "bleed": 29.0,
@@ -2032,7 +2176,8 @@
             "poison": 22.0,
             "set": "Maiden Set",
             "url1": "http://darksoulswiki.wikispaces.com/Maiden+Set",
-            "weight": 2.5
+            "weight": 2.5,
+            "weight_modifier": 1.0
         },
         "Moonlight Waistcloth": {
             "bleed": 14.0,
@@ -2046,7 +2191,8 @@
             "poison": 14.0,
             "set": "Moonlight Set",
             "url1": "http://darksoulswiki.wikispaces.com/Gwyndolin+Moonlight+Set",
-            "weight": 1.8
+            "weight": 1.8,
+            "weight_modifier": 1.0
         },
         "Naked Legs": {
             "bleed": 0.0,
@@ -2060,7 +2206,8 @@
             "poison": 0.0,
             "set": "Naked",
             "url1": "",
-            "weight": 0.0
+            "weight": 0.0,
+            "weight_modifier": 1.0
         },
         "Ornstein's Leggings": {
             "bleed": 22.0,
@@ -2074,7 +2221,8 @@
             "poison": 12.0,
             "set": "Ornstein's Set",
             "url1": "http://darksoulswiki.wikispaces.com/Ornstein%27s+Set",
-            "weight": 7.0
+            "weight": 7.0,
+            "weight_modifier": 1.0
         },
         "Painting Guardian Waistcloth": {
             "bleed": 21.0,
@@ -2088,7 +2236,8 @@
             "poison": 51.0,
             "set": "Painting Guardian Set",
             "url1": "http://darksoulswiki.wikispaces.com/Painting+Guardian+Set",
-            "weight": 4.0
+            "weight": 4.0,
+            "weight_modifier": 1.0
         },
         "Paladin Leggings": {
             "bleed": 21.0,
@@ -2102,7 +2251,8 @@
             "poison": 13.0,
             "set": "Paladin Set",
             "url1": "http://darksoulswiki.wikispaces.com/Paladin+Set",
-            "weight": 7.6
+            "weight": 7.6,
+            "weight_modifier": 1.0
         },
         "Shadow Leggings": {
             "bleed": 23.0,
@@ -2116,7 +2266,8 @@
             "poison": 28.0,
             "set": "Shadow Set",
             "url1": "http://darksoulswiki.wikispaces.com/Shadow+Set",
-            "weight": 1.4
+            "weight": 1.4,
+            "weight_modifier": 1.0
         },
         "Silver Knight Leggings": {
             "bleed": 14.0,
@@ -2130,7 +2281,8 @@
             "poison": 7.0,
             "set": "Silver Knight Set",
             "url1": "http://darksoulswiki.wikispaces.com/Silver+Knight+Set",
-            "weight": 6.5
+            "weight": 6.5,
+            "weight_modifier": 1.0
         },
         "Smough's Leggings": {
             "bleed": 33.0,
@@ -2144,7 +2296,8 @@
             "poison": 16.0,
             "set": "Smough's Set",
             "url1": "http://darksoulswiki.wikispaces.com/Smough%27s+Set",
-            "weight": 10.4
+            "weight": 10.4,
+            "weight_modifier": 1.0
         },
         "Sorcerer Boots": {
             "bleed": 9.0,
@@ -2158,7 +2311,8 @@
             "poison": 7.0,
             "set": "Sorcerer Set",
             "url1": "http://darksoulswiki.wikispaces.com/Sorcerer+Set",
-            "weight": 1.4
+            "weight": 1.4,
+            "weight_modifier": 1.0
         },
         "Steel Leggings": {
             "bleed": 14.0,
@@ -2172,7 +2326,8 @@
             "poison": 9.0,
             "set": "Steel Set",
             "url1": "http://darksoulswiki.wikispaces.com/Steel+Set",
-            "weight": 8.3
+            "weight": 8.3,
+            "weight_modifier": 1.0
         },
         "Stone Leggings": {
             "bleed": 27.0,
@@ -2186,7 +2341,8 @@
             "poison": 10.0,
             "set": "Stone Set",
             "url1": "http://darksoulswiki.wikispaces.com/Stone+Knight+Set",
-            "weight": 10.4
+            "weight": 10.4,
+            "weight_modifier": 1.0
         },
         "Travelling Boots": {
             "bleed": 14.0,
@@ -2200,7 +2356,8 @@
             "poison": 14.0,
             "set": "Big Hat's Set",
             "url1": "http://darksoulswiki.wikispaces.com/Big+Hat%27s+Set",
-            "weight": 1.6
+            "weight": 1.6,
+            "weight_modifier": 1.0
         },
         "Waistcloth of the Channelers": {
             "bleed": 23.0,
@@ -2214,7 +2371,8 @@
             "poison": 20.0,
             "set": "Set of the Channelers",
             "url1": "http://darksoulswiki.wikispaces.com/Channeler+Set",
-            "weight": 6.0
+            "weight": 6.0,
+            "weight_modifier": 1.0
         },
         "Wanderer Boots": {
             "bleed": 13.0,
@@ -2228,7 +2386,8 @@
             "poison": 13.0,
             "set": "Wanderer Set",
             "url1": "http://darksoulswiki.wikispaces.com/Wanderer+Set",
-            "weight": 2.1
+            "weight": 2.1,
+            "weight_modifier": 1.0
         },
         "Witch Skirt": {
             "bleed": 23.0,
@@ -2242,7 +2401,8 @@
             "poison": 23.0,
             "set": "Witch Set",
             "url1": "http://darksoulswiki.wikispaces.com/Witch+Set",
-            "weight": 2.5
+            "weight": 2.5,
+            "weight_modifier": 1.0
         },
         "Xanthous Waistcloth": {
             "bleed": 22.0,
@@ -2256,7 +2416,8 @@
             "poison": 33.0,
             "set": "Xanthous Set",
             "url1": "http://darksoulswiki.wikispaces.com/Xanthous+Set",
-            "weight": 4.0
+            "weight": 4.0,
+            "weight_modifier": 1.0
         }
     },
     "Torso": {
@@ -2272,7 +2433,8 @@
             "poison": 14.0,
             "set": "Antiquated Set",
             "url1": "http://darksoulswiki.wikispaces.com/Antiquated+Set",
-            "weight": 1.0
+            "weight": 1.0,
+            "weight_modifier": 1.0
         },
         "Armor of Thorns": {
             "bleed": 0.0,
@@ -2286,7 +2448,8 @@
             "poison": 0.0,
             "set": "Set of Thorns",
             "url1": "http://darksoulswiki.wikispaces.com/Thorns+Set",
-            "weight": 10.5
+            "weight": 10.5,
+            "weight_modifier": 1.0
         },
         "Armor of the Glorious": {
             "bleed": 28.0,
@@ -2300,7 +2463,8 @@
             "poison": 19.0,
             "set": "Adventurer Set",
             "url1": "http://darksoulswiki.wikispaces.com/Adventurer%27s+Set",
-            "weight": 13.3
+            "weight": 13.3,
+            "weight_modifier": 1.0
         },
         "Armor of the Sun": {
             "bleed": 23.0,
@@ -2314,7 +2478,8 @@
             "poison": 16.0,
             "set": "Iron and Sun Set",
             "url1": "http://darksoulswiki.wikispaces.com/Armor#Unique%20Armor%20Pieces-Solaire%20Sun%20Armor%20Set",
-            "weight": 9.0
+            "weight": 9.0,
+            "weight_modifier": 1.0
         },
         "Balder Armor": {
             "bleed": 20.0,
@@ -2328,7 +2493,8 @@
             "poison": 13.0,
             "set": "Balder Set",
             "url1": "http://darksoulswiki.wikispaces.com/Balder+Set",
-            "weight": 10.9
+            "weight": 10.9,
+            "weight_modifier": 1.0
         },
         "Black Cleric Robe": {
             "bleed": 22.0,
@@ -2342,7 +2508,8 @@
             "poison": 22.0,
             "set": "Black Set",
             "url1": "http://darksoulswiki.wikispaces.com/Black+Set",
-            "weight": 3.9
+            "weight": 3.9,
+            "weight_modifier": 1.0
         },
         "Black Iron Armor": {
             "bleed": 43.0,
@@ -2356,7 +2523,8 @@
             "poison": 25.0,
             "set": "Black Iron Set",
             "url1": "http://darksoulswiki.wikispaces.com/Black+Iron+Set",
-            "weight": 15.6
+            "weight": 15.6,
+            "weight_modifier": 1.0
         },
         "Black Knight Armor": {
             "bleed": 32.0,
@@ -2370,7 +2538,8 @@
             "poison": 15.0,
             "set": "Black Knight Set",
             "url1": "http://darksoulswiki.wikispaces.com/Black+Knight+Set",
-            "weight": 13.0
+            "weight": 13.0,
+            "weight_modifier": 1.0
         },
         "Black Leather Armor": {
             "bleed": 23.0,
@@ -2384,7 +2553,8 @@
             "poison": 31.0,
             "set": "Thief Set",
             "url1": "http://darksoulswiki.wikispaces.com/Thief+Set",
-            "weight": 3.1
+            "weight": 3.1,
+            "weight_modifier": 1.0
         },
         "Black Sorcerer Cloak": {
             "bleed": 31.0,
@@ -2398,7 +2568,8 @@
             "poison": 31.0,
             "set": "Black Sorcerer Set",
             "url1": "http://darksoulswiki.wikispaces.com/Black+Sorcerer+Set",
-            "weight": 1.8
+            "weight": 1.8,
+            "weight_modifier": 1.0
         },
         "Brass Armor": {
             "bleed": 24.0,
@@ -2412,7 +2583,8 @@
             "poison": 20.0,
             "set": "Shiny Brass Set",
             "url1": "http://darksoulswiki.wikispaces.com/Brass+Set",
-            "weight": 10.9
+            "weight": 10.9,
+            "weight_modifier": 1.0
         },
         "Brigand Armor": {
             "bleed": 20.0,
@@ -2426,7 +2598,8 @@
             "poison": 20.0,
             "set": "Bandit Set",
             "url1": "http://darksoulswiki.wikispaces.com/Bandit+Set",
-            "weight": 3.1
+            "weight": 3.1,
+            "weight_modifier": 1.0
         },
         "Catarina Armor": {
             "bleed": 34.0,
@@ -2440,7 +2613,8 @@
             "poison": 24.0,
             "set": "Catarina Set",
             "url1": "http://darksoulswiki.wikispaces.com/Catarina+Set",
-            "weight": 11.7
+            "weight": 11.7,
+            "weight_modifier": 1.0
         },
         "Chain Armor": {
             "bleed": 20.0,
@@ -2454,7 +2628,8 @@
             "poison": 12.0,
             "set": "Chain Set",
             "url1": "http://darksoulswiki.wikispaces.com/Chain+Set",
-            "weight": 6.0
+            "weight": 6.0,
+            "weight_modifier": 1.0
         },
         "Cleric Armor": {
             "bleed": 23.0,
@@ -2468,7 +2643,8 @@
             "poison": 16.0,
             "set": "Heavy Cleric Set",
             "url1": "http://darksoulswiki.wikispaces.com/Heavy+Cleric+Set",
-            "weight": 12.5
+            "weight": 12.5,
+            "weight_modifier": 1.0
         },
         "Crimson Robe": {
             "bleed": 21.0,
@@ -2482,7 +2658,8 @@
             "poison": 21.0,
             "set": "Crimson Set",
             "url1": "http://darksoulswiki.wikispaces.com/Crimson+Set",
-            "weight": 3.9
+            "weight": 3.9,
+            "weight_modifier": 1.0
         },
         "Crystalline Armor": {
             "bleed": 15.0,
@@ -2496,7 +2673,8 @@
             "poison": 0.0,
             "set": "Crystalline Set",
             "url1": "http://darksoulswiki.wikispaces.com/Crystalline+Set",
-            "weight": 10.9
+            "weight": 10.9,
+            "weight_modifier": 1.0
         },
         "Dark Armor": {
             "bleed": 30.0,
@@ -2510,7 +2688,8 @@
             "poison": 21.0,
             "set": "Dark Set",
             "url1": "http://darksoulswiki.wikispaces.com/Dark+Set",
-            "weight": 9.8
+            "weight": 9.8,
+            "weight_modifier": 1.0
         },
         "Dingy Robe": {
             "bleed": 35.0,
@@ -2524,7 +2703,8 @@
             "poison": 26.0,
             "set": "Dingy Set",
             "url1": "http://darksoulswiki.wikispaces.com/Dingy+Set",
-            "weight": 3.0
+            "weight": 3.0,
+            "weight_modifier": 1.0
         },
         "Eastern Armor": {
             "bleed": 38.0,
@@ -2538,7 +2718,8 @@
             "poison": 28.0,
             "set": "Eastern Set",
             "url1": "http://darksoulswiki.wikispaces.com/Eastern+Set",
-            "weight": 12.3
+            "weight": 12.3,
+            "weight_modifier": 1.0
         },
         "Elite Knight Armor": {
             "bleed": 23.0,
@@ -2552,7 +2733,8 @@
             "poison": 16.0,
             "set": "Elite Knight Set",
             "url1": "http://darksoulswiki.wikispaces.com/Elite+Knight+Set",
-            "weight": 11.7
+            "weight": 11.7,
+            "weight_modifier": 1.0
         },
         "Embraced Armor of Favor": {
             "bleed": 28.0,
@@ -2566,7 +2748,8 @@
             "poison": 22.0,
             "set": "Set of Favor",
             "url1": "http://darksoulswiki.wikispaces.com/Favor+Set",
-            "weight": 11.7
+            "weight": 11.7,
+            "weight_modifier": 1.0
         },
         "Giant Armor": {
             "bleed": 32.0,
@@ -2580,7 +2763,8 @@
             "poison": 19.0,
             "set": "Giant Set",
             "url1": "http://darksoulswiki.wikispaces.com/Giant+Armor+Set",
-            "weight": 16.4
+            "weight": 16.4,
+            "weight_modifier": 1.0
         },
         "Gold-Hemmed Black Cloak": {
             "bleed": 40.0,
@@ -2594,7 +2778,8 @@
             "poison": 94.0,
             "set": "Gold-Hemmed Black Set",
             "url1": "http://darksoulswiki.wikispaces.com/Gold-Hemmed+Black+Set",
-            "weight": 3.5
+            "weight": 3.5,
+            "weight_modifier": 1.0
         },
         "Golem Armor": {
             "bleed": 45.0,
@@ -2608,7 +2793,8 @@
             "poison": 31.0,
             "set": "Golem Set",
             "url1": "http://darksoulswiki.wikispaces.com/Iron+Golem+Set",
-            "weight": 16.4
+            "weight": 16.4,
+            "weight_modifier": 1.0
         },
         "Hard Leather Armor": {
             "bleed": 23.0,
@@ -2622,7 +2808,8 @@
             "poison": 20.0,
             "set": "Warrior Set",
             "url1": "http://darksoulswiki.wikispaces.com/Warrior+Set",
-            "weight": 5.9
+            "weight": 5.9,
+            "weight_modifier": 1.0
         },
         "Havel's Armor": {
             "bleed": 45.0,
@@ -2636,7 +2823,8 @@
             "poison": 11.0,
             "set": "Havel Set",
             "url1": "http://darksoulswiki.wikispaces.com/Havel%27s+Set",
-            "weight": 19.5
+            "weight": 19.5,
+            "weight_modifier": 1.0
         },
         "Hollow Soldier Armor": {
             "bleed": 18.0,
@@ -2650,7 +2838,8 @@
             "poison": 13.0,
             "set": "Hollow Soldier Set",
             "url1": "http://darksoulswiki.wikispaces.com/Hollow+Soldier+Set",
-            "weight": 7.8
+            "weight": 7.8,
+            "weight_modifier": 1.0
         },
         "Hollow Thief Leather Armor": {
             "bleed": 15.0,
@@ -2664,7 +2853,8 @@
             "poison": 29.0,
             "set": "Hollow Thief Set",
             "url1": "http://darksoulswiki.wikispaces.com/Armor#Light%20Armor-Hollow%20Thief%20Set",
-            "weight": 2.8
+            "weight": 2.8,
+            "weight_modifier": 1.0
         },
         "Hollow Warrior Armor": {
             "bleed": 13.0,
@@ -2678,7 +2868,8 @@
             "poison": 13.0,
             "set": "Hollow Warrior Set",
             "url1": "http://darksoulswiki.wikispaces.com/Hollow+Warrior+Set",
-            "weight": 6.6
+            "weight": 6.6,
+            "weight_modifier": 1.0
         },
         "Holy Robe": {
             "bleed": 24.0,
@@ -2692,7 +2883,8 @@
             "poison": 20.0,
             "set": "Cleric Set",
             "url1": "http://darksoulswiki.wikispaces.com/Cleric+Set",
-            "weight": 4.0
+            "weight": 4.0,
+            "weight_modifier": 1.0
         },
         "Knight Armor": {
             "bleed": 23.0,
@@ -2706,7 +2898,8 @@
             "poison": 16.0,
             "set": "Knight Set",
             "url1": "http://darksoulswiki.wikispaces.com/Knight+Set",
-            "weight": 10.9
+            "weight": 10.9,
+            "weight_modifier": 1.0
         },
         "Leather Armor": {
             "bleed": 21.0,
@@ -2720,7 +2913,8 @@
             "poison": 20.0,
             "set": "Hunter Set",
             "url1": "http://darksoulswiki.wikispaces.com/Hunter+Set",
-            "weight": 4.7
+            "weight": 4.7,
+            "weight_modifier": 1.0
         },
         "Maiden Robe": {
             "bleed": 23.0,
@@ -2734,7 +2928,8 @@
             "poison": 18.0,
             "set": "Maiden Set",
             "url1": "http://darksoulswiki.wikispaces.com/Maiden+Set",
-            "weight": 2.0
+            "weight": 2.0,
+            "weight_modifier": 1.0
         },
         "Moonlight Robe": {
             "bleed": 23.0,
@@ -2748,7 +2943,8 @@
             "poison": 23.0,
             "set": "Moonlight Set",
             "url1": "http://darksoulswiki.wikispaces.com/Gwyndolin+Moonlight+Set",
-            "weight": 3.1
+            "weight": 3.1,
+            "weight_modifier": 1.0
         },
         "Naked Torso": {
             "bleed": 0.0,
@@ -2762,7 +2958,8 @@
             "poison": 0.0,
             "set": "Naked",
             "url1": "",
-            "weight": 0.0
+            "weight": 0.0,
+            "weight_modifier": 1.0
         },
         "Ornstein's Armor": {
             "bleed": 38.0,
@@ -2776,7 +2973,8 @@
             "poison": 18.0,
             "set": "Ornstein's Set",
             "url1": "http://darksoulswiki.wikispaces.com/Ornstein%27s+Set",
-            "weight": 12.0
+            "weight": 12.0,
+            "weight_modifier": 1.0
         },
         "Painting Guardian Robe": {
             "bleed": 32.0,
@@ -2790,7 +2988,8 @@
             "poison": 78.0,
             "set": "Painting Guardian Set",
             "url1": "http://darksoulswiki.wikispaces.com/Painting+Guardian+Set",
-            "weight": 1.6
+            "weight": 1.6,
+            "weight_modifier": 1.0
         },
         "Paladin Armor": {
             "bleed": 34.0,
@@ -2804,7 +3003,8 @@
             "poison": 24.0,
             "set": "Paladin Set",
             "url1": "http://darksoulswiki.wikispaces.com/Paladin+Set",
-            "weight": 12.9
+            "weight": 12.9,
+            "weight_modifier": 1.0
         },
         "Robe of the Channelers": {
             "bleed": 38.0,
@@ -2818,7 +3018,8 @@
             "poison": 33.0,
             "set": "Set of the Channelers",
             "url1": "http://darksoulswiki.wikispaces.com/Channeler+Set",
-            "weight": 10.1
+            "weight": 10.1,
+            "weight_modifier": 1.0
         },
         "Robe of the Great Lord": {
             "bleed": 30.0,
@@ -2832,7 +3033,8 @@
             "poison": 15.0,
             "set": "Set of Gwyn",
             "url1": "http://darksoulswiki.wikispaces.com/Great+Lord+Armor",
-            "weight": 6.0
+            "weight": 6.0,
+            "weight_modifier": 1.0
         },
         "Sage Robe": {
             "bleed": 49.0,
@@ -2846,7 +3048,8 @@
             "poison": 49.0,
             "set": "Big Hat's Set",
             "url1": "http://darksoulswiki.wikispaces.com/Big+Hat%27s+Set",
-            "weight": 4.0
+            "weight": 4.0,
+            "weight_modifier": 1.0
         },
         "Shadow Garb": {
             "bleed": 39.0,
@@ -2860,7 +3063,8 @@
             "poison": 47.0,
             "set": "Shadow Set",
             "url1": "http://darksoulswiki.wikispaces.com/Shadow+Set",
-            "weight": 2.3
+            "weight": 2.3,
+            "weight_modifier": 1.0
         },
         "Silver Knight Armor": {
             "bleed": 24.0,
@@ -2874,7 +3078,8 @@
             "poison": 12.0,
             "set": "Silver Knight Set",
             "url1": "http://darksoulswiki.wikispaces.com/Silver+Knight+Set",
-            "weight": 12.0
+            "weight": 12.0,
+            "weight_modifier": 1.0
         },
         "Smough's Armor": {
             "bleed": 54.0,
@@ -2888,7 +3093,8 @@
             "poison": 28.0,
             "set": "Smough's Set",
             "url1": "http://darksoulswiki.wikispaces.com/Smough%27s+Set",
-            "weight": 17.5
+            "weight": 17.5,
+            "weight_modifier": 1.0
         },
         "Sorcerer Cloak": {
             "bleed": 16.0,
@@ -2902,7 +3108,8 @@
             "poison": 12.0,
             "set": "Sorcerer Set",
             "url1": "http://darksoulswiki.wikispaces.com/Sorcerer+Set",
-            "weight": 2.3
+            "weight": 2.3,
+            "weight_modifier": 1.0
         },
         "Steel Armor": {
             "bleed": 23.0,
@@ -2916,7 +3123,8 @@
             "poison": 16.0,
             "set": "Steel Set",
             "url1": "http://darksoulswiki.wikispaces.com/Steel+Set",
-            "weight": 14.0
+            "weight": 14.0,
+            "weight_modifier": 1.0
         },
         "Stone Armor": {
             "bleed": 45.0,
@@ -2930,7 +3138,8 @@
             "poison": 16.0,
             "set": "Stone Set",
             "url1": "http://darksoulswiki.wikispaces.com/Stone+Knight+Set",
-            "weight": 17.6
+            "weight": 17.6,
+            "weight_modifier": 1.0
         },
         "Tattered Cloth Robe": {
             "bleed": 23.0,
@@ -2944,7 +3153,8 @@
             "poison": 59.0,
             "set": "Pyromancer Set",
             "url1": "http://darksoulswiki.wikispaces.com/Pyromancer+Set",
-            "weight": 2.7
+            "weight": 2.7,
+            "weight_modifier": 1.0
         },
         "Wanderer Coat": {
             "bleed": 21.0,
@@ -2958,7 +3168,8 @@
             "poison": 21.0,
             "set": "Wanderer Set",
             "url1": "http://darksoulswiki.wikispaces.com/Wanderer+Set",
-            "weight": 3.5
+            "weight": 3.5,
+            "weight_modifier": 1.0
         },
         "Witch Cloak": {
             "bleed": 36.0,
@@ -2972,7 +3183,8 @@
             "poison": 36.0,
             "set": "Witch Set",
             "url1": "http://darksoulswiki.wikispaces.com/Witch+Set",
-            "weight": 4.0
+            "weight": 4.0,
+            "weight_modifier": 1.0
         },
         "Xanthous Overcoat": {
             "bleed": 22.0,
@@ -2986,7 +3198,8 @@
             "poison": 29.0,
             "set": "Xanthous Set",
             "url1": "http://darksoulswiki.wikispaces.com/Xanthous+Set",
-            "weight": 3.9
+            "weight": 3.9,
+            "weight_modifier": 1.0
         }
     }
 }

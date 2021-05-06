@@ -3,23 +3,16 @@
 # requires python 3.7+ for dicts being in insertion order
 
 from enum import Enum, auto
-from collections import defaultdict
 import json
 import bisect
 import itertools
 import functools
-
-CHARACTER_CLASS_STATS_JSON = 'darksouls-character-classes.json'
-EQUIPMENT_STATS_JSON = 'darksouls-equipment-stats-10.json'
-WEIGHT_KEY = 'weight'
-VALUE_KEY = 'physical'
-EQUIPMENT_TYPES = ['Head', 'Torso', 'Arms', 'Legs' ]
-
+import copy
 
 # A weight that incorporates a modifier
 @functools.total_ordering
 class KnapsackWeight(object):
-    def __init__(self, cost, modifier = 0.0):
+    def __init__(self, cost, modifier = 1.0):
         self.cost = cost
         self.modifier = modifier
 
@@ -45,14 +38,17 @@ class KnapsackWeight(object):
         if isinstance(other, KnapsackWeight):
             return KnapsackWeight(
                     cost = self.cost + other.cost,
-                    modifier = self.modifier + other.modifier)
+                    modifier = self.modifier * other.modifier)
         return NotImplemented
 
     def __str__(self):
-        if self.modifier == 0:
+        if self.modifier == 1.0:
             return str(self.cost)
         return "{} ({:+f})".format(self.cost, self.modifier)
 
+    # So dict values of this type print
+    def __repr__(self):
+        return self.__str__()
 
 # TODO: factor in rings/character endurance for equip load % gear adjustments
 class KnapsackItem(object):
@@ -67,6 +63,14 @@ class KnapsackItem(object):
         if alternatives is None:
             alternatives = set()
         self.alternatives = alternatives
+
+    def flattened(self, max_weight_cost, extra_weight_cost):
+        item = copy.copy(self)
+        item.weight = copy.copy(item.weight)
+        # convert the cost into a percentage of the weight
+        item.weight.cost = (item.weight.cost + extra_weight_cost) / (max_weight_cost * item.weight.modifier)
+        item.weight.modifier = 1.0
+        return item
 
     def combine(self, other):
         return KnapsackItem(
@@ -93,8 +97,117 @@ class KnapsackItem(object):
     def __repr__(self):
         return self.__str__()
 
+# Assumes items are being added in ascending order of ascending weight and descending sort_key
+class BestKnapsackItemForModifierGTE(object):
+    def __init__(self):
+        self.clear()
+
+    def clear(self):
+        self._keys = []
+        self._dict = {}
+
+    def add(self, item):
+        key = item.weight.modifier
+
+        index = bisect.bisect_left(self._keys, key)
+
+        if index < len(self._keys) and self._keys[index] == key:
+            # the key is already present
+            current_item = self._dict[key]
+            if current_item.value < item.value:
+                self._dict[key] = item
+        else:
+            self._keys.insert(index, key)
+            self._dict[key] = item
+
+        # if the next value is larger, assume that value
+        next_index = index + 1
+        if next_index < len(self._keys):
+            next_item = self._dict[self._keys[next_index]]
+            if next_item.value > item.value:
+                self._dict[key] = next_item
+
+        # walk backward and make any lesser values greater
+        while True:
+            index -= 1
+            if index < 0:
+                break
+            prior_key = self._keys[index]
+            if self._dict[prior_key].value >= item.value:
+                break
+            self._dict[prior_key] = item
+    
+    # if this throws IndexError, there's no key that is >= key
+    def lookup(self, item):
+        key = item.weight.modifier
+        index = bisect.bisect_left(self._keys, key)
+        return self._dict[self._keys[index]]
+
+    def lookup_modifier(self, modifier):
+        return self.lookup(KnapsackItem(weight=KnapsackWeight(cost=None, modifier=modifier), value=None, name=None))
+
+    # for diagnostic purposes
+    def sorted(self):
+        return sorted(self._dict.items(), key=lambda item: item[0])
+
+# NOTE: test
+if False:
+    best_for_modifier_gte = BestKnapsackItemForModifierGTE()
+    best_for_modifier_gte.add(KnapsackItem(weight=KnapsackWeight(cost=0, modifier=0), value=10, name='A'))
+    print(best_for_modifier_gte.sorted())
+    best_for_modifier_gte.add(KnapsackItem(weight=KnapsackWeight(cost=0, modifier=1), value=5, name='B'))
+    print(best_for_modifier_gte.sorted())
+    best_for_modifier_gte.add(KnapsackItem(weight=KnapsackWeight(cost=0, modifier=2), value=3, name='C'))
+    print(best_for_modifier_gte.sorted())
+    best_for_modifier_gte.add(KnapsackItem(weight=KnapsackWeight(cost=0, modifier=4), value=6, name='D'))
+    print(best_for_modifier_gte.sorted())
+    best_for_modifier_gte.add(KnapsackItem(weight=KnapsackWeight(cost=4, modifier=-1), value=5, name='E'))  # needs to become 10
+    print(best_for_modifier_gte.sorted())
+    print(best_for_modifier_gte.lookup_modifier(0))
+    print(best_for_modifier_gte.lookup_modifier(3))
+    exit(1)
+
+CHARACTER_CLASS_STATS_JSON = 'darksouls-character-classes.json'
+EQUIPMENT_STATS_JSON = 'darksouls-equipment-stats-10.json'
+WEIGHT_KEY = 'weight'
+WEIGHT_MODIFIER_KEY = 'weight_modifier'
+VALUE_KEY = 'physical'
+MAX_WEIGHT_COST = 51.0
+MAX_WEIGHT_PERCENT = 0.25
+EXTRA_WEIGHT_COST = 2.0  # weapons weight
+EQUIPMENT_TYPES = ['Head', 'Torso', 'Arms', 'Legs' ]
+
+
+
+class KnapsackSolution(object):
+    def __init__(self, items=None):
+        self.items = items
+
+    @property
+    def items(self):
+        return self._items
+
+    @items.setter
+    def items(self, items):
+        if not isinstance(items, dict):
+            raise TypeError('items must be a dict')
+        self._items = items
+        self._sorted_weights = sorted(self._items.keys())
+
+    def __len__(self):
+        return len(self.items)
+
+    # weight modifications need to be applied
+    def best_for_load_percentage(self, load, count=1):
+        weight = KnapsackWeight(cost = load)
+        index = bisect.bisect_right(self._sorted_weights, weight) - 1
+        if index == -1:
+            return None
+        start = max(index - count + 1, 0)
+        return [self.items[weight] for weight in reversed(self._sorted_weights[start: start+count])]
+
 class KnapsackItemGroup(object):
-    def __init__(self, items=None, debug=0):
+    def __init__(self, items, debug=0):
         self.debug = debug  # has to happen before setting items
         self.items = items
 
@@ -110,41 +223,33 @@ class KnapsackItemGroup(object):
             # dominance filter
             before_dominance = len(items)
             items = sorted(items)
-            last_survivor = None
             index = 0
-
-            # {modifier:KnapackItem}
+            best_for_modifier_gte = BestKnapsackItemForModifierGTE()
             last_survivor = None
-            # by modifier, the last survivor will be the highest value with that modifier so far
-            last_survivor_by_modifier = {}
             while index < len(items):
                 item = items[index]
+                try:
+                    possible_dominator = best_for_modifier_gte.lookup(item)
+                except IndexError:
+                    possible_dominator = None
 
-                # TODO: implement some sort of weight limit per-piece to help pruning?
-                if last_survivor is not None:
-                    if (item.weight.cost == last_survivor.weight.cost
-                            and item.weight.modifier < last_survivor.weight.modifier
-                            and item.value <= last_survivor.value) :
+                if possible_dominator is not None:
+                    if (item.value < possible_dominator.value
+                            or item.value == possible_dominator.value and item.weight > possible_dominator.weight):
                         if self.debug > 1:
-                            print(f"REMOVED: {item.name} is modifier dominated by {last_survivor.name}")
-                            del items[index]
-                            continue
+                            print(f"REMOVED: {item.name} is dominated by {possible_dominator.name}")
+                        del items[index]
+                        continue
+                if (last_survivor is not None and item.value == last_survivor.value
+                        and item.weight == last_survivor.weight):  # checks modifier too 
+                    if self.debug > 1:
+                        print(f"COMBINED: {item.name} is an equal alternative to {last_survivor.name}")
+                    last_survivor.alternatives.add(item.name)
+                    del items[index]
+                    continue
 
-                    last_modifier_survivor = last_survivor_by_modifier.get(item.weight.modifier)
-                    if last_modifier_survivor is not None:
-                        if (item.value < last_modifier_survivor.value
-                                or item.value == last_modifier_survivor.value and item.weight > last_modifier_survivor.weight):
-                            if self.debug > 1:
-                                print(f"REMOVED: {item.name} is dominated by {last_modifier_survivor.name}")
-                            del items[index]
-                            continue
-                        elif item.value == last_modifier_survivor.value and item.weight == last_modifier_survivor.weight:
-                            if self.debug > 1:
-                                print(f"COMBINED: {item.name} is an equal alternative to {last_modifier_survivor.name}")
-                            last_modifier_survivor.alternatives.add(item.name)
-                            del items[index]
-                            continue
-                last_survivor_by_modifier[item.weight.modifier] = last_survivor = item
+                last_survivor = item
+                best_for_modifier_gte.add(item) 
                 if self.debug > 1:
                     print(f"KEPT: {item.weight} {item.name}")
                 index += 1
@@ -153,29 +258,23 @@ class KnapsackItemGroup(object):
                 print(f"Entries removed due to being suboptimal: {before_dominance -len(self._items)}")
         else:
             raise ValueError("items must be a dict(weight:KnapSackItem) or a list(KnapSackItem)")
-        # optimization
-        self._sorted_weights = sorted(self._items.keys())
-
-    @staticmethod
-    def from_equipment_section(section, weight_key, value_key):
-        return KnapsackItemGroup(items = [ KnapsackItem(
-                weight = stats[weight_key],
-                value = stats[value_key],
-                name = name)
-                for name, stats in section.items() ])
 
     def __len__(self):
         return len(self.items)
 
-    def best_for_weight(self, weight, count=1):
-        # TODO: don't do this KnapsackWeight conversion, but make sure things have been flattened?
-        if not isinstance(weight, KnapsackWeight):
-            weight = KnapsackWeight(cost = weight)
-        index = bisect.bisect_right(self._sorted_weights, weight) - 1
-        if index == -1:
-            return None
-        start = max(index - count + 1, 0)
-        return [self.items[weight] for weight in reversed(self._sorted_weights[start: start+count])]
+    @staticmethod
+    def from_equipment_section(section, weight_key, weight_modifier_key, value_key):
+        return KnapsackItemGroup(items = [ KnapsackItem(
+                weight = KnapsackWeight(cost=stats[weight_key], modifier=stats[weight_modifier_key]),
+                value = stats[value_key],
+                name = name)
+                for name, stats in section.items() ])
+
+    def flatten_to_solution(self, max_weight_cost, extra_weight_cost):
+        flattened = KnapsackItemGroup(items = [ item.flattened(
+                    max_weight_cost=max_weight_cost, extra_weight_cost=extra_weight_cost)
+                    for item in self.items.values() ])
+        return KnapsackSolution(items = flattened.items)
 
     def combine(self, other):
         return KnapsackItemGroup(items = [ self_item.combine(other_item)
@@ -188,51 +287,33 @@ with open(CHARACTER_CLASS_STATS_JSON, 'r') as handle:
 with open(EQUIPMENT_STATS_JSON, 'r') as handle:
     ALL_EQUIPMENT_STATS = json.load(handle)
 
-solution = [ KnapsackItemGroup.from_equipment_section(
+groups = [ KnapsackItemGroup.from_equipment_section(
         section = ALL_EQUIPMENT_STATS[equipment_type],
         weight_key = WEIGHT_KEY,
+        weight_modifier_key = WEIGHT_MODIFIER_KEY,
         value_key = VALUE_KEY)
         for equipment_type in EQUIPMENT_TYPES ]
 
-# process the solution in groups of 2
+# process the groups in batches of 2
 # NOTE: certain orders will prune things faster and as a consequence be more efficient
 # but I do not know of a good way to decide the order.
-while len(solution) > 1:
+while len(groups) > 1:
     index = 0
-    count = len(solution) // 2
+    count = len(groups) // 2
     while index < count:
         offset = index*2
-        solution[index] = solution[offset].combine(solution[offset+1])
+        groups[index] = groups[offset].combine(groups[offset+1])
         index += 1
-    del solution[index:]
+    del groups[index:]
 
 # All groups combined into one
-solution = solution[0]
+
+solution = groups[0].flatten_to_solution(max_weight_cost=MAX_WEIGHT_COST, extra_weight_cost=EXTRA_WEIGHT_COST)
 #print(solution.items)
 print(f"optimal sets for {VALUE_KEY}: {len(solution)}")
-top_ten = solution.best_for_weight(51.0, 10)
+top_ten = solution.best_for_load_percentage(0.25, count=10)
 for entry in top_ten:
     print(entry)
 
 
 exit(1)
-
-# if a piece gives any extra weight, even the tiniest amount, this could mean
-# that another category of item could be upgraded to something else, and that
-# item could be massively better.  For this reason, until reaching the final
-# category you cannot prune them out.
-#
-# if the modifier is higher, you can remove a lower one, but you must keep the highest for any given weight
-
-# (weight, modifier)
-# (12, 1.0) = 9.0
-# (14, 1.5) = 8.0
-# x(14, 1.5) = 6.0
-# (14, 1.0) = 12.0
-# (14, 1.0) = 10.0
-# (15, 1.0) = 22.0
-# (16, 1.0) = 32.0
-
-# this would nullify the other 14 entries because  the value is > or == and same weight with higher multiplier
-# (14, 1.5) = 10.0
-
