@@ -1,13 +1,23 @@
 #!/usr/bin/env python3
 
-# requires python 3.7+ for dicts being in insertion order
-
 from enum import Enum, auto
 import json
 import bisect
 import itertools
 import functools
 import copy
+
+CHARACTER_CLASS_STATS_JSON = 'darksouls-character-classes.json'
+EQUIPMENT_STATS_JSON = 'darksouls-equipment-stats-10.json'
+EQUIPMENT_TYPES = ['Head', 'Torso', 'Arms', 'Legs' ]
+
+WEIGHT_KEY = 'weight'
+WEIGHT_MODIFIER_KEY = 'weight_modifier'
+VALUE_KEY = 'physical'
+
+MAX_WEIGHT_COST = 51.0
+MAX_WEIGHT_PERCENT = 0.25
+EXTRA_WEIGHT_COST = 2.0  # weapons weight
 
 # A weight that incorporates a modifier
 @functools.total_ordering
@@ -28,7 +38,6 @@ class KnapsackWeight(object):
             return self.__key() == other.__key()
         return NotImplemented
 
-    # the inverted sorted of the modifier makes using __key() not super viable
     def __lt__(self, other):
         # sort my cost then inverted modifier.  smallest weight, largest modifier.
         return (self.cost < other.cost or
@@ -50,7 +59,6 @@ class KnapsackWeight(object):
     def __repr__(self):
         return self.__str__()
 
-# TODO: factor in rings/character endurance for equip load % gear adjustments
 class KnapsackItem(object):
     def __init__(self, weight, value, name, alternatives=None):
         if not isinstance(weight, KnapsackWeight):
@@ -98,7 +106,16 @@ class KnapsackItem(object):
     def __repr__(self):
         return self.__str__()
 
-# Assumes items are being added in ascending order of ascending weight and descending sort_key
+# This is essentially a lookup table/buffer to remember the highest value item with a
+# modifier greater than or equal to the modifier of the item currently being processed.
+# The intention is for this to only be used when processing a KnapsackItem list in
+# sorted order, because the sort order intentionally places higher value items and
+# items that could possibly dominate other items earlier in the list than those
+# that would be dominated by them.  This provides the information the algorithm needs
+# in order to perform the full domination reduction in a single pass, by allowing it to
+# efficiently know that an item with a modifier greater than or equal to the current item
+# and a value greater than or equal to the current item exists, and thus that the
+# current item can be removed outright due to being suboptimal in all cases.
 class BestKnapsackItemForModifierGTE(object):
     def __init__(self):
         self.clear()
@@ -150,35 +167,6 @@ class BestKnapsackItemForModifierGTE(object):
     # for diagnostic purposes
     def sorted(self):
         return sorted(self._dict.items(), key=lambda item: item[0])
-
-# NOTE: test
-if False:
-    best_for_modifier_gte = BestKnapsackItemForModifierGTE()
-    best_for_modifier_gte.add(KnapsackItem(weight=KnapsackWeight(cost=0, modifier=0), value=10, name='A'))
-    print(best_for_modifier_gte.sorted())
-    best_for_modifier_gte.add(KnapsackItem(weight=KnapsackWeight(cost=0, modifier=1), value=5, name='B'))
-    print(best_for_modifier_gte.sorted())
-    best_for_modifier_gte.add(KnapsackItem(weight=KnapsackWeight(cost=0, modifier=2), value=3, name='C'))
-    print(best_for_modifier_gte.sorted())
-    best_for_modifier_gte.add(KnapsackItem(weight=KnapsackWeight(cost=0, modifier=4), value=6, name='D'))
-    print(best_for_modifier_gte.sorted())
-    best_for_modifier_gte.add(KnapsackItem(weight=KnapsackWeight(cost=4, modifier=-1), value=5, name='E'))  # needs to become 10
-    print(best_for_modifier_gte.sorted())
-    print(best_for_modifier_gte.lookup_modifier(0))
-    print(best_for_modifier_gte.lookup_modifier(3))
-    exit(1)
-
-CHARACTER_CLASS_STATS_JSON = 'darksouls-character-classes.json'
-EQUIPMENT_STATS_JSON = 'darksouls-equipment-stats-10.json'
-WEIGHT_KEY = 'weight'
-WEIGHT_MODIFIER_KEY = 'weight_modifier'
-VALUE_KEY = 'physical'
-MAX_WEIGHT_COST = 51.0
-MAX_WEIGHT_PERCENT = 0.25
-EXTRA_WEIGHT_COST = 2.0  # weapons weight
-EQUIPMENT_TYPES = ['Head', 'Torso', 'Arms', 'Legs' ]
-
-
 
 class KnapsackSolution(object):
     def __init__(self, items=None):
@@ -308,7 +296,6 @@ while len(groups) > 1:
     del groups[index:]
 
 # All groups combined into one
-
 solution = groups[0].flatten_to_solution(max_weight_cost=MAX_WEIGHT_COST, extra_weight_cost=EXTRA_WEIGHT_COST)
 #print(solution.items)
 print(f"optimal sets for {VALUE_KEY}: {len(solution)}")
@@ -316,5 +303,21 @@ top_ten = solution.best_for_load_percentage(0.25, count=10)
 for entry in top_ten:
     print(entry)
 
-
 exit(1)
+# NOTE: test
+if False:
+    best_for_modifier_gte = BestKnapsackItemForModifierGTE()
+    best_for_modifier_gte.add(KnapsackItem(weight=KnapsackWeight(cost=0, modifier=0), value=10, name='A'))
+    print(best_for_modifier_gte.sorted())
+    best_for_modifier_gte.add(KnapsackItem(weight=KnapsackWeight(cost=0, modifier=1), value=5, name='B'))
+    print(best_for_modifier_gte.sorted())
+    best_for_modifier_gte.add(KnapsackItem(weight=KnapsackWeight(cost=0, modifier=2), value=3, name='C'))
+    print(best_for_modifier_gte.sorted())
+    best_for_modifier_gte.add(KnapsackItem(weight=KnapsackWeight(cost=0, modifier=4), value=6, name='D'))
+    print(best_for_modifier_gte.sorted())
+    best_for_modifier_gte.add(KnapsackItem(weight=KnapsackWeight(cost=4, modifier=-1), value=5, name='E'))  # needs to become 10
+    print(best_for_modifier_gte.sorted())
+    print(best_for_modifier_gte.lookup_modifier(0))
+    print(best_for_modifier_gte.lookup_modifier(3))
+    exit(1)
+
