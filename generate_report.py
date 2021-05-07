@@ -250,11 +250,15 @@ class KnapsackItemGroup(object):
 
     @staticmethod
     def from_equipment_section(section, weight_key, weight_modifier_key, value_key):
+        defaults = section['defaults']
         return KnapsackItemGroup(items = [ KnapsackItem(
-                weight = KnapsackWeight(cost=stats[weight_key], modifier=stats[weight_modifier_key]),
-                value = stats[value_key],
+                weight = KnapsackWeight(
+                    cost = stats[weight_key] if weight_key in stats else defaults[weight_key],
+                    modifier = stats[weight_modifier_key] if weight_modifier_key in stats else defaults[weight_modifier_key]
+                    ),
+                value = stats[value_key] if value_key in stats else defaults[value_key],
                 name = name)
-                for name, stats in section.items() ])
+                for name, stats in section['entries'].items() ])
 
     def flatten_to_solution(self, max_weight_cost, extra_weight_cost):
         flattened = KnapsackItemGroup(items = [ item.flattened(
