@@ -76,7 +76,6 @@ class KnapsackItem(object):
         item = copy.copy(self)
         item.weight = copy.copy(item.weight)
         # convert the cost into a percentage of the weight
-        # TODO: is there precision loss here that matters?
         item.weight.cost = (item.weight.cost + extra_weight_cost) / (max_weight_cost * item.weight.modifier)
         item.weight.modifier = 1.0
         return item
@@ -86,8 +85,6 @@ class KnapsackItem(object):
                 weight = self.weight + other.weight,
                 value = self.value + other.value,
                 name = self.name + other.name,
-                # TODO: should this all be calculated here? or just listed in
-                # a manner that could be done later?
                 alternatives = set(itertools.product(
                         self.alternatives, other.alternatives)))
 
@@ -98,7 +95,7 @@ class KnapsackItem(object):
                 self.weight == other.weight and self.value > other.value)
 
     def __str__(self):
-        # NOTE: the str usages here are turning tuples into strings, with quotes and all
+        # the str usages here are turning tuples into strings, with quotes and all
         display_name = ' OR '.join(itertools.chain([str(self.name)], map(str, self.alternatives)))
         return f"({self.value}) [{self.weight}] {display_name}"
 
