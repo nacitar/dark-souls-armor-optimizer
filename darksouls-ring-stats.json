@@ -1,0 +1,45 @@
+{
+    "Fingers": {
+        "defaults": {
+            "bleed": 0.0,
+            "curse": 0.0,
+            "fire": 0.0,
+            "lightning": 0.0,
+            "magic": 0.0,
+            "physical": 0.0,
+            "poise": 0,
+            "poison": 0.0,
+            "set": "",
+            "weight": 0.0,
+            "weight_modifier": 1.0
+        },
+        "entries": {
+            "Havel's Ring": {
+                "weight_modifier": 1.5
+            },
+            "Ring of Favor and Protection": {
+                "weight_modifier": 1.2
+            },
+            "Ring of Steel Protection": {
+                "physical": 50.0
+            },
+            "Spell Stoneplate Ring": {
+                "magic": 50.0
+            },
+            "Flame Stoneplate Ring": {
+                "fire": 50.0
+            },
+            "Thunder Stoneplate Ring": {
+                "lightning": 50.0
+            },
+            "Speckled Stoneplate Ring": {
+                "magic": 25.0,
+                "fire": 25.0,
+                "lightning": 25.0
+            },
+            "Wolf Ring": {
+                "poise": 40.0
+            }
+        }
+    }
+}
