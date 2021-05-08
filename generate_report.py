@@ -207,6 +207,7 @@ class KnapsackSolution(object):
         start = max(index - count + 1, 0)
         return [self.items[weight] for weight in reversed(self._sorted_weights[start: start+count])]
 
+# NOTE: slot_count is a request; if there aren't enough items left after pruning to provide that many selections, less slots will be provided.
 class KnapsackItemGroup(object):
     def __init__(self, items, slot_count=1, debug=0):
         self.debug = debug
@@ -221,38 +222,44 @@ class KnapsackItemGroup(object):
                 index = 0
                 best_for_modifier_gte = BestKnapsackItemForModifierGTE()
                 last_survivor = None
+                # how many items thus far have been dominated by the referenced one, even if they weren't pruned
+                lesser_item_count = {}
                 while index < len(items):
                     item = items[index]
                     try:
                         possible_dominator = best_for_modifier_gte.lookup(item)
                     except IndexError:
                         possible_dominator = None
-                    dominated = False
+                    dominated = 0
                     alternative = False
-
+                    
                     if possible_dominator is not None:
                         if (item.value < possible_dominator.value
                                 or item.value == possible_dominator.value and item.weight > possible_dominator.weight):
-                            dominated = True
+                            dominated = lesser_item_count.get(item.name, 0) + 1
+                            lesser_item_count[item.name] = dominated
                     if (last_survivor is not None and item.value == last_survivor.value
                             and item.weight == last_survivor.weight):  # checks modifier too 
-                        dominated = True
+                        dominated = lesser_item_count.get(last_survivor.name, 0) + 1
+                        lesser_item_count[last_survivor.name] = dominated
                         alternative = True
 
-                    if dominated:
+                    if dominated > 0:
                         # even if we don't prune it out, we don't need this piece to factor
                         # into the domination logic.  There is no need to directly acknowledge
                         # that this item dominates some other when this item itself is also
                         # dominated by some even better item.  The comparison is best performed
                         # between that item and the most dominant item.
 
-                        # index says how many items we've kept so far, and being dominated tells
-                        # us it's at least 1 other than this.
-
                         # other slots could use things we dominate/things that are lesser.
                         # so make sure we have avoided pruning out at LEAST that many of
                         # the lesser items before removing this one.
-                        if index + 1  > slot_count:
+
+                        # Each particular item needs to have enough fallbacks to cover extra
+                        # slots, so we track how many items each one has dominated to ensure
+                        # we don't remove fallback options for once the dominant item has
+                        # already been selected but there are more slots to go.
+                        if dominated + 1 > slot_count:
                             if alternative:
                                 if self.debug > 1:
                                     print(f"COMBINED: {item.name} is an equal alternative to {last_survivor.name}")
