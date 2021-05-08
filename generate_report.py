@@ -9,6 +9,7 @@ import copy
 
 CHARACTER_CLASS_STATS_JSON = 'darksouls-character-classes.json'
 EQUIPMENT_STATS_JSON = 'darksouls-equipment-stats-10.json'
+RING_STATS_JSON = 'darksouls-ring-stats.json'
 EQUIPMENT_TYPES = ['Head', 'Torso', 'Arms', 'Legs' ]
 
 WEIGHT_KEY = 'weight'
@@ -59,6 +60,7 @@ class KnapsackWeight(object):
     def __repr__(self):
         return self.__str__()
 
+@functools.total_ordering
 class KnapsackItem(object):
     def __init__(self, weight, value, name, alternatives=None):
         if not isinstance(weight, KnapsackWeight):
@@ -80,19 +82,40 @@ class KnapsackItem(object):
         item.weight.modifier = 1.0
         return item
 
-    def combine(self, other):
-        return KnapsackItem(
-                weight = self.weight + other.weight,
-                value = self.value + other.value,
-                name = self.name + other.name,
-                alternatives = set(itertools.product(
-                        self.alternatives, other.alternatives)))
+    @classmethod
+    def combine_all(cls, items):
+        if isinstance(items, cls):
+            items = [items]
+        else:
+            items = list(items)
+        result = None
+        for item in items:
+            if result is None:
+                result = item
+            else:
+                result = KnapsackItem(
+                        weight = result.weight + item.weight,
+                        value = result.value + item.value,
+                        name = result.name + item.name,
+                        alternatives = set(itertools.product(
+                                result.alternatives, item.alternatives))
+                        )
+        return result
+
+
+    def combine(self, item):
+        return type(self).combine_all([self, item])
+
+    def __eq__(self, other):
+        return (self.weight == other.weight and self.value == other.value
+                and self.name == other.name)
 
     def __lt__(self, other):
         # sort by weight then inverted value
         # the dominate() algorithm requires this sort order
         return (self.weight < other.weight or
-                self.weight == other.weight and self.value > other.value)
+                self.weight == other.weight and self.value > other.value or
+                self.value == other.value and self.name < other.name)
 
     def __str__(self):
         # the str usages here are turning tuples into strings, with quotes and all
@@ -167,18 +190,10 @@ class BestKnapsackItemForModifierGTE(object):
 
 class KnapsackSolution(object):
     def __init__(self, items=None):
-        self.items = items
-
-    @property
-    def items(self):
-        return self._items
-
-    @items.setter
-    def items(self, items):
         if not isinstance(items, dict):
             raise TypeError('items must be a dict')
-        self._items = items
-        self._sorted_weights = sorted(self._items.keys())
+        self.items = items
+        self._sorted_weights = sorted(self.items.keys())
 
     def __len__(self):
         return len(self.items)
@@ -193,55 +208,80 @@ class KnapsackSolution(object):
         return [self.items[weight] for weight in reversed(self._sorted_weights[start: start+count])]
 
 class KnapsackItemGroup(object):
-    def __init__(self, items, debug=0):
-        self.debug = debug  # has to happen before setting items
-        self.items = items
+    def __init__(self, items, slot_count=1, debug=0):
+        self.debug = debug
 
-    @property
-    def items(self):
-        return self._items
-
-    @items.setter
-    def items(self, items):
         if isinstance(items, dict):
-            self._items = items
+            self.items = items
         elif isinstance(items, list):
             # dominance filter
             before_dominance = len(items)
-            items = sorted(items)
-            index = 0
-            best_for_modifier_gte = BestKnapsackItemForModifierGTE()
-            last_survivor = None
-            while index < len(items):
-                item = items[index]
-                try:
-                    possible_dominator = best_for_modifier_gte.lookup(item)
-                except IndexError:
-                    possible_dominator = None
+            while True:
+                items = sorted(items)
+                index = 0
+                best_for_modifier_gte = BestKnapsackItemForModifierGTE()
+                last_survivor = None
+                while index < len(items):
+                    item = items[index]
+                    try:
+                        possible_dominator = best_for_modifier_gte.lookup(item)
+                    except IndexError:
+                        possible_dominator = None
+                    dominated = False
+                    alternative = False
 
-                if possible_dominator is not None:
-                    if (item.value < possible_dominator.value
-                            or item.value == possible_dominator.value and item.weight > possible_dominator.weight):
-                        if self.debug > 1:
-                            print(f"REMOVED: {item.name} is dominated by {possible_dominator.name}")
-                        del items[index]
-                        continue
-                if (last_survivor is not None and item.value == last_survivor.value
-                        and item.weight == last_survivor.weight):  # checks modifier too 
-                    if self.debug > 1:
-                        print(f"COMBINED: {item.name} is an equal alternative to {last_survivor.name}")
-                    last_survivor.alternatives.add(item.name)
-                    del items[index]
-                    continue
+                    if possible_dominator is not None:
+                        if (item.value < possible_dominator.value
+                                or item.value == possible_dominator.value and item.weight > possible_dominator.weight):
+                            dominated = True
+                    if (last_survivor is not None and item.value == last_survivor.value
+                            and item.weight == last_survivor.weight):  # checks modifier too 
+                        dominated = True
+                        alternative = True
 
-                last_survivor = item
-                best_for_modifier_gte.add(item) 
-                if self.debug > 1:
-                    print(f"KEPT: {item.weight} {item.name}")
-                index += 1
-            self._items = { item.weight: item for item in items }
-            if self.debug > 0:
-                print(f"Entries removed due to being suboptimal: {before_dominance -len(self._items)}")
+                    if dominated:
+                        # even if we don't prune it out, we don't need this piece to factor
+                        # into the domination logic.  There is no need to directly acknowledge
+                        # that this item dominates some other when this item itself is also
+                        # dominated by some even better item.  The comparison is best performed
+                        # between that item and the most dominant item.
+
+                        # index says how many items we've kept so far, and being dominated tells
+                        # us it's at least 1 other than this.
+
+                        # other slots could use things we dominate/things that are lesser.
+                        # so make sure we have avoided pruning out at LEAST that many of
+                        # the lesser items before removing this one.
+                        if index + 1  > slot_count:
+                            if alternative:
+                                if self.debug > 1:
+                                    print(f"COMBINED: {item.name} is an equal alternative to {last_survivor.name}")
+                                last_survivor.alternatives.add(item.name)
+                            else:
+                                if self.debug > 1:
+                                    print(f"REMOVED: {item.name} is dominated by {possible_dominator.name}")
+                            del items[index]
+                            continue
+                        else:
+                            if self.debug > 1:
+                                print(f"KEPT: {item.weight} {item.name} after comparing with {possible_dominator.name}")
+                    else:
+                        last_survivor = item
+                        best_for_modifier_gte.add(item) 
+                    index += 1
+
+                if self.debug > 0:
+                    print(f"Entries removed due to being suboptimal: {before_dominance -len(items)}")
+                possible_slots = min(len(items), slot_count)
+                if possible_slots > 1:
+                    #import pdb
+                    #pdb.set_trace()
+                    slot_count = 1
+                    items = [ KnapsackItem.combine_all(items)
+                        for items in itertools.combinations(items, r = possible_slots) ]
+                    continue  # run it again to reduce the combinations
+                break
+            self.items = { item.weight: item for item in items }
         else:
             raise ValueError("items must be a dict(weight:KnapSackItem) or a list(KnapSackItem)")
 
@@ -249,7 +289,7 @@ class KnapsackItemGroup(object):
         return len(self.items)
 
     @staticmethod
-    def from_equipment_section(section, weight_key, weight_modifier_key, value_key):
+    def from_equipment_section(section, weight_key, weight_modifier_key, value_key, slot_count):
         defaults = section['defaults']
         return KnapsackItemGroup(items = [ KnapsackItem(
                 weight = KnapsackWeight(
@@ -258,7 +298,8 @@ class KnapsackItemGroup(object):
                     ),
                 value = stats[value_key] if value_key in stats else defaults[value_key],
                 name = name)
-                for name, stats in section['entries'].items() ])
+                for name, stats in section['entries'].items() ],
+                slot_count = slot_count)
 
     def flatten_to_solution(self, max_weight_cost, extra_weight_cost):
         flattened = KnapsackItemGroup(items = [ item.flattened(
@@ -266,9 +307,28 @@ class KnapsackItemGroup(object):
                     for item in self.items.values() ])
         return KnapsackSolution(items = flattened.items)
 
+    @classmethod
+    def combine_in_pairs(cls, groups):
+        if isinstance(groups, cls):
+            groups = [groups]
+        else:
+            groups = list(groups)
+        while len(groups) > 1:
+            index = 0
+            count = len(groups) // 2
+            while index < count:
+                offset = index*2
+                groups[index] = KnapsackItemGroup(
+                        items = [ first_item.combine(second_item)
+                                for first_item, second_item in itertools.product(
+                                        groups[offset].items.values(),
+                                        groups[offset+1].items.values())])
+                index += 1
+            del groups[index:]
+        return groups[0]
+        
     def combine(self, other):
-        return KnapsackItemGroup(items = [ self_item.combine(other_item)
-            for self_item, other_item in itertools.product(self.items.values(), other.items.values())])
+        return type(self).combine_in_pairs([self, other])
 
 
 with open(CHARACTER_CLASS_STATS_JSON, 'r') as handle:
@@ -277,27 +337,29 @@ with open(CHARACTER_CLASS_STATS_JSON, 'r') as handle:
 with open(EQUIPMENT_STATS_JSON, 'r') as handle:
     ALL_EQUIPMENT_STATS = json.load(handle)
 
-groups = [ KnapsackItemGroup.from_equipment_section(
-        section = ALL_EQUIPMENT_STATS[equipment_type],
-        weight_key = WEIGHT_KEY,
-        weight_modifier_key = WEIGHT_MODIFIER_KEY,
-        value_key = VALUE_KEY)
-        for equipment_type in EQUIPMENT_TYPES ]
+with open(RING_STATS_JSON, 'r') as handle:
+    RING_STATS = json.load(handle)
 
-# process the groups in batches of 2
 # NOTE: certain orders will prune things faster and as a consequence be more efficient
 # but I do not know of a good way to decide the order.
-while len(groups) > 1:
-    index = 0
-    count = len(groups) // 2
-    while index < count:
-        offset = index*2
-        groups[index] = groups[offset].combine(groups[offset+1])
-        index += 1
-    del groups[index:]
+combined_group = KnapsackItemGroup.combine_in_pairs(
+        [ KnapsackItemGroup.from_equipment_section(
+                section = ALL_EQUIPMENT_STATS[equipment_type],
+                weight_key = WEIGHT_KEY,
+                weight_modifier_key = WEIGHT_MODIFIER_KEY,
+                value_key = VALUE_KEY,
+                slot_count = 1)
+                for equipment_type in EQUIPMENT_TYPES ])
+# Add rings
+combined_group = combined_group.combine(KnapsackItemGroup.from_equipment_section(
+        section = RING_STATS['Fingers'],
+        weight_key = WEIGHT_KEY,
+        weight_modifier_key = WEIGHT_MODIFIER_KEY,
+        value_key = VALUE_KEY,
+        slot_count = 2))
 
 # All groups combined into one
-solution = groups[0].flatten_to_solution(max_weight_cost=MAX_WEIGHT_COST, extra_weight_cost=EXTRA_WEIGHT_COST)
+solution = combined_group.flatten_to_solution(max_weight_cost=MAX_WEIGHT_COST, extra_weight_cost=EXTRA_WEIGHT_COST)
 #print(solution.items)
 print(f"optimal sets for {VALUE_KEY}: {len(solution)}")
 top_ten = solution.best_for_load_percentage(0.25, count=10)
@@ -305,7 +367,8 @@ for entry in top_ten:
     print(entry)
 
 exit(1)
-# NOTE: test
+
+# test
 if False:
     best_for_modifier_gte = BestKnapsackItemForModifierGTE()
     best_for_modifier_gte.add(KnapsackItem(weight=KnapsackWeight(cost=0, modifier=0), value=10, name='A'))

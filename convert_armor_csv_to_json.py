@@ -3,7 +3,7 @@
 import json
 import csv
 
-ARMOR_STATS_CSV = 'source/darksouls-armor-stats-0.csv'
+ARMOR_STATS_CSV = 'source/darksouls-armor-stats-10.csv'
 
 def parse_csv_with_headings(handle):
     field_names = []
@@ -39,7 +39,10 @@ def convert_armor_csv_to_json(in_csv_filename, out_json_filename):
             'poison': 0.0,
             'set': '',
             'weight': 0.0,
-            'weight_modifier': 1.0
+            'weight_modifier': 1.0,
+            "health_modifier": 1.0,
+            "stamina_modifier": 1.0,
+            "stamina_regeneration": 0.0
             }
     with open(in_csv_filename, 'r') as handle:
         for entry in parse_csv_with_headings(handle):
@@ -58,14 +61,27 @@ def convert_armor_csv_to_json(in_csv_filename, out_json_filename):
             del entry['position']
             name = entry['name']
             del entry['name']
-            entry['poise'] = int(entry['poise'])
-            for field in ['weight', 'physical', 'magic', 'fire', 'lightning',
+
+            for field in ['poise', 'weight', 'physical', 'magic', 'fire', 'lightning',
                     'bleed', 'poison', 'curse']:
                 entry[field] = float(entry[field])
-            if name == "Mask of the Father":
+
+            if name == 'Mask of the Father':
                 entry['weight_modifier'] = 1.05  # +5%
             else:
-                entry['weight_modifier'] = 1.00
+                entry['weight_modifier'] = 1.0
+
+            if name == 'Mask of the Mother':
+                entry['health_modifier'] = 1.1  # +10%
+            else:
+                entry['health_modifier'] = 1.0
+            
+            if name == 'Mask of the Child':
+                entry['stamina_regeneration'] = 10.0
+            else:
+                entry['stamina_regeneration'] = 0.0
+
+
 
             del entry['url1']
             del entry['location']

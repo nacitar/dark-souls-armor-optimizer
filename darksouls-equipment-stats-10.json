@@ -4,12 +4,15 @@
             "bleed": 0.0,
             "curse": 0.0,
             "fire": 0.0,
+            "health_modifier": 1.0,
             "lightning": 0.0,
             "magic": 0.0,
             "physical": 0.0,
             "poise": 0,
             "poison": 0.0,
             "set": "",
+            "stamina_modifier": 1.0,
+            "stamina_regeneration": 0.0,
             "weight": 0.0,
             "weight_modifier": 1.0
         },
@@ -31,7 +34,7 @@
                 "lightning": 12.1,
                 "magic": 16.9,
                 "physical": 41.1,
-                "poise": 5,
+                "poise": 5.0,
                 "poison": 7.0,
                 "set": "Balder Set",
                 "weight": 3.5
@@ -43,7 +46,7 @@
                 "lightning": 20.2,
                 "magic": 26.4,
                 "physical": 62.0,
-                "poise": 18,
+                "poise": 18.0,
                 "poison": 17.8,
                 "set": "Black Iron Set",
                 "weight": 9.2
@@ -54,7 +57,7 @@
                 "lightning": 12.4,
                 "magic": 21.7,
                 "physical": 40.3,
-                "poise": 10,
+                "poise": 10.0,
                 "poison": 10.2,
                 "set": "Black Knight Set",
                 "weight": 6.0
@@ -109,7 +112,7 @@
                 "lightning": 18.6,
                 "magic": 21.7,
                 "physical": 37.2,
-                "poise": 8,
+                "poise": 8.0,
                 "poison": 12.7,
                 "set": "Shiny Brass Set",
                 "weight": 5.4
@@ -130,7 +133,7 @@
                 "lightning": 18.6,
                 "magic": 27.9,
                 "physical": 52.7,
-                "poise": 13,
+                "poise": 13.0,
                 "poison": 16.5,
                 "set": "Catarina Set",
                 "weight": 6.9
@@ -141,7 +144,7 @@
                 "lightning": 22.0,
                 "magic": 32.0,
                 "physical": 58.0,
-                "poise": 12,
+                "poise": 12.0,
                 "poison": 13.0,
                 "set": "Heavy Cleric Set",
                 "weight": 7.4
@@ -163,7 +166,7 @@
                 "lightning": 4.0,
                 "magic": 12.0,
                 "physical": 37.0,
-                "poise": 9,
+                "poise": 9.0,
                 "set": "Crystalline Set",
                 "weight": 6.4
             },
@@ -173,7 +176,7 @@
                 "lightning": 23.3,
                 "magic": 27.9,
                 "physical": 41.9,
-                "poise": 9,
+                "poise": 9.0,
                 "poison": 15.2,
                 "set": "Dark Set",
                 "weight": 5.8
@@ -195,7 +198,7 @@
                 "lightning": 3.1,
                 "magic": 1.6,
                 "physical": 9.3,
-                "poise": 2,
+                "poise": 2.0,
                 "poison": 5.1,
                 "set": "Eastern Set",
                 "weight": 1.5
@@ -206,7 +209,7 @@
                 "lightning": 12.1,
                 "magic": 16.9,
                 "physical": 43.6,
-                "poise": 4,
+                "poise": 4.0,
                 "poison": 7.0,
                 "set": "Elite Knight Set",
                 "weight": 3.7
@@ -218,7 +221,7 @@
                 "lightning": 6.0,
                 "magic": 7.0,
                 "physical": 11.0,
-                "poise": 4,
+                "poise": 4.0,
                 "poison": 5.0,
                 "set": "Adventurer Set",
                 "weight": 3.0
@@ -230,7 +233,7 @@
                 "lightning": 12.0,
                 "magic": 16.0,
                 "physical": 33.0,
-                "poise": 8,
+                "poise": 8.0,
                 "poison": 13.0,
                 "set": "Set of Favor",
                 "weight": 5.0
@@ -241,7 +244,7 @@
                 "lightning": 18.6,
                 "magic": 24.8,
                 "physical": 40.3,
-                "poise": 9,
+                "poise": 9.0,
                 "poison": 12.7,
                 "set": "Set of Thorns",
                 "weight": 6.2
@@ -252,7 +255,7 @@
                 "lightning": 10.0,
                 "magic": 13.0,
                 "physical": 17.0,
-                "poise": 3,
+                "poise": 3.0,
                 "poison": 10.0,
                 "set": "Set of the Channelers",
                 "weight": 3.0
@@ -263,7 +266,7 @@
                 "lightning": 29.5,
                 "magic": 29.5,
                 "physical": 63.6,
-                "poise": 21,
+                "poise": 21.0,
                 "poison": 14.0,
                 "set": "Giant Set",
                 "weight": 9.7
@@ -284,7 +287,7 @@
                 "lightning": 10.0,
                 "magic": 25.0,
                 "physical": 54.0,
-                "poise": 20,
+                "poise": 20.0,
                 "poison": 17.0,
                 "set": "Golem Set",
                 "weight": 9.7
@@ -306,7 +309,7 @@
                 "lightning": 29.0,
                 "magic": 32.0,
                 "physical": 54.0,
-                "poise": 28,
+                "poise": 28.0,
                 "poison": 5.0,
                 "set": "Havel Set",
                 "weight": 11.5
@@ -318,7 +321,7 @@
                 "lightning": 22.0,
                 "magic": 24.0,
                 "physical": 41.0,
-                "poise": 7,
+                "poise": 7.0,
                 "poison": 10.0,
                 "set": "Iron and Sun Set",
                 "weight": 4.3
@@ -329,7 +332,7 @@
                 "lightning": 9.7,
                 "magic": 16.9,
                 "physical": 41.1,
-                "poise": 6,
+                "poise": 6.0,
                 "poison": 7.0,
                 "set": "Knight Set",
                 "weight": 3.5
@@ -340,7 +343,7 @@
                 "lightning": 9.7,
                 "magic": 24.2,
                 "physical": 29.0,
-                "poise": 5,
+                "poise": 5.0,
                 "poison": 9.8,
                 "set": "Chain Set",
                 "weight": 3.6
@@ -387,7 +390,7 @@
                 "lightning": 14.0,
                 "magic": 12.0,
                 "physical": 29.0,
-                "poise": 6,
+                "poise": 6.0,
                 "poison": 6.0,
                 "set": "Ornstein's Set",
                 "weight": 4.0
@@ -410,7 +413,7 @@
                 "lightning": 18.6,
                 "magic": 29.5,
                 "physical": 54.3,
-                "poise": 12,
+                "poise": 12.0,
                 "poison": 16.5,
                 "set": "Paladin Set",
                 "weight": 7.6
@@ -432,7 +435,7 @@
                 "lightning": 24.8,
                 "magic": 18.6,
                 "physical": 38.8,
-                "poise": 9,
+                "poise": 9.0,
                 "poison": 7.6,
                 "set": "Silver Knight Set",
                 "weight": 5.5
@@ -444,7 +447,7 @@
                 "lightning": 33.0,
                 "magic": 31.0,
                 "physical": 61.0,
-                "poise": 21,
+                "poise": 21.0,
                 "poison": 16.0,
                 "set": "Smough's Set",
                 "weight": 10.4
@@ -465,7 +468,7 @@
                 "lightning": 14.0,
                 "magic": 32.0,
                 "physical": 61.0,
-                "poise": 14,
+                "poise": 14.0,
                 "poison": 13.0,
                 "set": "Steel Set",
                 "weight": 8.3
@@ -476,7 +479,7 @@
                 "lightning": 33.0,
                 "magic": 27.0,
                 "physical": 54.0,
-                "poise": 23,
+                "poise": 23.0,
                 "poison": 10.0,
                 "set": "Stone Set",
                 "weight": 10.4
@@ -540,12 +543,15 @@
             "bleed": 0.0,
             "curse": 0.0,
             "fire": 0.0,
+            "health_modifier": 1.0,
             "lightning": 0.0,
             "magic": 0.0,
             "physical": 0.0,
             "poise": 0,
             "poison": 0.0,
             "set": "",
+            "stamina_modifier": 1.0,
+            "stamina_regeneration": 0.0,
             "weight": 0.0,
             "weight_modifier": 1.0
         },
@@ -556,7 +562,7 @@
                 "lightning": 14.5,
                 "magic": 14.5,
                 "physical": 33.9,
-                "poise": 6,
+                "poise": 6.0,
                 "poison": 8.4,
                 "set": "Balder Set",
                 "weight": 4.2
@@ -578,7 +584,7 @@
                 "lightning": 12.4,
                 "magic": 17.1,
                 "physical": 41.9,
-                "poise": 12,
+                "poise": 12.0,
                 "poison": 12.7,
                 "set": "Black Iron Set",
                 "weight": 6.0
@@ -589,7 +595,7 @@
                 "lightning": 9.3,
                 "magic": 17.1,
                 "physical": 32.6,
-                "poise": 8,
+                "poise": 8.0,
                 "poison": 7.6,
                 "set": "Black Knight Set",
                 "weight": 5.0
@@ -612,7 +618,7 @@
                 "lightning": 17.0,
                 "magic": 18.6,
                 "physical": 34.1,
-                "poise": 8,
+                "poise": 8.0,
                 "poison": 11.4,
                 "set": "Shiny Brass Set",
                 "weight": 5.1
@@ -633,7 +639,7 @@
                 "lightning": 10.8,
                 "magic": 18.6,
                 "physical": 34.1,
-                "poise": 8,
+                "poise": 8.0,
                 "poison": 11.4,
                 "set": "Catarina Set",
                 "weight": 4.5
@@ -644,7 +650,7 @@
                 "lightning": 7.3,
                 "magic": 24.2,
                 "physical": 29.0,
-                "poise": 5,
+                "poise": 5.0,
                 "poison": 8.4,
                 "set": "Chain Set",
                 "weight": 3.0
@@ -655,7 +661,7 @@
                 "lightning": 15.0,
                 "magic": 22.0,
                 "physical": 36.0,
-                "poise": 8,
+                "poise": 8.0,
                 "poison": 8.0,
                 "set": "Heavy Cleric Set",
                 "weight": 4.8
@@ -699,7 +705,7 @@
                 "lightning": 2.0,
                 "magic": 8.0,
                 "physical": 25.0,
-                "poise": 6,
+                "poise": 6.0,
                 "set": "Crystalline Set",
                 "weight": 4.2
             },
@@ -709,7 +715,7 @@
                 "lightning": 15.5,
                 "magic": 18.6,
                 "physical": 27.9,
-                "poise": 6,
+                "poise": 6.0,
                 "poison": 10.2,
                 "set": "Dark Set",
                 "weight": 3.8
@@ -731,7 +737,7 @@
                 "lightning": 10.8,
                 "magic": 9.3,
                 "physical": 26.4,
-                "poise": 8,
+                "poise": 8.0,
                 "poison": 14.0,
                 "set": "Eastern Set",
                 "weight": 4.7
@@ -742,7 +748,7 @@
                 "lightning": 14.5,
                 "magic": 16.9,
                 "physical": 36.3,
-                "poise": 6,
+                "poise": 6.0,
                 "poison": 8.4,
                 "set": "Elite Knight Set",
                 "weight": 4.5
@@ -753,7 +759,7 @@
                 "lightning": 6.2,
                 "magic": 7.8,
                 "physical": 40.3,
-                "poise": 12,
+                "poise": 12.0,
                 "poison": 10.2,
                 "weight": 8.0
             },
@@ -763,7 +769,7 @@
                 "lightning": 23.3,
                 "magic": 23.3,
                 "physical": 23.3,
-                "poise": 8,
+                "poise": 8.0,
                 "poison": 24.1,
                 "weight": 3.5
             },
@@ -773,7 +779,7 @@
                 "lightning": 20.2,
                 "magic": 20.2,
                 "physical": 41.9,
-                "poise": 14,
+                "poise": 14.0,
                 "poison": 10.2,
                 "set": "Giant Set",
                 "weight": 6.3
@@ -794,7 +800,7 @@
                 "lightning": 6.0,
                 "magic": 17.0,
                 "physical": 35.0,
-                "poise": 13,
+                "poise": 13.0,
                 "poison": 12.0,
                 "set": "Golem Set",
                 "weight": 6.3
@@ -806,7 +812,7 @@
                 "lightning": 18.0,
                 "magic": 22.0,
                 "physical": 36.0,
-                "poise": 18,
+                "poise": 18.0,
                 "poison": 4.0,
                 "set": "Havel Set",
                 "weight": 7.5
@@ -818,7 +824,7 @@
                 "lightning": 11.0,
                 "magic": 16.0,
                 "physical": 28.0,
-                "poise": 8,
+                "poise": 8.0,
                 "poison": 10.0,
                 "set": "Set of Favor",
                 "weight": 4.5
@@ -829,7 +835,7 @@
                 "lightning": 12.4,
                 "magic": 15.5,
                 "physical": 26.4,
-                "poise": 6,
+                "poise": 6.0,
                 "poison": 8.9,
                 "set": "Set of Thorns",
                 "weight": 4.1
@@ -841,7 +847,7 @@
                 "lightning": 10.0,
                 "magic": 12.0,
                 "physical": 18.0,
-                "poise": 8,
+                "poise": 8.0,
                 "poison": 7.0,
                 "set": "Adventurer Set",
                 "weight": 5.1
@@ -852,7 +858,7 @@
                 "lightning": 9.7,
                 "magic": 14.5,
                 "physical": 24.2,
-                "poise": 5,
+                "poise": 5.0,
                 "poison": 7.0,
                 "set": "Hollow Soldier Set",
                 "weight": 3.0
@@ -873,7 +879,7 @@
                 "lightning": 14.5,
                 "magic": 14.5,
                 "physical": 24.2,
-                "poise": 3,
+                "poise": 3.0,
                 "poison": 7.0,
                 "set": "Hollow Warrior Set",
                 "weight": 2.6
@@ -885,7 +891,7 @@
                 "lightning": 22.0,
                 "magic": 24.0,
                 "physical": 34.0,
-                "poise": 8,
+                "poise": 8.0,
                 "poison": 11.0,
                 "set": "Iron and Sun Set",
                 "weight": 4.5
@@ -896,7 +902,7 @@
                 "lightning": 12.1,
                 "magic": 14.5,
                 "physical": 33.9,
-                "poise": 8,
+                "poise": 8.0,
                 "poison": 8.4,
                 "set": "Knight Set",
                 "weight": 4.2
@@ -929,6 +935,7 @@
                 "lightning": 10.0,
                 "magic": 10.0,
                 "physical": 6.0,
+                "stamina_regeneration": 10.0,
                 "weight": 1.2
             },
             "Mask of the Father": {
@@ -943,6 +950,7 @@
             "Mask of the Mother": {
                 "bleed": 10.0,
                 "fire": 6.0,
+                "health_modifier": 1.1,
                 "lightning": 8.0,
                 "magic": 12.0,
                 "physical": 6.0,
@@ -969,7 +977,7 @@
                 "lightning": 18.0,
                 "magic": 16.0,
                 "physical": 32.0,
-                "poise": 9,
+                "poise": 9.0,
                 "poison": 8.0,
                 "set": "Ornstein's Set",
                 "weight": 5.5
@@ -992,7 +1000,7 @@
                 "lightning": 10.8,
                 "magic": 18.6,
                 "physical": 34.1,
-                "poise": 8,
+                "poise": 8.0,
                 "poison": 11.4,
                 "set": "Paladin Set",
                 "weight": 5.0
@@ -1023,7 +1031,7 @@
                 "lightning": 15.0,
                 "magic": 24.0,
                 "physical": 39.0,
-                "poise": 8,
+                "poise": 8.0,
                 "poison": 17.0,
                 "weight": 4.5
             },
@@ -1053,7 +1061,7 @@
                 "lightning": 21.7,
                 "magic": 15.5,
                 "physical": 32.6,
-                "poise": 8,
+                "poise": 8.0,
                 "poison": 6.3,
                 "set": "Silver Knight Set",
                 "weight": 4.8
@@ -1064,7 +1072,7 @@
                 "lightning": 13.0,
                 "magic": 18.0,
                 "physical": 20.0,
-                "poise": 5,
+                "poise": 5.0,
                 "poison": 13.0,
                 "set": "Set of the Channelers",
                 "weight": 3.9
@@ -1076,7 +1084,7 @@
                 "lightning": 21.0,
                 "magic": 19.0,
                 "physical": 40.0,
-                "poise": 14,
+                "poise": 14.0,
                 "poison": 12.0,
                 "set": "Smough's Set",
                 "weight": 6.8
@@ -1097,7 +1105,7 @@
                 "lightning": 7.3,
                 "magic": 19.4,
                 "physical": 33.9,
-                "poise": 5,
+                "poise": 5.0,
                 "poison": 11.2,
                 "set": "Warrior Set",
                 "weight": 3.5
@@ -1108,7 +1116,7 @@
                 "lightning": 12.1,
                 "magic": 19.4,
                 "physical": 38.7,
-                "poise": 9,
+                "poise": 9.0,
                 "poison": 8.4,
                 "set": "Steel Set",
                 "weight": 5.4
@@ -1119,7 +1127,7 @@
                 "lightning": 21.0,
                 "magic": 17.0,
                 "physical": 35.0,
-                "poise": 15,
+                "poise": 15.0,
                 "poison": 6.0,
                 "set": "Stone Set",
                 "weight": 6.8
@@ -1137,7 +1145,7 @@
                 "lightning": 2.0,
                 "magic": 8.0,
                 "physical": 21.0,
-                "poise": 15,
+                "poise": 15.0,
                 "weight": 10.0
             },
             "Tattered Cloth Hood+10": {
@@ -1200,12 +1208,15 @@
             "bleed": 0.0,
             "curse": 0.0,
             "fire": 0.0,
+            "health_modifier": 1.0,
             "lightning": 0.0,
             "magic": 0.0,
             "physical": 0.0,
             "poise": 0,
             "poison": 0.0,
             "set": "",
+            "stamina_modifier": 1.0,
+            "stamina_regeneration": 0.0,
             "weight": 0.0,
             "weight_modifier": 1.0
         },
@@ -1238,7 +1249,7 @@
                 "lightning": 21.8,
                 "magic": 24.2,
                 "physical": 53.2,
-                "poise": 9,
+                "poise": 9.0,
                 "poison": 12.6,
                 "set": "Balder Set",
                 "weight": 6.4
@@ -1250,7 +1261,7 @@
                 "lightning": 20.2,
                 "magic": 26.4,
                 "physical": 62.0,
-                "poise": 18,
+                "poise": 18.0,
                 "poison": 17.8,
                 "set": "Black Iron Set",
                 "weight": 9.2
@@ -1261,7 +1272,7 @@
                 "lightning": 14.0,
                 "magic": 23.3,
                 "physical": 46.5,
-                "poise": 11,
+                "poise": 11.0,
                 "poison": 11.4,
                 "set": "Black Knight Set",
                 "weight": 7.0
@@ -1316,7 +1327,7 @@
                 "lightning": 7.0,
                 "magic": 10.0,
                 "physical": 14.0,
-                "poise": 6,
+                "poise": 6.0,
                 "poison": 6.0,
                 "set": "Adventurer Set",
                 "weight": 4.0
@@ -1328,7 +1339,7 @@
                 "lightning": 23.3,
                 "magic": 24.8,
                 "physical": 40.3,
-                "poise": 9,
+                "poise": 9.0,
                 "poison": 15.2,
                 "set": "Shiny Brass Set",
                 "weight": 6.4
@@ -1349,7 +1360,7 @@
                 "lightning": 18.6,
                 "magic": 27.9,
                 "physical": 52.7,
-                "poise": 13,
+                "poise": 13.0,
                 "poison": 16.5,
                 "set": "Catarina Set",
                 "weight": 6.9
@@ -1360,7 +1371,7 @@
                 "lightning": 12.1,
                 "magic": 33.9,
                 "physical": 43.6,
-                "poise": 7,
+                "poise": 7.0,
                 "poison": 12.6,
                 "set": "Chain Set",
                 "weight": 4.6
@@ -1371,7 +1382,7 @@
                 "lightning": 22.0,
                 "magic": 32.0,
                 "physical": 58.0,
-                "poise": 12,
+                "poise": 12.0,
                 "poison": 13.0,
                 "set": "Heavy Cleric Set",
                 "weight": 7.4
@@ -1393,7 +1404,7 @@
                 "lightning": 4.0,
                 "magic": 12.0,
                 "physical": 37.0,
-                "poise": 9,
+                "poise": 9.0,
                 "set": "Crystalline Set",
                 "weight": 6.4
             },
@@ -1403,7 +1414,7 @@
                 "lightning": 23.3,
                 "magic": 27.9,
                 "physical": 41.9,
-                "poise": 9,
+                "poise": 9.0,
                 "poison": 15.2,
                 "set": "Dark Set",
                 "weight": 5.8
@@ -1414,7 +1425,7 @@
                 "lightning": 9.3,
                 "magic": 7.8,
                 "physical": 23.3,
-                "poise": 6,
+                "poise": 6.0,
                 "poison": 12.7,
                 "set": "Eastern Set",
                 "weight": 4.0
@@ -1425,7 +1436,7 @@
                 "lightning": 21.8,
                 "magic": 26.6,
                 "physical": 55.7,
-                "poise": 9,
+                "poise": 9.0,
                 "poison": 12.6,
                 "set": "Elite Knight Set",
                 "weight": 6.9
@@ -1436,7 +1447,7 @@
                 "lightning": 29.5,
                 "magic": 29.5,
                 "physical": 63.6,
-                "poise": 21,
+                "poise": 21.0,
                 "poison": 14.0,
                 "set": "Giant Set",
                 "weight": 9.7
@@ -1457,7 +1468,7 @@
                 "lightning": 10.0,
                 "magic": 25.0,
                 "physical": 54.0,
-                "poise": 20,
+                "poise": 20.0,
                 "poison": 17.0,
                 "set": "Golem Set",
                 "weight": 9.7
@@ -1479,7 +1490,7 @@
                 "lightning": 29.0,
                 "magic": 32.0,
                 "physical": 54.0,
-                "poise": 28,
+                "poise": 28.0,
                 "poison": 5.0,
                 "set": "Havel Set",
                 "weight": 11.5
@@ -1501,7 +1512,7 @@
                 "lightning": 14.5,
                 "magic": 19.4,
                 "physical": 31.5,
-                "poise": 7,
+                "poise": 7.0,
                 "poison": 8.4,
                 "set": "Hollow Soldier Set",
                 "weight": 1.5
@@ -1522,7 +1533,7 @@
                 "lightning": 19.4,
                 "magic": 19.4,
                 "physical": 31.5,
-                "poise": 5,
+                "poise": 5.0,
                 "poison": 8.4,
                 "set": "Hollow Warrior Set",
                 "weight": 1.4
@@ -1544,7 +1555,7 @@
                 "lightning": 27.0,
                 "magic": 29.0,
                 "physical": 51.0,
-                "poise": 9,
+                "poise": 9.0,
                 "poison": 13.0,
                 "set": "Iron and Sun Set",
                 "weight": 5.3
@@ -1555,7 +1566,7 @@
                 "lightning": 19.4,
                 "magic": 24.2,
                 "physical": 53.2,
-                "poise": 12,
+                "poise": 12.0,
                 "poison": 12.6,
                 "set": "Knight Set",
                 "weight": 6.4
@@ -1577,7 +1588,7 @@
                 "lightning": 17.0,
                 "magic": 22.0,
                 "physical": 43.0,
-                "poise": 11,
+                "poise": 11.0,
                 "poison": 18.0,
                 "set": "Set of Favor",
                 "weight": 6.9
@@ -1588,7 +1599,7 @@
                 "lightning": 18.6,
                 "magic": 24.8,
                 "physical": 40.3,
-                "poise": 9,
+                "poise": 9.0,
                 "poison": 12.7,
                 "set": "Set of Thorns",
                 "weight": 6.2
@@ -1625,7 +1636,7 @@
                 "lightning": 24.0,
                 "magic": 20.0,
                 "physical": 40.0,
-                "poise": 11,
+                "poise": 11.0,
                 "poison": 12.0,
                 "set": "Ornstein's Set",
                 "weight": 7.0
@@ -1648,7 +1659,7 @@
                 "lightning": 18.6,
                 "magic": 29.5,
                 "physical": 54.3,
-                "poise": 12,
+                "poise": 12.0,
                 "poison": 16.5,
                 "set": "Paladin Set",
                 "weight": 7.6
@@ -1670,7 +1681,7 @@
                 "lightning": 29.5,
                 "magic": 23.3,
                 "physical": 43.4,
-                "poise": 11,
+                "poise": 11.0,
                 "poison": 8.9,
                 "set": "Silver Knight Set",
                 "weight": 6.5
@@ -1682,7 +1693,7 @@
                 "lightning": 33.0,
                 "magic": 31.0,
                 "physical": 61.0,
-                "poise": 21,
+                "poise": 21.0,
                 "poison": 16.0,
                 "set": "Smough's Set",
                 "weight": 10.4
@@ -1703,7 +1714,7 @@
                 "lightning": 14.0,
                 "magic": 32.0,
                 "physical": 61.0,
-                "poise": 14,
+                "poise": 14.0,
                 "poison": 13.0,
                 "set": "Steel Set",
                 "weight": 8.3
@@ -1714,7 +1725,7 @@
                 "lightning": 33.0,
                 "magic": 27.0,
                 "physical": 54.0,
-                "poise": 23,
+                "poise": 23.0,
                 "poison": 10.0,
                 "set": "Stone Set",
                 "weight": 10.4
@@ -1735,7 +1746,7 @@
                 "lightning": 20.0,
                 "magic": 27.0,
                 "physical": 32.0,
-                "poise": 7,
+                "poise": 7.0,
                 "poison": 20.0,
                 "set": "Set of the Channelers",
                 "weight": 6.0
@@ -1778,12 +1789,15 @@
             "bleed": 0.0,
             "curse": 0.0,
             "fire": 0.0,
+            "health_modifier": 1.0,
             "lightning": 0.0,
             "magic": 0.0,
             "physical": 0.0,
             "poise": 0,
             "poison": 0.0,
             "set": "",
+            "stamina_modifier": 1.0,
+            "stamina_regeneration": 0.0,
             "weight": 0.0,
             "weight_modifier": 1.0
         },
@@ -1805,7 +1819,7 @@
                 "lightning": 31.0,
                 "magic": 43.4,
                 "physical": 69.8,
-                "poise": 16,
+                "poise": 16.0,
                 "poison": 22.9,
                 "set": "Set of Thorns",
                 "weight": 10.5
@@ -1817,7 +1831,7 @@
                 "lightning": 25.0,
                 "magic": 31.0,
                 "physical": 47.0,
-                "poise": 20,
+                "poise": 20.0,
                 "poison": 19.0,
                 "set": "Adventurer Set",
                 "weight": 13.3
@@ -1829,7 +1843,7 @@
                 "lightning": 46.0,
                 "magic": 51.0,
                 "physical": 85.0,
-                "poise": 16,
+                "poise": 16.0,
                 "poison": 22.0,
                 "set": "Iron and Sun Set",
                 "weight": 9.0
@@ -1840,7 +1854,7 @@
                 "lightning": 36.3,
                 "magic": 36.3,
                 "physical": 89.5,
-                "poise": 16,
+                "poise": 16.0,
                 "poison": 22.4,
                 "set": "Balder Set",
                 "weight": 10.9
@@ -1863,7 +1877,7 @@
                 "lightning": 32.5,
                 "magic": 46.5,
                 "physical": 105.4,
-                "poise": 31,
+                "poise": 31.0,
                 "poison": 31.7,
                 "set": "Black Iron Set",
                 "weight": 15.6
@@ -1874,7 +1888,7 @@
                 "lightning": 26.4,
                 "magic": 44.9,
                 "physical": 88.4,
-                "poise": 21,
+                "poise": 21.0,
                 "poison": 19.0,
                 "set": "Black Knight Set",
                 "weight": 13.0
@@ -1907,7 +1921,7 @@
                 "lightning": 38.7,
                 "magic": 41.8,
                 "physical": 74.4,
-                "poise": 16,
+                "poise": 16.0,
                 "poison": 25.4,
                 "set": "Shiny Brass Set",
                 "weight": 10.9
@@ -1928,7 +1942,7 @@
                 "lightning": 29.4,
                 "magic": 48.0,
                 "physical": 88.3,
-                "poise": 21,
+                "poise": 21.0,
                 "poison": 30.5,
                 "set": "Catarina Set",
                 "weight": 11.7
@@ -1939,7 +1953,7 @@
                 "lightning": 16.9,
                 "magic": 50.8,
                 "physical": 72.6,
-                "poise": 9,
+                "poise": 9.0,
                 "poison": 16.8,
                 "set": "Chain Set",
                 "weight": 6.0
@@ -1950,7 +1964,7 @@
                 "lightning": 36.0,
                 "magic": 56.0,
                 "physical": 97.0,
-                "poise": 20,
+                "poise": 20.0,
                 "poison": 22.0,
                 "set": "Heavy Cleric Set",
                 "weight": 12.5
@@ -1972,7 +1986,7 @@
                 "lightning": 7.0,
                 "magic": 21.0,
                 "physical": 59.0,
-                "poise": 16,
+                "poise": 16.0,
                 "set": "Crystalline Set",
                 "weight": 10.9
             },
@@ -1982,7 +1996,7 @@
                 "lightning": 41.9,
                 "magic": 46.5,
                 "physical": 69.8,
-                "poise": 16,
+                "poise": 16.0,
                 "poison": 26.7,
                 "set": "Dark Set",
                 "weight": 9.8
@@ -2004,7 +2018,7 @@
                 "lightning": 27.9,
                 "magic": 23.3,
                 "physical": 69.8,
-                "poise": 20,
+                "poise": 20.0,
                 "poison": 35.6,
                 "set": "Eastern Set",
                 "weight": 12.3
@@ -2015,7 +2029,7 @@
                 "lightning": 36.3,
                 "magic": 41.1,
                 "physical": 94.4,
-                "poise": 15,
+                "poise": 15.0,
                 "poison": 22.4,
                 "set": "Elite Knight Set",
                 "weight": 11.7
@@ -2027,7 +2041,7 @@
                 "lightning": 30.0,
                 "magic": 36.0,
                 "physical": 74.0,
-                "poise": 20,
+                "poise": 20.0,
                 "poison": 28.0,
                 "set": "Set of Favor",
                 "weight": 11.7
@@ -2038,7 +2052,7 @@
                 "lightning": 51.1,
                 "magic": 49.6,
                 "physical": 111.6,
-                "poise": 35,
+                "poise": 35.0,
                 "poison": 24.1,
                 "set": "Giant Set",
                 "weight": 16.4
@@ -2059,7 +2073,7 @@
                 "lightning": 17.0,
                 "magic": 45.0,
                 "physical": 91.0,
-                "poise": 33,
+                "poise": 33.0,
                 "poison": 31.0,
                 "set": "Golem Set",
                 "weight": 16.4
@@ -2081,7 +2095,7 @@
                 "lightning": 49.0,
                 "magic": 56.0,
                 "physical": 92.0,
-                "poise": 47,
+                "poise": 47.0,
                 "poison": 11.0,
                 "set": "Havel Set",
                 "weight": 19.5
@@ -2092,7 +2106,7 @@
                 "lightning": 24.2,
                 "magic": 38.7,
                 "physical": 62.9,
-                "poise": 12,
+                "poise": 12.0,
                 "poison": 18.2,
                 "set": "Hollow Soldier Set",
                 "weight": 7.8
@@ -2113,7 +2127,7 @@
                 "lightning": 41.1,
                 "magic": 38.7,
                 "physical": 58.1,
-                "poise": 8,
+                "poise": 8.0,
                 "poison": 18.2,
                 "set": "Hollow Warrior Set",
                 "weight": 6.6
@@ -2134,7 +2148,7 @@
                 "lightning": 31.5,
                 "magic": 38.7,
                 "physical": 89.5,
-                "poise": 20,
+                "poise": 20.0,
                 "poison": 22.4,
                 "set": "Knight Set",
                 "weight": 10.9
@@ -2181,7 +2195,7 @@
                 "lightning": 40.0,
                 "magic": 36.0,
                 "physical": 70.0,
-                "poise": 19,
+                "poise": 19.0,
                 "poison": 18.0,
                 "set": "Ornstein's Set",
                 "weight": 12.0
@@ -2204,7 +2218,7 @@
                 "lightning": 29.5,
                 "magic": 48.1,
                 "physical": 91.5,
-                "poise": 20,
+                "poise": 20.0,
                 "poison": 30.5,
                 "set": "Paladin Set",
                 "weight": 12.9
@@ -2215,7 +2229,7 @@
                 "lightning": 35.0,
                 "magic": 45.0,
                 "physical": 53.0,
-                "poise": 12,
+                "poise": 12.0,
                 "poison": 33.0,
                 "set": "Set of the Channelers",
                 "weight": 10.1
@@ -2258,7 +2272,7 @@
                 "lightning": 52.7,
                 "magic": 40.3,
                 "physical": 80.6,
-                "poise": 19,
+                "poise": 19.0,
                 "poison": 15.2,
                 "set": "Silver Knight Set",
                 "weight": 12.0
@@ -2270,7 +2284,7 @@
                 "lightning": 59.0,
                 "magic": 52.0,
                 "physical": 106.0,
-                "poise": 35,
+                "poise": 35.0,
                 "poison": 28.0,
                 "set": "Smough's Set",
                 "weight": 17.6
@@ -2291,7 +2305,7 @@
                 "lightning": 31.5,
                 "magic": 53.2,
                 "physical": 101.6,
-                "poise": 23,
+                "poise": 23.0,
                 "poison": 22.4,
                 "set": "Steel Set",
                 "weight": 14.0
@@ -2302,7 +2316,7 @@
                 "lightning": 54.0,
                 "magic": 45.0,
                 "physical": 91.0,
-                "poise": 39,
+                "poise": 39.0,
                 "poison": 16.0,
                 "set": "Stone Set",
                 "weight": 17.6

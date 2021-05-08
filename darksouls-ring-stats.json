@@ -7,17 +7,32 @@
             "lightning": 0.0,
             "magic": 0.0,
             "physical": 0.0,
-            "poise": 0,
+            "poise": 0.0,
             "poison": 0.0,
             "set": "",
             "weight": 0.0,
-            "weight_modifier": 1.0
+            "weight_modifier": 1.0,
+            "health_modifier": 1.0,
+            "stamina_modifier": 1.0,
+            "stamina_regeneration": 0.0
         },
         "entries": {
+            "Naked Finger": {
+                "set": "Naked"
+            },
+            "Tiny Being's Ring": {
+                "health_modifier": 1.05
+            },
+            "Cloranthy Ring": {
+                "stamina_regeneration": 20
+            },
             "Havel's Ring": {
+                "set": "Havel Set",
                 "weight_modifier": 1.5
             },
             "Ring of Favor and Protection": {
+                "health_modifier": 1.2,
+                "stamina_modifier": 1.2,
                 "weight_modifier": 1.2
             },
             "Ring of Steel Protection": {
