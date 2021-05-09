@@ -17,7 +17,11 @@ WEIGHT_MODIFIER_KEY = 'weight_modifier'
 VALUE_KEY = 'physical'
 
 MAX_WEIGHT_COST = 51.0
+
+#MAX_WEIGHT_PERCENT = 0.08333
+#MAX_WEIGHT_PERCENT = 0.16667
 MAX_WEIGHT_PERCENT = 0.25
+
 EXTRA_WEIGHT_COST = 2.0  # weapons weight
 
 # A weight that incorporates a modifier
@@ -207,7 +211,7 @@ class KnapsackSolution(object):
 
 # NOTE: slot_count is a request; if there aren't enough items left after pruning to provide that many selections, less slots will be provided.
 class KnapsackItemGroup(object):
-    def __init__(self, items, slot_count=1, debug=0):
+    def __init__(self, items, slot_count=1, allow_duplicates=False, debug=0):
         self.debug = debug
 
         if isinstance(items, dict):
@@ -282,8 +286,12 @@ class KnapsackItemGroup(object):
                     #import pdb
                     #pdb.set_trace()
                     slot_count = 1
-                    items = [ KnapsackItem.combine_all(items)
-                        for items in itertools.combinations(items, r = possible_slots) ]
+                    if not allow_duplicates:
+                        items = [ KnapsackItem.combine_all(items)
+                            for items in itertools.combinations(items, r = possible_slots) ]
+                    else:
+                        items = [ KnapsackItem.combine_all(items)
+                            for items in itertools.product(*([items]*possible_slots)) ]
                     continue  # run it again to reduce the combinations
                 break
             self.items = { item.weight: item for item in items }
@@ -294,7 +302,7 @@ class KnapsackItemGroup(object):
         return len(self.items)
 
     @staticmethod
-    def from_equipment_section(section, weight_key, weight_modifier_key, value_key, slot_count):
+    def from_equipment_section(section, weight_key, weight_modifier_key, value_key, slot_count, allow_duplicates=False):
         defaults = section['defaults']
         return KnapsackItemGroup(items = [ KnapsackItem(
                 weight = KnapsackWeight(
@@ -304,7 +312,8 @@ class KnapsackItemGroup(object):
                 value = stats[value_key] if value_key in stats else defaults[value_key],
                 name = name)
                 for name, stats in section['entries'].items() ],
-                slot_count = slot_count)
+                slot_count = slot_count,
+                allow_duplicates = allow_duplicates)
 
     def flatten_to_solution(self, max_weight_cost, extra_weight_cost):
         flattened = KnapsackItemGroup(items = [ item.flattened(
@@ -345,6 +354,7 @@ with open(EQUIPMENT_STATS_JSON, 'r') as handle:
 with open(RING_STATS_JSON, 'r') as handle:
     RING_STATS = json.load(handle)
 
+
 # NOTE: certain orders will prune things faster and as a consequence be more efficient
 # but I do not know of a good way to decide the order.
 combined_group = KnapsackItemGroup.combine_in_pairs(
@@ -366,7 +376,7 @@ combined_group = combined_group.combine(KnapsackItemGroup.from_equipment_section
 
 solution = combined_group.flatten_to_solution(max_weight_cost=MAX_WEIGHT_COST, extra_weight_cost=EXTRA_WEIGHT_COST)
 print(f"optimal sets for {VALUE_KEY}: {len(solution)}")
-top_ten = solution.best_for_load_percentage(0.25, count=10)
+top_ten = solution.best_for_load_percentage(MAX_WEIGHT_PERCENT, count=10)
 for entry in top_ten:
     print(entry)
 
