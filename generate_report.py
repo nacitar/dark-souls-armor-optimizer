@@ -209,9 +209,9 @@ class KnapsackSolution(object):
         end = index+1
         return [self.items[weight] for weight in reversed(self._sorted_weights[max(end - count, 0):end])]
 
-# NOTE: slot_count is a request; if there aren't enough items left after pruning to provide that many selections, less slots will be provided.
-class KnapsackItemGroup(object):
-    def __init__(self, items, slot_count=1, allow_duplicates=False, debug=0):
+# NOTE: count is a request; if there aren't enough items left after pruning to provide that many selections, less slots will be provided.
+class KnapsackItemSlot(object):
+    def __init__(self, items, count=1, allow_duplicates=False, debug=0):
         self.debug = debug
 
         if isinstance(items, dict):
@@ -261,7 +261,7 @@ class KnapsackItemGroup(object):
                         # slots, so we track how many items each one has dominated to ensure
                         # we don't remove fallback options for once the dominant item has
                         # already been selected but there are more slots to go.
-                        if dominated + 1 > slot_count:
+                        if dominated + 1 > count:
                             if alternative:
                                 if self.debug > 1:
                                     print(f"COMBINED: {item.name} is an equal alternative to {last_survivor.name}")
@@ -281,11 +281,9 @@ class KnapsackItemGroup(object):
 
                 if self.debug > 0:
                     print(f"Entries removed due to being suboptimal: {before_dominance -len(items)}")
-                possible_slots = min(len(items), slot_count)
+                possible_slots = min(len(items), count)
                 if possible_slots > 1:
-                    #import pdb
-                    #pdb.set_trace()
-                    slot_count = 1
+                    count = 1
                     if not allow_duplicates:
                         items = [ KnapsackItem.combine_all(items)
                             for items in itertools.combinations(items, r = possible_slots) ]
@@ -302,9 +300,9 @@ class KnapsackItemGroup(object):
         return len(self.items)
 
     @staticmethod
-    def from_equipment_section(section, weight_key, weight_modifier_key, value_key, slot_count, allow_duplicates=False):
+    def from_equipment_section(section, weight_key, weight_modifier_key, value_key, count, allow_duplicates=False):
         defaults = section['defaults']
-        return KnapsackItemGroup(items = [ KnapsackItem(
+        return KnapsackItemSlot(items = [ KnapsackItem(
                 weight = KnapsackWeight(
                     cost = stats[weight_key] if weight_key in stats else defaults[weight_key],
                     modifier = stats[weight_modifier_key] if weight_modifier_key in stats else defaults[weight_modifier_key]
@@ -312,34 +310,34 @@ class KnapsackItemGroup(object):
                 value = stats[value_key] if value_key in stats else defaults[value_key],
                 name = name)
                 for name, stats in section['entries'].items() ],
-                slot_count = slot_count,
+                count = count,
                 allow_duplicates = allow_duplicates)
 
     def flatten_to_solution(self, max_weight_cost, extra_weight_cost):
-        flattened = KnapsackItemGroup(items = [ item.flattened(
+        flattened = KnapsackItemSlot(items = [ item.flattened(
                     max_weight_cost=max_weight_cost, extra_weight_cost=extra_weight_cost)
                     for item in self.items.values() ])
         return KnapsackSolution(items = flattened.items)
 
     @classmethod
-    def combine_in_pairs(cls, groups):
-        if isinstance(groups, cls):
-            groups = [groups]
+    def combine_in_pairs(cls, slots):
+        if isinstance(slots, cls):
+            slots = [slots]
         else:
-            groups = list(groups)
-        while len(groups) > 1:
+            slots = list(slots)
+        while len(slots) > 1:
             index = 0
-            count = len(groups) // 2
+            count = len(slots) // 2
             while index < count:
                 offset = index*2
-                groups[index] = KnapsackItemGroup(
+                slots[index] = KnapsackItemSlot(
                         items = [ first_item.combine(second_item)
                                 for first_item, second_item in itertools.product(
-                                        groups[offset].items.values(),
-                                        groups[offset+1].items.values())])
+                                        slots[offset].items.values(),
+                                        slots[offset+1].items.values())])
                 index += 1
-            del groups[index:]
-        return groups[0]
+            del slots[index:]
+        return slots[0]
         
     def combine(self, other):
         return type(self).combine_in_pairs([self, other])
@@ -357,24 +355,24 @@ with open(RING_STATS_JSON, 'r') as handle:
 
 # NOTE: certain orders will prune things faster and as a consequence be more efficient
 # but I do not know of a good way to decide the order.
-combined_group = KnapsackItemGroup.combine_in_pairs(
-        [ KnapsackItemGroup.from_equipment_section(
+combined_slot = KnapsackItemSlot.combine_in_pairs(
+        [ KnapsackItemSlot.from_equipment_section(
                 section = ALL_EQUIPMENT_STATS[equipment_type],
                 weight_key = WEIGHT_KEY,
                 weight_modifier_key = WEIGHT_MODIFIER_KEY,
                 value_key = VALUE_KEY,
-                slot_count = 1)
+                count = 1)
                 for equipment_type in EQUIPMENT_TYPES ])
 
 # Add rings
-combined_group = combined_group.combine(KnapsackItemGroup.from_equipment_section(
+combined_slot = combined_slot.combine(KnapsackItemSlot.from_equipment_section(
         section = RING_STATS['Fingers'],
         weight_key = WEIGHT_KEY,
         weight_modifier_key = WEIGHT_MODIFIER_KEY,
         value_key = VALUE_KEY,
-        slot_count = 2))
+        count = 2))
 
-solution = combined_group.flatten_to_solution(max_weight_cost=MAX_WEIGHT_COST, extra_weight_cost=EXTRA_WEIGHT_COST)
+solution = combined_slot.flatten_to_solution(max_weight_cost=MAX_WEIGHT_COST, extra_weight_cost=EXTRA_WEIGHT_COST)
 print(f"optimal sets for {VALUE_KEY}: {len(solution)}")
 top_ten = solution.best_for_load_percentage(MAX_WEIGHT_PERCENT, count=10)
 for entry in top_ten:
