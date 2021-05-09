@@ -97,9 +97,7 @@ class KnapsackItem(object):
                         weight = result.weight + item.weight,
                         value = result.value + item.value,
                         name = result.name + item.name,
-                        alternatives = set(itertools.product(
-                                result.alternatives, item.alternatives))
-                        )
+                        alternatives = set(itertools.chain(result.alternatives, item.alternatives)))
         return result
 
 
@@ -119,7 +117,7 @@ class KnapsackItem(object):
 
     def __str__(self):
         # the str usages here are turning tuples into strings, with quotes and all
-        display_name = ' OR '.join(itertools.chain([str(self.name)], map(str, self.alternatives)))
+        display_name = ' SWAPPABLE '.join(itertools.chain([str(self.name)], map(str, self.alternatives)))
         return f"({self.value}) [{self.weight}] {display_name}"
 
     # So dict values of this type print
@@ -204,8 +202,8 @@ class KnapsackSolution(object):
         index = bisect.bisect_right(self._sorted_weights, weight) - 1
         if index == -1:
             return None
-        start = max(index - count + 1, 0)
-        return [self.items[weight] for weight in reversed(self._sorted_weights[start: start+count])]
+        end = index+1
+        return [self.items[weight] for weight in reversed(self._sorted_weights[max(end - count, 0):end])]
 
 # NOTE: slot_count is a request; if there aren't enough items left after pruning to provide that many selections, less slots will be provided.
 class KnapsackItemGroup(object):
@@ -357,6 +355,7 @@ combined_group = KnapsackItemGroup.combine_in_pairs(
                 value_key = VALUE_KEY,
                 slot_count = 1)
                 for equipment_type in EQUIPMENT_TYPES ])
+
 # Add rings
 combined_group = combined_group.combine(KnapsackItemGroup.from_equipment_section(
         section = RING_STATS['Fingers'],
@@ -365,9 +364,7 @@ combined_group = combined_group.combine(KnapsackItemGroup.from_equipment_section
         value_key = VALUE_KEY,
         slot_count = 2))
 
-# All groups combined into one
 solution = combined_group.flatten_to_solution(max_weight_cost=MAX_WEIGHT_COST, extra_weight_cost=EXTRA_WEIGHT_COST)
-#print(solution.items)
 print(f"optimal sets for {VALUE_KEY}: {len(solution)}")
 top_ten = solution.best_for_load_percentage(0.25, count=10)
 for entry in top_ten:
