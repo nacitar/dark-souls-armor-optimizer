@@ -1,28 +1,13 @@
 #!/usr/bin/env python3
 
+# Requires python 3.8+ for assignment expressions
+
 from enum import Enum, auto
 import json
 import bisect
 import itertools
 import functools
 import copy
-
-CHARACTER_CLASS_STATS_JSON = 'darksouls-character-classes.json'
-EQUIPMENT_STATS_JSON = 'darksouls-equipment-stats-10.json'
-RING_STATS_JSON = 'darksouls-ring-stats.json'
-EQUIPMENT_TYPES = ['Head', 'Torso', 'Arms', 'Legs' ]
-
-WEIGHT_KEY = 'weight'
-WEIGHT_MODIFIER_KEY = 'weight_modifier'
-VALUE_KEY = 'physical'
-
-MAX_WEIGHT_COST = 51.0
-
-#MAX_WEIGHT_PERCENT = 0.08333
-#MAX_WEIGHT_PERCENT = 0.16667
-MAX_WEIGHT_PERCENT = 0.25
-
-EXTRA_WEIGHT_COST = 2.0  # weapons weight
 
 # A weight that incorporates a modifier
 @functools.total_ordering
@@ -336,49 +321,143 @@ class KnapsackItemSlot(object):
                                         slots[offset].items.values(),
                                         slots[offset+1].items.values())])
                 index += 1
-            del slots[index:]
+            del slots[index:index*2]
+
         return slots[0]
         
     def combine(self, other):
         return type(self).combine_in_pairs([self, other])
 
 
-with open(CHARACTER_CLASS_STATS_JSON, 'r') as handle:
-    CHARACTER_CLASSES = json.load(handle)
+class EquipmentStatistics(object):
+    def __init__(self, statistics, defaults = None):
+        self._statistics = statistics
+        if defaults is None:
+            defaults = {}
+        self._defaults = defaults
 
-with open(EQUIPMENT_STATS_JSON, 'r') as handle:
-    ALL_EQUIPMENT_STATS = json.load(handle)
+    def keys(self):
+        remaining_defaults = set(self._defaults)
+        for key in self._statistics:
+            remaining_defaults.discard(key)
+            yield key
+        for key in remaining_defaults:
+            yield key
 
-with open(RING_STATS_JSON, 'r') as handle:
-    RING_STATS = json.load(handle)
+    def flattened(self):
+        return { key: self[key] for key in sorted(self.keys()) }
+
+    def __str__(self):
+        return str(self.flattened())
+
+    def __repr__(self):
+        return str(self)
+
+    def __getitem__(self, key):
+        try:
+            return self._statistics[key]
+        except KeyError:
+            return self._defaults[key]
+
+class EquipmentSection(object):
+    def __init__(self, entries, defaults = None):
+        if defaults is None:
+            defaults = {}
+
+        for name, statistics in entries.items():
+            # TODO: anything else during this iteration?  Filtering?
+            entries[name] = EquipmentStatistics(statistics = statistics, defaults = defaults)
+
+        self._entries = entries
+
+    def keys(self):
+        return self._entries.keys()
+
+    def __getitem__(self, key):
+        return self._entries[key]
 
 
-# NOTE: certain orders will prune things faster and as a consequence be more efficient
-# but I do not know of a good way to decide the order.
-combined_slot = KnapsackItemSlot.combine_in_pairs(
-        [ KnapsackItemSlot.from_equipment_section(
-                section = ALL_EQUIPMENT_STATS[equipment_type],
-                weight_key = WEIGHT_KEY,
-                weight_modifier_key = WEIGHT_MODIFIER_KEY,
-                value_key = VALUE_KEY,
-                count = 1)
-                for equipment_type in EQUIPMENT_TYPES ])
+class EquipmentCollection(object):
+    def __init__(self):
+        self._sections = {}
 
-# Add rings
-combined_slot = combined_slot.combine(KnapsackItemSlot.from_equipment_section(
-        section = RING_STATS['Fingers'],
-        weight_key = WEIGHT_KEY,
-        weight_modifier_key = WEIGHT_MODIFIER_KEY,
-        value_key = VALUE_KEY,
-        count = 2))
+    def keys(self):
+        return self._sections.keys()
+
+    def __getitem__(self, key):
+        return self._sections[key]
+
+    def add_raw_collection(self, data):
+        for name, section in data.items():
+            if name in self._sections:
+                raise KeyError(f'Section {name} is already present within the collection.')
+            self._sections[name] = EquipmentSection(entries = section['entries'], defaults = section.get('defaults'))
+
+    def add_collection_json(self, path):
+        with open(path, 'r') as handle:
+            data = json.load(handle)
+        self.add_raw_collection(data)
+
+    def to_knapsack_item_slot(self, sections, weight_key, weight_modifier_key, value_key):
+        pairs = []
+        for section_arg in sections:
+            if not isinstance(section_arg, tuple):
+                section_arg = (section_arg,)
+            name, count, allow_duplicates = section_arg + (None, 1, False)[len(section_arg):]
+            section = self[name]
+
+            pairs.append(KnapsackItemSlot(
+                items = [
+                    KnapsackItem(
+                        weight = KnapsackWeight(
+                            # Assignment expression; python 3.8+
+                            cost = (statistics := section[name])[weight_key],
+                            modifier = statistics[weight_modifier_key]),
+                        value = statistics[value_key],
+                        name = name)
+                    for name in section.keys() ],
+                count = count,
+                allow_duplicates = allow_duplicates))
+
+        return KnapsackItemSlot.combine_in_pairs(pairs)
+
+##############################################################################
+
+CHARACTER_CLASS_STATS_JSON = 'darksouls-character-classes.json'
+#with open(CHARACTER_CLASS_STATS_JSON, 'r') as handle:
+#    CHARACTER_CLASSES = json.load(handle)
+
+EQUIPMENT_STATS_JSON = 'darksouls-equipment-stats-10.json'
+RING_STATS_JSON = 'darksouls-ring-stats.json'
+MAX_WEIGHT_COST = 51.0
+#MAX_WEIGHT_PERCENT = 0.08333
+#MAX_WEIGHT_PERCENT = 0.16667
+MAX_WEIGHT_PERCENT = 0.25
+EXTRA_WEIGHT_COST = 2.0  # weapons weight
+
+equipment = EquipmentCollection()
+equipment.add_collection_json(EQUIPMENT_STATS_JSON)
+equipment.add_collection_json(RING_STATS_JSON)
+#print(equipment['Arms']['Balder Gauntlets+10'])
+
+settings = {
+        'weight_key': 'weight',
+        'weight_modifier_key': 'weight_modifier',
+        'value_key': 'physical' }
+
+combined_slot = equipment.to_knapsack_item_slot(
+        sections=['Head', 'Torso', 'Arms', 'Legs', ('Fingers', 2, False)],
+        **settings)
 
 solution = combined_slot.flatten_to_solution(max_weight_cost=MAX_WEIGHT_COST, extra_weight_cost=EXTRA_WEIGHT_COST)
-print(f"optimal sets for {VALUE_KEY}: {len(solution)}")
+
+print(f"optimal sets for {settings['value_key']}: {len(solution)}")
 top_ten = solution.best_for_load_percentage(MAX_WEIGHT_PERCENT, count=10)
 for entry in top_ten:
     print(entry)
 
-exit(1)
+exit(0)
+
 
 # test
 if False:
