@@ -329,6 +329,7 @@ class KnapsackItemSlot(object):
         return type(self).combine_in_pairs([self, other])
 
 
+# Lightweight layer over a dict to implement default values
 class EquipmentStatistics(object):
     def __init__(self, statistics, defaults = None):
         self._statistics = statistics
@@ -363,11 +364,9 @@ class EquipmentSection(object):
     def __init__(self, entries, defaults = None):
         if defaults is None:
             defaults = {}
-
         for name, statistics in entries.items():
             # TODO: anything else during this iteration?  Filtering?
             entries[name] = EquipmentStatistics(statistics = statistics, defaults = defaults)
-
         self._entries = entries
 
     def keys(self):
@@ -375,7 +374,6 @@ class EquipmentSection(object):
 
     def __getitem__(self, key):
         return self._entries[key]
-
 
 class EquipmentCollection(object):
     def __init__(self):
