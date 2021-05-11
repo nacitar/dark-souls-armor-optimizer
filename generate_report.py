@@ -29,7 +29,7 @@ class KnapsackWeight(object):
         return NotImplemented
 
     def __lt__(self, other):
-        # sort my cost then inverted modifier.  smallest weight, largest modifier.
+        # sort by cost then inverted modifier.  smallest cost, largest modifier.
         return (self.cost < other.cost or
             self.cost == other.cost and self.modifier > other.modifier)
 
@@ -208,7 +208,7 @@ class KnapsackItemSlot(object):
                 items = sorted(items)
                 index = 0
                 best_for_modifier_gte = BestKnapsackItemForModifierGTE()
-                last_survivor = None
+                last_top_survivor = None
                 # how many items thus far have been dominated by the referenced one, even if they weren't pruned
                 lesser_item_count = {}
                 while index < len(items):
@@ -225,32 +225,24 @@ class KnapsackItemSlot(object):
                                 or item.value == possible_dominator.value and item.weight > possible_dominator.weight):
                             dominated = lesser_item_count.get(item.name, 0) + 1
                             lesser_item_count[item.name] = dominated
-                    if (last_survivor is not None and item.value == last_survivor.value
-                            and item.weight == last_survivor.weight):  # checks modifier too 
-                        dominated = lesser_item_count.get(last_survivor.name, 0) + 1
-                        lesser_item_count[last_survivor.name] = dominated
+                    if (last_top_survivor is not None and item.value == last_top_survivor.value
+                            and item.weight == last_top_survivor.weight):  # checks modifier too
+                        dominated = lesser_item_count.get(last_top_survivor.name, 0) + 1
+                        lesser_item_count[last_top_survivor.name] = dominated
                         alternative = True
 
                     if dominated > 0:
-                        # even if we don't prune it out, we don't need this piece to factor
-                        # into the domination logic.  There is no need to directly acknowledge
-                        # that this item dominates some other when this item itself is also
-                        # dominated by some even better item.  The comparison is best performed
-                        # between that item and the most dominant item.
-
-                        # other slots could use things we dominate/things that are lesser.
-                        # so make sure we have avoided pruning out at LEAST that many of
-                        # the lesser items before removing this one.
-
                         # Each particular item needs to have enough fallbacks to cover extra
                         # slots, so we track how many items each one has dominated to ensure
                         # we don't remove fallback options for once the dominant item has
-                        # already been selected but there are more slots to go.
+                        # already been selected but there are more slots to go.  However,
+                        # even if the item is ultimately kept as a fallback it isn't a
+                        # "top" survivor, as it survived merely due to fallbacks.
                         if dominated + 1 > count:
                             if alternative:
                                 if self.debug > 1:
-                                    print(f"COMBINED: {item.name} is an equal alternative to {last_survivor.name}")
-                                last_survivor.alternatives.add(item.name)
+                                    print(f"COMBINED: {item.name} is an equal alternative to {last_top_survivor.name}")
+                                last_top_survivor.alternatives.add(item.name)
                             else:
                                 if self.debug > 1:
                                     print(f"REMOVED: {item.name} is dominated by {possible_dominator.name}")
@@ -260,7 +252,7 @@ class KnapsackItemSlot(object):
                             if self.debug > 1:
                                 print(f"KEPT: {item.weight} {item.name} after comparing with {possible_dominator.name}")
                     else:
-                        last_survivor = item
+                        last_top_survivor = item
                         best_for_modifier_gte.add(item) 
                     index += 1
 
@@ -284,20 +276,6 @@ class KnapsackItemSlot(object):
     def __len__(self):
         return len(self.items)
 
-    @staticmethod
-    def from_equipment_section(section, weight_key, weight_modifier_key, value_key, count, allow_duplicates=False):
-        defaults = section['defaults']
-        return KnapsackItemSlot(items = [ KnapsackItem(
-                weight = KnapsackWeight(
-                    cost = stats[weight_key] if weight_key in stats else defaults[weight_key],
-                    modifier = stats[weight_modifier_key] if weight_modifier_key in stats else defaults[weight_modifier_key]
-                    ),
-                value = stats[value_key] if value_key in stats else defaults[value_key],
-                name = name)
-                for name, stats in section['entries'].items() ],
-                count = count,
-                allow_duplicates = allow_duplicates)
-
     def flatten_to_solution(self, max_weight_cost, extra_weight_cost):
         flattened = KnapsackItemSlot(items = [ item.flattened(
                     max_weight_cost=max_weight_cost, extra_weight_cost=extra_weight_cost)
@@ -310,19 +288,17 @@ class KnapsackItemSlot(object):
             slots = [slots]
         else:
             slots = list(slots)
-        while len(slots) > 1:
-            index = 0
-            count = len(slots) // 2
-            while index < count:
-                offset = index*2
-                slots[index] = KnapsackItemSlot(
-                        items = [ first_item.combine(second_item)
-                                for first_item, second_item in itertools.product(
-                                        slots[offset].items.values(),
-                                        slots[offset+1].items.values())])
-                index += 1
-            del slots[index:index*2]
 
+        while len(slots) > 1:
+            slots_iter = iter(slots)
+            # replace the slice, so that any extra slot without a pair
+            # still sits at the end of the list
+            slots[:len(slots) // 2 * 2] = [cls(
+                            items = [first_item.combine(second_item)
+                                        for first_item, second_item in itertools.product(
+                                                first_slot.items.values(),
+                                                second_slot.items.values())])
+                        for first_slot, second_slot in zip(*[slots_iter] * 2)]
         return slots[0]
         
     def combine(self, other):
@@ -396,28 +372,31 @@ class EquipmentCollection(object):
             data = json.load(handle)
         self.add_raw_collection(data)
 
+    # helper
+    def __get_section_settings_defaults(self, name, count=1, allow_duplicates=False):
+        return (self[name], count, allow_duplicates)
+
+    def __get_section_settings(self, section_arg):
+        if not isinstance(section_arg, tuple):
+            section_arg = (section_arg,)
+        return self.__get_section_settings_defaults(*section_arg)
+
     def to_knapsack_item_slot(self, sections, weight_key, weight_modifier_key, value_key):
-        pairs = []
-        for section_arg in sections:
-            if not isinstance(section_arg, tuple):
-                section_arg = (section_arg,)
-            name, count, allow_duplicates = section_arg + (None, 1, False)[len(section_arg):]
-            section = self[name]
-
-            pairs.append(KnapsackItemSlot(
-                items = [
-                    KnapsackItem(
-                        weight = KnapsackWeight(
-                            # Assignment expression; python 3.8+
-                            cost = (statistics := section[name])[weight_key],
-                            modifier = statistics[weight_modifier_key]),
-                        value = statistics[value_key],
-                        name = name)
-                    for name in section.keys() ],
-                count = count,
-                allow_duplicates = allow_duplicates))
-
-        return KnapsackItemSlot.combine_in_pairs(pairs)
+        return KnapsackItemSlot.combine_in_pairs([
+                KnapsackItemSlot(
+                    items = [
+                        KnapsackItem(
+                            weight = KnapsackWeight(
+                                # Assignment expression; python 3.8+
+                                cost = (statistics := section[name])[weight_key],
+                                modifier = statistics[weight_modifier_key]),
+                            value = statistics[value_key],
+                            name = name)
+                        for name in section.keys() ],
+                    count = count,
+                    allow_duplicates = allow_duplicates)
+                for section, count, allow_duplicates in map(self.__get_section_settings, sections)
+                ])
 
 ##############################################################################
 
