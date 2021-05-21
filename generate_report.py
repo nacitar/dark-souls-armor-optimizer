@@ -288,7 +288,7 @@ class KnapsackItemSlot(object):
     def __len__(self):
         return len(self.items)
 
-    def solution_by_equip_load(self, max_weight_cost, extra_weight_cost):
+    def solution_by_weight_percentage(self, max_weight_cost, extra_weight_cost):
         if not self._has_modifiers and extra_weight_cost == 0.0:
             items = self.items
         else:
@@ -447,7 +447,8 @@ combined_slot = equipment.to_knapsack_item_slot(
         sections=['Head', 'Torso', 'Arms', 'Legs', ('Fingers', 2, False)],
         **settings)
 
-solution = combined_slot.solution_by_equip_load(max_weight_cost=MAX_WEIGHT_COST, extra_weight_cost=EXTRA_WEIGHT_COST)
+solution = combined_slot.solution_by_weight_percentage(
+        max_weight_cost=MAX_WEIGHT_COST, extra_weight_cost=EXTRA_WEIGHT_COST)
 
 print(f"optimal sets for {settings['value_key']}: {len(solution)}")
 top_ten = solution.best_for_cost(MAX_WEIGHT_PERCENT, count=10)
