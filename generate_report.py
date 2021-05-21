@@ -179,7 +179,7 @@ class BestKnapsackItemForModifierGTE(object):
 class KnapsackSolution(object):
     def __init__(self, items=None, sort=True):
         if not isinstance(items, list):
-            raise TypeError('items must be a list')
+            raise TypeError("items must be a list(KnapSackItem)")
         if sort:
             items = sorted(items)
         self.items = { item.weight: item for item in items }
@@ -283,7 +283,7 @@ class KnapsackItemSlot(object):
             # in sorted order
             self.items = items  #{ item.weight: item for item in items }
         else:
-            raise ValueError("items must be a list(KnapSackItem)")
+            raise TypeError("items must be a list(KnapSackItem)")
 
     def __len__(self):
         return len(self.items)
