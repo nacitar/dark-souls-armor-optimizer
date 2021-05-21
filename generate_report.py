@@ -395,7 +395,7 @@ class EquipmentCollection(object):
 
     # helper
     def __get_section_settings_defaults(self, name, count=1, allow_duplicates=False):
-        return (self[name], name, count, allow_duplicates)
+        return (self[name], count, allow_duplicates)
 
     def __get_section_settings(self, section_arg):
         if not isinstance(section_arg, tuple):
@@ -416,7 +416,7 @@ class EquipmentCollection(object):
                         for name in section.keys() ],
                     count = count,
                     allow_duplicates = allow_duplicates)
-                for section, section_name, count, allow_duplicates in map(self.__get_section_settings, sections)
+                for section, count, allow_duplicates in map(self.__get_section_settings, sections)
                 ])
 
 ##############################################################################
