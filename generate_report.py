@@ -7,6 +7,22 @@ import bisect
 import itertools
 import functools
 
+# TODO:
+# - store the maximum weight modifier for a given slot
+# - When pruning, know the highest possible modifier for all remaining slots
+#   - How do you know?  You need to know this information while pruning, so
+#     this means scanning the input data before pruning.
+#   - This means knowing the full slot set prior to pruning.
+#   - Prune out things that couldn't possibly be worn because they are too heavy
+#     by themselves, even with the highest of all possible modifiers in the other
+#     slots.  DONT FORGET THE MODIFIER OF THE ITEM TO BE PRUNED, EITHER!
+#   - Would need to know the player equip load and any extra weight during pruning.
+# - If presenting items to exclude, weight modifying items should be near the top
+#   of the list, because they reduce complexity greatly when removed.
+# - The lowest modifier doesn't seem useful.
+# - This won't change much with high equip load, but for constrained loads
+#   it should be able to prune out a ton of things.
+
 # A weight that incorporates a modifier
 @functools.total_ordering
 class KnapsackWeight(object):
