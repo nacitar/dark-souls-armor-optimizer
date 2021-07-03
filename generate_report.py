@@ -7,6 +7,8 @@ import bisect
 import itertools
 import functools
 
+import collections
+
 # TODO:
 # - store the maximum weight modifier for a given slot
 # - When pruning, know the highest possible modifier for all remaining slots
@@ -101,7 +103,7 @@ class KnapsackItem(object):
         return type(self)(
                 weight = self.weight + other.weight,
                 value = self.value + other.value,
-                # filter None out so special entires that items that are
+                # filter None out so special items that are
                 # unnamed could be used to make new items from existing
                 # ones with adjusted values. Also needed for supporting
                 # type(self).ZERO
@@ -339,55 +341,6 @@ class KnapsackItemSlot(object):
                     for first_slot, second_slot in zip(*[slots_iter] * 2)]
         return slots[0]
 
-
-# Lightweight layer over a dict to implement default values
-class EquipmentStatistics(object):
-    def __init__(self, statistics, defaults = None):
-        self._statistics = statistics
-        if defaults is None:
-            defaults = {}
-        self._defaults = defaults
-
-    def keys(self):
-        remaining_defaults = set(self._defaults)
-        for key in self._statistics:
-            remaining_defaults.discard(key)
-            yield key
-        for key in remaining_defaults:
-            yield key
-
-    # all stats committed to a single dict, without the indirection for defaults
-    def flattened(self):
-        return { key: self[key] for key in sorted(self.keys()) }
-
-    def __str__(self):
-        return str(self.flattened())
-
-    def __repr__(self):
-        return str(self)
-
-    def __getitem__(self, key):
-        try:
-            return self._statistics[key]
-        except KeyError:
-            return self._defaults[key]
-
-class EquipmentSection(object):
-    # takes ownership of entries, and modifies it
-    def __init__(self, entries, defaults = None):
-        if defaults is None:
-            defaults = {}
-        for name, statistics in entries.items():
-            # TODO: anything else during this iteration?  Filtering?
-            entries[name] = EquipmentStatistics(statistics = statistics, defaults = defaults)
-        self._entries = entries
-
-    def keys(self):
-        return self._entries.keys()
-
-    def __getitem__(self, key):
-        return self._entries[key]
-
 class EquipmentCollection(object):
     def __init__(self):
         self._sections = {}
@@ -402,7 +355,12 @@ class EquipmentCollection(object):
         for name, section in data.items():
             if name in self._sections:
                 raise KeyError(f'Section {name} is already present within the collection.')
-            self._sections[name] = EquipmentSection(entries = section['entries'], defaults = section.get('defaults'))
+            defaults = section.get('defaults')
+            if defaults is not None:
+                self._sections[name] = {entry_name: collections.ChainMap(statistics, defaults)
+                        for entry_name, statistics in section['entries'].items()}
+            else:
+                self._sections[name] = section['entries']
 
     def add_collection_json(self, path):
         with open(path, 'r') as handle:
