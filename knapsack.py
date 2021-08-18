@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 
-# Requires python 3.8+ for assignment expressions
-
 import json
 import bisect
 import itertools
 import functools
 
 import collections
+import logging
+
+logger = logging.getLogger(__name__)
 
 # TODO:
 # - store the maximum weight modifier for a given slot
@@ -180,7 +181,7 @@ class BestKnapsackItemForModifierGTE(object):
             if self._dict[prior_key].value >= item.value:
                 break
             self._dict[prior_key] = item
-    
+
     # if this throws IndexError, there's no key that is >= key
     def lookup(self, item):
         key = item.weight.modifier
@@ -244,7 +245,7 @@ class KnapsackItemSlot(object):
                         possible_dominator = None
                     dominated = 0
                     alternative = False
-                    
+
                     if possible_dominator is not None:
                         if (item.value < possible_dominator.value
                                 or item.value == possible_dominator.value and item.weight > possible_dominator.weight):
@@ -278,7 +279,7 @@ class KnapsackItemSlot(object):
                                 print(f"KEPT: {item.weight} {item.name} after comparing with {possible_dominator.name}")
                     else:
                         last_top_survivor = item
-                        best_for_modifier_gte.add(item) 
+                        best_for_modifier_gte.add(item)
                     if not self._has_modifiers and item.weight.has_modifier():
                         if self.debug:
                             print(f"MODIFIER: {item.name} {item.weight}")
@@ -353,14 +354,20 @@ class EquipmentCollection(object):
 
     def add_raw_collection(self, data):
         for name, section in data.items():
-            if name in self._sections:
-                raise KeyError(f'Section {name} is already present within the collection.')
-            defaults = section.get('defaults')
-            if defaults is not None:
-                self._sections[name] = {entry_name: collections.ChainMap(statistics, defaults)
-                        for entry_name, statistics in section['entries'].items()}
-            else:
-                self._sections[name] = section['entries']
+            entries = section.get('entries')
+            if entries:  # present and non-empty
+                defaults = section.get('defaults')
+                if defaults is not None:
+                    # make entries incorporate the defaults
+                    entries = {entry_name: collections.ChainMap(statistics, defaults)
+                            for entry_name, statistics in entries.items()}
+                if name in self._sections:
+                    existing_keys = set(self._sections.keys()).intersection(entries.keys())
+                    if existing_keys:
+                        logger.warning(f'Overwriting existing entries for section "{name}": {existing_keys}')
+                    self._sections[name].update(entries)
+                else:
+                    self._sections[name] = entries
 
     def add_collection_json(self, path):
         with open(path, 'r') as handle:
@@ -392,60 +399,4 @@ class EquipmentCollection(object):
                     allow_duplicates = allow_duplicates)
                 for section, count, allow_duplicates in map(self.__get_section_settings, sections)
                 ])
-
-##############################################################################
-
-CHARACTER_CLASS_STATS_JSON = 'darksouls-character-classes.json'
-#with open(CHARACTER_CLASS_STATS_JSON, 'r') as handle:
-#    CHARACTER_CLASSES = json.load(handle)
-
-EQUIPMENT_STATS_JSON = 'darksouls-equipment-stats-10.json'
-RING_STATS_JSON = 'darksouls-ring-stats.json'
-MAX_WEIGHT_COST = 51.0
-#MAX_WEIGHT_PERCENT = 0.08333
-#MAX_WEIGHT_PERCENT = 0.16667
-MAX_WEIGHT_PERCENT = 0.25
-EXTRA_WEIGHT_COST = 2.0  # weapons weight
-
-equipment = EquipmentCollection()
-equipment.add_collection_json(EQUIPMENT_STATS_JSON)
-equipment.add_collection_json(RING_STATS_JSON)
-#print(equipment['Arms']['Balder Gauntlets+10'])
-
-settings = {
-        'weight_key': 'weight',
-        'weight_modifier_key': 'weight_modifier',
-        'value_key': 'physical' }
-
-combined_slot = equipment.to_knapsack_item_slot(
-        sections=['Head', 'Torso', 'Arms', 'Legs', ('Fingers', 2, False)],
-        **settings)
-
-solution = combined_slot.solution_by_weight_percentage(
-        max_weight_cost=MAX_WEIGHT_COST, extra_weight_cost=EXTRA_WEIGHT_COST)
-
-print(f"optimal sets for {settings['value_key']}: {len(solution)}")
-top_ten = solution.best_for_cost(MAX_WEIGHT_PERCENT, count=10)
-for entry in top_ten:
-    print(entry)
-
-exit(0)
-
-
-# test
-if False:
-    best_for_modifier_gte = BestKnapsackItemForModifierGTE()
-    best_for_modifier_gte.add(KnapsackItem(weight=KnapsackWeight(cost=0, modifier=0), value=10, name='A'))
-    print(best_for_modifier_gte.sorted())
-    best_for_modifier_gte.add(KnapsackItem(weight=KnapsackWeight(cost=0, modifier=1), value=5, name='B'))
-    print(best_for_modifier_gte.sorted())
-    best_for_modifier_gte.add(KnapsackItem(weight=KnapsackWeight(cost=0, modifier=2), value=3, name='C'))
-    print(best_for_modifier_gte.sorted())
-    best_for_modifier_gte.add(KnapsackItem(weight=KnapsackWeight(cost=0, modifier=4), value=6, name='D'))
-    print(best_for_modifier_gte.sorted())
-    best_for_modifier_gte.add(KnapsackItem(weight=KnapsackWeight(cost=4, modifier=-1), value=5, name='E'))  # needs to become 10
-    print(best_for_modifier_gte.sorted())
-    print(best_for_modifier_gte.lookup_modifier(0))
-    print(best_for_modifier_gte.lookup_modifier(3))
-    exit(1)
 
