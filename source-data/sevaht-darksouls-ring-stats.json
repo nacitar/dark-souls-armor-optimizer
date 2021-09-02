@@ -1,0 +1,51 @@
+{
+    "Naked Finger": {
+        "set": "Naked",
+        "position": "Fingers"
+    },
+    "Tiny Being's Ring": {
+        "health_modifier": "0.05",
+        "position": "Fingers"
+    },
+    "Cloranthy Ring": {
+        "stamina_regeneration": "20",
+        "position": "Fingers"
+    },
+    "Havel's Ring": {
+        "set": "Havel",
+        "weight_modifier": "0.5",
+        "position": "Fingers"
+    },
+    "Ring of Favor and Protection": {
+        "health_modifier": "0.2",
+        "stamina_modifier": "0.2",
+        "weight_modifier": "0.2",
+        "position": "Fingers"
+    },
+    "Ring of Steel Protection": {
+        "physical": "50.0",
+        "position": "Fingers"
+    },
+    "Spell Stoneplate Ring": {
+        "magic": "50.0",
+        "position": "Fingers"
+    },
+    "Flame Stoneplate Ring": {
+        "fire": "50.0",
+        "position": "Fingers"
+    },
+    "Thunder Stoneplate Ring": {
+        "lightning": "50.0",
+        "position": "Fingers"
+    },
+    "Speckled Stoneplate Ring": {
+        "magic": "25.0",
+        "fire": "25.0",
+        "lightning": "25.0",
+        "position": "Fingers"
+    },
+    "Wolf Ring": {
+        "poise": "40.0",
+        "position": "Fingers"
+    }
+}

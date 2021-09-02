@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-# Requires python 3.8+ for assignment expressions
-
 import logging
 logging.basicConfig(
         level=logging.WARNING,
