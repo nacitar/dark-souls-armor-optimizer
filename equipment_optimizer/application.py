@@ -14,8 +14,7 @@ LOG = logging.getLogger(__name__)
 
 # TODO:
 #   add arguments you want to maximize
-#   add set exclusions or something more general
-#   get this committed!
+#   add arguments for set/name exclusions
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
