@@ -10,12 +10,6 @@ from . import game_data
 LOG = logging.getLogger(__name__)
 
 
-exclude = {
-    "set": set(["Havel"]),
-    "name": set(["Wanderer Manchettes"]),
-}
-
-
 class Equipment(object):
     """
     When importing pieces, if an exclusion applies it will silently
@@ -61,11 +55,11 @@ class Equipment(object):
         content: Optional[str] = None,
     ) -> None:
         if path is not None:
-            with open(path, mode="r", newline="") as handle:
-                for piece in csv.DictReader(handle):
+            with game_data.open_csv(path) as csv_file:
+                for piece in game_data.iterate_csv(file=csv_file):
                     self.import_piece(piece)
         if content is not None:
-            for piece in csv.DictReader(game_data.iterlines(content)):
+            for piece in game_data.iterate_csv(content=content):
                 self.import_piece(piece)
 
     def import_builtin_game(

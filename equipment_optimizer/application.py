@@ -71,20 +71,21 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     LOG.setLevel(args.verbose)
 
     exclude = None
-    #exclude = {
-    #        'set': set(['Xanthous'])
+    # exclude = {
+    #        "set": set(["Xanthous"]),
+    #        "name": set(["Wanderer Manchettes"])
     #    }
     equipment = Equipment(statistics=args.statistic, exclude=exclude)
 
     if args.input_directory:
-        equipment.import_custom_game(args.input_directory, data_sets=args.data_set)
+        equipment.import_custom_game(
+            args.input_directory, data_sets=args.data_set
+        )
     else:
         equipment.import_builtin_game(game=args.game, data_sets=args.data_set)
 
     print(equipment.data)
     return 0
-
-
 
 
 if __name__ == "__main__":
