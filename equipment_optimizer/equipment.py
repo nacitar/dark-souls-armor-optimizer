@@ -25,9 +25,9 @@ class Equipment(object):
     def __init__(
         self,
         *,
-        statistics: Optional[Iterable[str]] = None,
         position_key: str = "position",
         name_key: str = "name",
+        statistics: Optional[Iterable[str]] = None,
         exclude: Optional[dict[str, set[str]]] = None,
     ):
         # position => name => statistics => nonzero float value
