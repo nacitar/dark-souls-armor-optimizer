@@ -17,6 +17,11 @@ exclude = {
 
 
 class Equipment(object):
+    """
+    When importing pieces, if an exclusion applies it will silently
+    not be imported.
+    """
+
     def __init__(
         self,
         *,
@@ -33,13 +38,12 @@ class Equipment(object):
         self._name_key = name_key
         self._exclude = exclude or {}
 
-    def filter_statistics(
-        self, piece: dict[str, str]
-    ) -> Optional[dict[str, float]]:
+    def import_piece(self, piece: dict[str, str]) -> None:
         for statistic, value in self._exclude.items():
             if piece.get(statistic) in value:
-                return None
-        return {
+                return
+        section = self.data.setdefault(piece[self._position_key], {})
+        section[piece[self._name_key]] = {
             statistic: nonzero_float
             for statistic, value in piece.items()
             if (
@@ -51,14 +55,6 @@ class Equipment(object):
             )
         }
 
-    def import_piece(self, piece: dict[str, str]) -> bool:
-        statistics = self.filter_statistics(piece)
-        if statistics is not None:
-            section = self.data.setdefault(piece[self._position_key], {})
-            section[piece[self._name_key]] = statistics
-            return True
-        return False
-
     def import_csv(
         self,
         path: Optional[Union[str, PathLike[str]]] = None,
@@ -68,15 +64,13 @@ class Equipment(object):
             with open(path, mode="r", newline="") as handle:
                 for piece in csv.DictReader(handle):
                     self.import_piece(piece)
-        elif content is None:
-            raise TypeError("Must specify path and/or content.")
         if content is not None:
             for piece in csv.DictReader(game_data.iterlines(content)):
                 self.import_piece(piece)
 
     def import_builtin_game(
         self, game: str, *, data_sets: Optional[list[str]] = None
-    ):
+    ) -> None:
         for path in game_data.get_csv_files(
             game, data_sets=data_sets, is_resource=True
         ):
