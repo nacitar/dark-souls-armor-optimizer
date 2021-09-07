@@ -1,53 +1,90 @@
 #!/usr/bin/env python3
 
-from typing import Iterable, Optional, Union
+from typing import Iterable, Optional, Union, Iterator
 from pathlib import Path
 from os import PathLike
-import csv
 import logging
 from . import game_data
 
 LOG = logging.getLogger(__name__)
 
 
-class Equipment(object):
-    """
-    When importing pieces, if an exclusion applies it will silently
-    not be imported.
-    """
+class PieceData(object):
+    def __init__(
+        self, *, attributes: dict[str, str], statistics: dict[str, float]
+    ):
+        self.attributes: dict[str, str] = attributes
+        self.statistics: dict[str, float] = statistics
 
+    def get_statistic(self, statistic: str) -> float:
+        return self.statistics.get(statistic, 0.0)
+
+    def get_attribute(self, attribute: str) -> str:
+        return self.attributes.get(attribute, "")
+
+    def __repr__(self) -> str:
+        return repr(
+            {"attributes": self.attributes, "statistics": self.statistics}
+        )
+
+
+class EquipmentDatabase(object):
     def __init__(
         self,
         *,
-        position_key: str = "position",
         name_key: str = "name",
-        statistics: Optional[Iterable[str]] = None,
+        position_key: str = "position",
+        fields: Optional[Iterable[str]] = None,
         exclude: Optional[dict[str, set[str]]] = None,
     ):
-        # position => name => statistics => nonzero float value
-        self.data: dict[str, dict[str, dict[str, float]]] = {}
+        self.pieces: dict[str, PieceData] = {}
         # None means to get all of them
-        self._statistics = list(statistics) if statistics is not None else None
-        self._position_key = position_key
+        self._fields = list(fields) if fields is not None else None
         self._name_key = name_key
+        self._position_key = position_key
         self._exclude = exclude or {}
 
-    def import_piece(self, piece: dict[str, str]) -> None:
-        for statistic, value in self._exclude.items():
-            if piece.get(statistic) in value:
-                return
-        section = self.data.setdefault(piece[self._position_key], {})
-        section[piece[self._name_key]] = {
-            statistic: nonzero_float
-            for statistic, value in piece.items()
-            if (
-                statistic not in (self._position_key, self._name_key)
-                and (self._statistics is None or statistic in self._statistics)
-                and bool(
-                    nonzero_float := game_data.to_float(value, default=0.0)
-                )
+    def by_position(
+        self, positions: Optional[set[str]] = None
+    ) -> dict[str, set[str]]:
+        result: dict[str, set[str]] = {}
+        for name, data in self.pieces.items():
+            position = data.get_attribute(self._position_key)
+            if position and (not positions or position in positions):
+                result.setdefault(position, set()).add(name)
+        return result
+
+    def is_csv_row_excluded(self, row: dict[str, str]) -> bool:
+        for attribute, value in self._exclude.items():
+            if row.get(attribute, "") in value:
+                return True
+        return False
+
+    def import_csv_row(self, row: dict[str, str]) -> None:
+        if self.is_csv_row_excluded(row):
+            LOG.warning(f"Skipping excluded piece of equipment: {repr(row)}")
+        else:
+            attributes: dict[str, str] = {}
+            statistics: dict[str, float] = {}
+            name = ""
+            for key, value in row.items():
+                if value:
+                    if key == self._name_key:
+                        name = value
+                    elif self._fields is None or key in self._fields:
+                        try:
+                            float_value = float(value)
+                            if float_value != 0.0:
+                                statistics[key] = float_value
+                        except ValueError:
+                            attributes[key] = value
+            if not name:
+                raise ValueError(f"row requires non-empty name: {repr(row)}")
+            if name in self.pieces:
+                LOG.warning(f"Replacing existing piece of equipment: {name}")
+            self.pieces[name] = PieceData(
+                attributes=attributes, statistics=statistics
             )
-        }
 
     def import_csv(
         self,
@@ -56,11 +93,11 @@ class Equipment(object):
     ) -> None:
         if path is not None:
             with game_data.open_csv(path) as csv_file:
-                for piece in game_data.iterate_csv(file=csv_file):
-                    self.import_piece(piece)
+                for row in game_data.iterate_csv(file=csv_file):
+                    self.import_csv_row(row)
         if content is not None:
-            for piece in game_data.iterate_csv(content=content):
-                self.import_piece(piece)
+            for row in game_data.iterate_csv(content=content):
+                self.import_csv_row(row)
 
     def import_builtin_game(
         self, game: str, *, data_sets: Optional[list[str]] = None

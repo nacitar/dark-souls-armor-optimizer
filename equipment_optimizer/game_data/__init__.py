@@ -38,11 +38,11 @@ def iterate_csv(
     Any file passed to the file argument must be opened with newline="".
     """
     if file is not None:
-        for piece in csv.DictReader(file):
-            yield piece
+        for row in csv.DictReader(file):
+            yield row
     if content is not None:
-        for piece in csv.DictReader(iterate_lines(content)):
-            yield piece
+        for row in csv.DictReader(iterate_lines(content)):
+            yield row
 
 
 # NOTE: importlib.resources.contents requires an __init__.py to be present
@@ -85,13 +85,6 @@ def get_resource_content(path: Union[str, PathLike[str]]) -> str:
     if content is not None:
         return content.decode(json.detect_encoding(content))
     return ""
-
-
-def to_float(value: Union[str, float, int], default: float) -> float:
-    try:
-        return float(value)
-    except ValueError:
-        return default
 
 
 # TODO: test

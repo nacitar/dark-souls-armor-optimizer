@@ -6,7 +6,7 @@ from typing import Optional, Sequence
 import logging
 import argparse
 import sys
-from .equipment import Equipment
+from .equipment import EquipmentDatabase
 
 # from collections.abc import Mapping
 
@@ -54,28 +54,28 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     )
     group = parser.add_mutually_exclusive_group()
     group.add_argument(
-        "-s",
-        "--statistic",
+        "-f",
+        "--field",
         action="append",
-        help="Statistics to include in the output.",
+        help="Fields to include in the output.",
     )
     group.add_argument(
         "-n",
-        "--no-statistics",
+        "--no-fields",
         action="store_true",
-        help="Include no statistics in the output.",
+        help="Include no fields in the output.",
     )
     args = parser.parse_args(args=argv)
-    if args.no_statistics:
-        args.statistic = []
+    if args.no_fields:
+        args.field = []
     LOG.setLevel(args.verbose)
 
-    exclude = None
-    # exclude = {
-    #        "set": set(["Xanthous"]),
-    #        "name": set(["Wanderer Manchettes"])
-    #    }
-    equipment = Equipment(statistics=args.statistic, exclude=exclude)
+    exclude = {
+        "position": set("")
+        # "set": set(["Xanthous"]),
+        # "name": set(["Wanderer Manchettes"])
+    }
+    equipment = EquipmentDatabase(fields=args.field, exclude=exclude)
 
     if args.input_directory:
         equipment.import_custom_game(
@@ -84,7 +84,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     else:
         equipment.import_builtin_game(game=args.game, data_sets=args.data_set)
 
-    print(equipment.data)
+    print(equipment.by_position())
     return 0
 
 
