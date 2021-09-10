@@ -32,24 +32,27 @@ class EquipmentDatabase(object):
     def __init__(
         self,
         *,
-        name_key: str = "name",
-        position_key: str = "position",
-        fields: Optional[Iterable[str]] = None,
+        name_field: str = "name",
+        position_field: str = "position",
+        fields: Optional[set[str]] = None,
         exclude: Optional[dict[str, set[str]]] = None,
     ):
         self.pieces: dict[str, PieceData] = {}
-        # None means to get all of them
-        self._fields = list(fields) if fields is not None else None
-        self._name_key = name_key
-        self._position_key = position_key
-        self._exclude = exclude or {}
+        self._name_field = name_field
+        self._position_field = position_field
+        if fields is not None:
+            self._fields = fields.copy()
+            self._fields.update((self._name_field, self._position_field))
+        else:
+            self._fields = None  # get all of them
+        self._exclude: dict[str, set[str]] = exclude or {}
 
     def by_position(
         self, positions: Optional[set[str]] = None
     ) -> dict[str, set[str]]:
         result: dict[str, set[str]] = {}
         for name, data in self.pieces.items():
-            position = data.get_attribute(self._position_key)
+            position = data.get_attribute(self._position_field)
             if position and (not positions or position in positions):
                 result.setdefault(position, set()).add(name)
         return result
@@ -62,14 +65,14 @@ class EquipmentDatabase(object):
 
     def import_csv_row(self, row: dict[str, str]) -> None:
         if self.is_csv_row_excluded(row):
-            LOG.warning(f"Skipping excluded piece of equipment: {repr(row)}")
+            LOG.debug(f"Skipping excluded piece of equipment: {repr(row)}")
         else:
             attributes: dict[str, str] = {}
             statistics: dict[str, float] = {}
             name = ""
             for key, value in row.items():
                 if value:
-                    if key == self._name_key:
+                    if key == self._name_field:
                         name = value
                     elif self._fields is None or key in self._fields:
                         try:

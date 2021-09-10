@@ -8,13 +8,13 @@ import argparse
 import sys
 from .equipment import EquipmentDatabase
 
-# from collections.abc import Mapping
-
 LOG = logging.getLogger(__name__)
 
 # TODO:
-#   add arguments you want to maximize
-#   add arguments for set/name exclusions
+#   fix Traveling Gloves in data
+#       really, need to get a new data dump because it's missing fields.
+#   consider naming of classes/module itself for 'equipment'
+#   allow saving the output of by_position
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
@@ -22,9 +22,16 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         style="{",
         format="[{asctime:s}] {levelname:s} {message:s}",
         datefmt="%Y-%m-%d %H:%M:%S",
-        level=logging.INFO,
     )
     parser = argparse.ArgumentParser(description="An equipment optimizer.")
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        action="store_const",
+        const=logging.DEBUG,
+        default=logging.INFO,
+        help="Increase output verbosity",
+    )
     group = parser.add_mutually_exclusive_group()
     group.add_argument(
         "-g",
@@ -39,24 +46,47 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     )
     parser.add_argument(
         "-d",
-        "--data-set",
-        action="append",
-        nargs="?",
+        "--data-sets",
+        type=lambda argument: argument.split(","),
         help="The name of a data set to use in addition to common data.",
     )
     parser.add_argument(
-        "-v",
-        "--verbose",
-        action="store_const",
-        const=logging.DEBUG,
-        default=logging.INFO,
-        help="Increase output verbosity",
+        "-m",
+        "--maximize",
+        type=lambda argument: argument.split(","),
+        required=True,
+        help="Fields to maximize in the output.",
+    )
+    parser.add_argument(
+        "--name-field",
+        default="name",
+        help="The name of the field that holds the name of the piece.",
+    )
+    parser.add_argument(
+        "--position-field",
+        default="position",
+        help="The name of the field that holds the position of the piece.",
+    )
+    parser.add_argument(
+        "--set-field",
+        default="set",
+        help="The name of the field that holds the name of the piece's set.",
+    )
+    parser.add_argument(
+        "--exclude-sets",
+        type=lambda argument: set(argument.split(",")),
+        help="The name of sets to exclude from the data.",
+    )
+    parser.add_argument(
+        "--exclude-pieces",
+        type=lambda argument: set(argument.split(",")),
+        help="The name of pieces to exclude from the data.",
     )
     group = parser.add_mutually_exclusive_group()
     group.add_argument(
         "-f",
-        "--field",
-        action="append",
+        "--fields",
+        type=lambda argument: argument.split(","),
         help="Fields to include in the output.",
     )
     group.add_argument(
@@ -66,23 +96,31 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         help="Include no fields in the output.",
     )
     args = parser.parse_args(args=argv)
-    if args.no_fields:
-        args.field = []
-    LOG.setLevel(args.verbose)
+    logging.getLogger().setLevel(args.verbose)
 
-    exclude = {
-        "position": set("")
-        # "set": set(["Xanthous"]),
-        # "name": set(["Wanderer Manchettes"])
-    }
-    equipment = EquipmentDatabase(fields=args.field, exclude=exclude)
+    fields = set(args.maximize)
+    if args.fields:
+        fields.update(args.fields)
+
+    exclude = {}
+    if args.exclude_pieces is not None:
+        exclude[args.name_field] = args.exclude_pieces
+    if args.exclude_sets is not None:
+        exclude[args.set_field] = args.exclude_sets
+
+    equipment = EquipmentDatabase(
+        name_field=args.name_field,
+        position_field=args.position_field,
+        fields=fields,
+        exclude=exclude,
+    )
 
     if args.input_directory:
         equipment.import_custom_game(
-            args.input_directory, data_sets=args.data_set
+            args.input_directory, data_sets=args.data_sets
         )
     else:
-        equipment.import_builtin_game(game=args.game, data_sets=args.data_set)
+        equipment.import_builtin_game(game=args.game, data_sets=args.data_sets)
 
     print(equipment.by_position())
     return 0
