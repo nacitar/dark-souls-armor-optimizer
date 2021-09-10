@@ -41,8 +41,7 @@ class EquipmentDatabase(object):
         self._name_field = name_field
         self._position_field = position_field
         if fields is not None:
-            self._fields = fields.copy()
-            self._fields.update((self._name_field, self._position_field))
+            self._fields = fields.union({self._name_field, self._position_field})
         else:
             self._fields = None  # get all of them
         self._exclude = exclude
