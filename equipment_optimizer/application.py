@@ -6,6 +6,7 @@ from typing import Optional, Sequence
 import logging
 import argparse
 import sys
+import re
 from .equipment import EquipmentDatabase
 
 LOG = logging.getLogger(__name__)
@@ -14,7 +15,11 @@ LOG = logging.getLogger(__name__)
 #   fix Traveling Gloves in data
 #       really, need to get a new data dump because it's missing fields.
 #   consider naming of classes/module itself for 'equipment'
-#   allow saving the output of by_position
+
+# comma delimited list with leading and trailing whitespace removed
+LIST_PATTERN = re.compile("(?:^|,)\s*([^,]*[^,\s])\s*")
+LIST_ARGUMENT_TYPE = lambda argument: re.findall(LIST_PATTERN, argument)
+SET_ARGUMENT_TYPE = lambda argument: set(LIST_ARGUMENT_TYPE(argument))
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
@@ -47,13 +52,13 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument(
         "-d",
         "--data-sets",
-        type=lambda argument: argument.split(","),
+        type=SET_ARGUMENT_TYPE,
         help="The name of a data set to use in addition to common data.",
     )
     parser.add_argument(
         "-m",
         "--maximize",
-        type=lambda argument: argument.split(","),
+        type=LIST_ARGUMENT_TYPE,
         required=True,
         help="Fields to maximize in the output.",
     )
@@ -74,19 +79,19 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     )
     parser.add_argument(
         "--exclude-sets",
-        type=lambda argument: set(argument.split(",")),
+        type=SET_ARGUMENT_TYPE,
         help="The name of sets to exclude from the data.",
     )
     parser.add_argument(
         "--exclude-pieces",
-        type=lambda argument: set(argument.split(",")),
+        type=SET_ARGUMENT_TYPE,
         help="The name of pieces to exclude from the data.",
     )
     group = parser.add_mutually_exclusive_group()
     group.add_argument(
         "-f",
         "--fields",
-        type=lambda argument: argument.split(","),
+        type=SET_ARGUMENT_TYPE,
         help="Fields to include in the output.",
     )
     group.add_argument(

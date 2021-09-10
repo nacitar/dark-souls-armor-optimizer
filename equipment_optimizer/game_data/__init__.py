@@ -65,11 +65,11 @@ def iterate_directory(
 def get_csv_files(
     path: Union[str, PathLike[str]],
     *,
-    data_sets: Optional[Iterable[str]] = None,
+    data_sets: Optional[set[str]] = None,
     is_resource: bool = False,
 ) -> Generator[Path, None, None]:
     if data_sets is None:
-        data_sets = []
+        data_sets = set()
     return (
         file
         for data_set in itertools.chain(("",), data_sets)
