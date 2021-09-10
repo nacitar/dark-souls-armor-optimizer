@@ -41,7 +41,9 @@ class EquipmentDatabase(object):
         self._name_field = name_field
         self._position_field = position_field
         if fields is not None:
-            self._fields = fields.union({self._name_field, self._position_field})
+            self._fields = fields.union(
+                {self._name_field, self._position_field}
+            )
         else:
             self._fields = None  # get all of them
         self._exclude = exclude
@@ -103,7 +105,7 @@ class EquipmentDatabase(object):
                 self.import_csv_row(row)
 
     def import_builtin_game(
-        self, game: str, *, data_sets: Optional[list[str]] = None
+        self, game: str, *, data_sets: Optional[set[str]] = None
     ) -> None:
         for path in game_data.get_csv_files(
             game, data_sets=data_sets, is_resource=True
