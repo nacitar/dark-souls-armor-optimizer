@@ -45,7 +45,7 @@ class EquipmentDatabase(object):
             self._fields.update((self._name_field, self._position_field))
         else:
             self._fields = None  # get all of them
-        self._exclude: dict[str, set[str]] = exclude or {}
+        self._exclude = exclude
 
     def by_position(
         self, positions: Optional[set[str]] = None
@@ -58,9 +58,10 @@ class EquipmentDatabase(object):
         return result
 
     def is_csv_row_excluded(self, row: dict[str, str]) -> bool:
-        for attribute, value in self._exclude.items():
-            if row.get(attribute, "") in value:
-                return True
+        if self._exclude:
+            for attribute, value in self._exclude.items():
+                if row.get(attribute, "") in value:
+                    return True
         return False
 
     def import_csv_row(self, row: dict[str, str]) -> None:
