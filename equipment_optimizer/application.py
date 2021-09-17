@@ -7,7 +7,7 @@ import logging
 import argparse
 import sys
 import re
-from .equipment import EquipmentDatabase
+from .equipment import EquipmentCollection
 
 LOG = logging.getLogger(__name__)
 
@@ -113,7 +113,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     if args.exclude_sets is not None:
         exclude[args.set_field] = args.exclude_sets
 
-    equipment = EquipmentDatabase(
+    equipment = EquipmentCollection(
         name_field=args.name_field,
         position_field=args.position_field,
         fields=fields,

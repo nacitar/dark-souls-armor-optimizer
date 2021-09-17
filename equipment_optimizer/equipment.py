@@ -28,7 +28,7 @@ class PieceData(object):
         )
 
 
-class EquipmentDatabase(object):
+class EquipmentCollection(object):
     def __init__(
         self,
         *,
@@ -40,12 +40,11 @@ class EquipmentDatabase(object):
         self.pieces: dict[str, PieceData] = {}
         self._name_field = name_field
         self._position_field = position_field
+        self._fields: Optional[set[str]] = None  # get all of them
         if fields is not None:
             self._fields = fields.union(
                 {self._name_field, self._position_field}
             )
-        else:
-            self._fields = None  # get all of them
         self._exclude = exclude
 
     def by_position(
@@ -116,7 +115,7 @@ class EquipmentDatabase(object):
         self,
         path: Union[str, PathLike[str]],
         *,
-        data_sets: Optional[Iterable[str]] = None,
+        data_sets: Optional[set[str]] = None,
     ) -> None:
         for path in game_data.get_csv_files(path, data_sets=data_sets):
             self.import_csv(path=path)
