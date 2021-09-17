@@ -18,9 +18,12 @@ LOG = logging.getLogger(__name__)
 
 # comma delimited list with leading and trailing whitespace removed
 LIST_PATTERN = re.compile("(?:^|,)\s*([^,]*[^,\s])\s*")
-LIST_ARGUMENT_TYPE = lambda argument: re.findall(LIST_PATTERN, argument)
-SET_ARGUMENT_TYPE = lambda argument: set(LIST_ARGUMENT_TYPE(argument))
 
+def argument_to_list(argument: str) -> list[str]:
+    return re.findall(LIST_PATTERN, argument)
+
+def argument_to_set(argument: str) -> set[str]:
+    return set(argument_to_list(argument))
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
     logging.basicConfig(
@@ -52,13 +55,13 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument(
         "-d",
         "--data-sets",
-        type=SET_ARGUMENT_TYPE,
+        type=argument_to_set,
         help="The name of a data set to use in addition to common data.",
     )
     parser.add_argument(
         "-m",
         "--maximize",
-        type=LIST_ARGUMENT_TYPE,
+        type=argument_to_list,
         required=True,
         help="Fields to maximize in the output.",
     )
@@ -79,19 +82,19 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     )
     parser.add_argument(
         "--exclude-sets",
-        type=SET_ARGUMENT_TYPE,
+        type=argument_to_set,
         help="The name of sets to exclude from the data.",
     )
     parser.add_argument(
         "--exclude-pieces",
-        type=SET_ARGUMENT_TYPE,
+        type=argument_to_set,
         help="The name of pieces to exclude from the data.",
     )
     group = parser.add_mutually_exclusive_group()
     group.add_argument(
         "-f",
         "--fields",
-        type=SET_ARGUMENT_TYPE,
+        type=argument_to_set,
         help="Fields to include in the output.",
     )
     group.add_argument(
