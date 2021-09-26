@@ -5,9 +5,8 @@ from sortedcontainers import SortedDict  # type: ignore
 from typing import Optional, Sequence
 import logging
 import argparse
-import sys
 import re
-from .equipment import EquipmentCollection
+from . import game_data
 
 LOG = logging.getLogger(__name__)
 
@@ -17,13 +16,16 @@ LOG = logging.getLogger(__name__)
 #   consider naming of classes/module itself for 'equipment'
 
 # comma delimited list with leading and trailing whitespace removed
-LIST_PATTERN = re.compile("(?:^|,)\s*([^,]*[^,\s])\s*")
+LIST_PATTERN = re.compile(r"(?:^|,)\s*([^,]*[^,\s])\s*")
+
 
 def argument_to_list(argument: str) -> list[str]:
     return re.findall(LIST_PATTERN, argument)
 
+
 def argument_to_set(argument: str) -> set[str]:
     return set(argument_to_list(argument))
+
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
     logging.basicConfig(
@@ -106,9 +108,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     args = parser.parse_args(args=argv)
     logging.getLogger().setLevel(args.verbose)
 
-    fields = set(args.maximize)
     if args.fields:
-        fields.update(args.fields)
+        args.fields.add(args.maximize)
+        args.fields.add(args.position_field)
 
     exclude = {}
     if args.exclude_pieces is not None:
@@ -116,26 +118,29 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     if args.exclude_sets is not None:
         exclude[args.set_field] = args.exclude_sets
 
-    equipment = EquipmentCollection(
+    equipment = game_data.EquipmentCollection(
         name_field=args.name_field,
-        position_field=args.position_field,
-        fields=fields,
+        fields=args.fields,
         exclude=exclude,
     )
 
     if args.input_directory:
-        equipment.import_custom_game(
+        equipment.process_custom_game(
             args.input_directory, data_sets=args.data_sets
         )
     else:
-        equipment.import_builtin_game(game=args.game, data_sets=args.data_sets)
+        equipment.process_builtin_game(
+            game=args.game, data_sets=args.data_sets
+        )
 
-    print(equipment.by_position())
+    by_position: dict[str, set[str]] = {}
+    for name, data in equipment.pieces.items():
+        position = data.get_attribute(args.position_field)
+        if position:
+            by_position.setdefault(position, set()).add(name)
+    print(by_position)
     return 0
 
-
-if __name__ == "__main__":
-    sys.exit(main())
 
 # The general concept here is that an item is dominated by any other item with
 # a higher weight modifier and the same value or better.
