@@ -9,14 +9,15 @@ import re
 import json
 import csv
 
+
 LOG = logging.getLogger(__name__)
 
 
-def as_package_name(name: str) -> str:
+def _as_package_name(name: str) -> str:
     return re.sub(r"[^a-z0-9_]", "_", name.lower())
 
 
-def iterate_lines(value: str) -> Generator[str, None, None]:
+def _iterate_lines(value: str) -> Generator[str, None, None]:
     return (
         line.group(0) for line in re.finditer(r"[^\n]*\r?\n|[^\n]+$", value)
     )
@@ -100,19 +101,19 @@ class EquipmentCollection(object):
                 for row in csv.DictReader(csv_file):
                     self.process_row(row)
         if content is not None:
-            for row in csv.DictReader(iterate_lines(content)):
+            for row in csv.DictReader(_iterate_lines(content)):
                 self.process_row(row)
 
     def process_builtin_game(
         self, game: str, *, data_sets: Optional[set[str]] = None
     ) -> None:
-        game_package = f"{__name__}.{as_package_name(game)}"
+        game_package = f"{__package__}.{_as_package_name(game)}"
         if data_sets is None:
             data_sets = set()
         for package in itertools.chain(
             (game_package,),
             (
-                f"{game_package}.{as_package_name(data_set)}"
+                f"{game_package}.{_as_package_name(data_set)}"
                 for data_set in data_sets
             ),
         ):

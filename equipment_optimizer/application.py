@@ -1,19 +1,17 @@
-#!/usr/bin/env python3
-
 # requires 3.9+ (for mypy dict/tuple instead of Dict/Tuple)
 from sortedcontainers import SortedDict  # type: ignore
 from typing import Optional, Sequence
 import logging
 import argparse
 import re
-from . import game_data
+from .game_data.collection import EquipmentCollection
 
 LOG = logging.getLogger(__name__)
 
 # TODO:
 #   fix Traveling Gloves in data
 #       really, need to get a new data dump because it's missing fields.
-#   consider naming of classes/module itself for 'equipment'
+# - mypy doesn't deduce the type of argparse arguments
 
 # comma delimited list with leading and trailing whitespace removed
 LIST_PATTERN = re.compile(r"(?:^|,)\s*([^,]*[^,\s])\s*")
@@ -118,7 +116,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     if args.exclude_sets is not None:
         exclude[args.set_field] = args.exclude_sets
 
-    equipment = game_data.EquipmentCollection(
+    equipment = EquipmentCollection(
         name_field=args.name_field,
         fields=args.fields,
         exclude=exclude,
