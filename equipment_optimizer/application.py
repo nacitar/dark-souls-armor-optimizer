@@ -14,11 +14,11 @@ LOG = logging.getLogger(__name__)
 # - mypy doesn't deduce the type of argparse arguments
 
 # comma delimited list with leading and trailing whitespace removed
-LIST_PATTERN = re.compile(r"(?:^|,)\s*([^,]*[^,\s])\s*")
+_LIST_PATTERN = re.compile(r"(?:^|,)\s*([^,]*[^,\s])\s*")
 
 
 def _argument_to_list(argument: str) -> list[str]:
-    return re.findall(LIST_PATTERN, argument)
+    return re.findall(_LIST_PATTERN, argument)
 
 
 def _argument_to_set(argument: str) -> set[str]:
@@ -40,14 +40,14 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         default=logging.INFO,
         help="Increase output verbosity",
     )
-    group = parser.add_mutually_exclusive_group()
-    group.add_argument(
+    input_group = parser.add_mutually_exclusive_group()
+    input_group.add_argument(
         "-g",
         "--game",
         default="Dark Souls",
         help="The name of the built-in game whose data will be used.",
     )
-    group.add_argument(
+    input_group.add_argument(
         "-i",
         "--input-directory",
         help="A directory with custom csv files whose data will be used.",
@@ -76,6 +76,11 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         help="The name of the field that holds the position of the piece.",
     )
     parser.add_argument(
+        "--weight-field",
+        default="weight",
+        help="The name of the field that holds the weight of the piece.",
+    )
+    parser.add_argument(
         "--set-field",
         default="set",
         help="The name of the field that holds the name of the piece's set.",
@@ -90,14 +95,14 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         type=_argument_to_set,
         help="The name of pieces to exclude from the data.",
     )
-    group = parser.add_mutually_exclusive_group()
-    group.add_argument(
+    field_group = parser.add_mutually_exclusive_group()
+    field_group.add_argument(
         "-f",
         "--fields",
         type=_argument_to_set,
         help="Fields to include in the output.",
     )
-    group.add_argument(
+    field_group.add_argument(
         "-n",
         "--no-fields",
         action="store_true",
@@ -109,6 +114,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     if args.fields:
         args.fields.add(args.maximize)
         args.fields.add(args.position_field)
+        args.fields.add(args.weight_field)
 
     exclude = {}
     if args.exclude_pieces is not None:
