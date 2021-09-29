@@ -50,7 +50,6 @@ class EquipmentReader(object):
         fields: Optional[set[str]] = None,
         exclude: Optional[dict[str, set[str]]] = None,
     ):
-        # self.pieces: dict[str, PieceData] = {}
         self._name_field = name_field
         self._fields: Optional[set[str]] = None  # get all of them
         if fields is not None:
@@ -82,26 +81,26 @@ class EquipmentReader(object):
                         attributes[key] = value
         if not name:
             raise ValueError(f"row requires non-empty name: {repr(row)}")
-        # if name in self.pieces:
-        #    LOG.warning(f"Replacing existing piece of equipment: {name}")
         return (name, PieceData(attributes=attributes, statistics=statistics))
 
-    def csv(
+    def csv_file(
         self,
-        path: Optional[Union[str, PathLike[str]]] = None,
-        content: Optional[str] = None,
+        path: Union[str, PathLike[str]],
     ) -> Generator[tuple[str, PieceData], None, None]:
-        if path is not None:
-            with open(path, mode="r", newline="") as csv_file:
-                for row in csv.DictReader(csv_file):
-                    result = self.piece(row)
-                    if result is not None:
-                        yield result
-        if content is not None:
-            for row in csv.DictReader(_iterate_lines(content)):
+        with open(path, mode="r", newline="") as csv_file:
+            for row in csv.DictReader(csv_file):
                 result = self.piece(row)
                 if result is not None:
                     yield result
+
+    def csv_content(
+        self,
+        content: str,
+    ) -> Generator[tuple[str, PieceData], None, None]:
+        for row in csv.DictReader(_iterate_lines(content)):
+            result = self.piece(row)
+            if result is not None:
+                yield result
 
     def builtin_game(
         self, game: str, *, data_sets: Optional[set[str]] = None
@@ -121,8 +120,8 @@ class EquipmentReader(object):
                     LOG.debug(f"Loading data: {package} {filename}")
                     data = pkgutil.get_data(package, filename)
                     if data is not None:
-                        yield from self.csv(
-                            content=data.decode(json.detect_encoding(data))
+                        yield from self.csv_content(
+                            data.decode(json.detect_encoding(data))
                         )
 
     def custom_game(
@@ -139,4 +138,4 @@ class EquipmentReader(object):
             for data_file in data_directory.iterdir():
                 if data_file.suffix.lower() == ".csv":
                     LOG.debug(f"Loading custom data: {data_file}")
-                    yield from self.csv(path=data_file)
+                    yield from self.csv_file(data_file)
