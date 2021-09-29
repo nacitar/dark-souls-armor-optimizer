@@ -42,7 +42,7 @@ class PieceData(object):
         )
 
 
-class EquipmentCollection(object):
+class EquipmentReader(object):
     def __init__(
         self,
         *,
@@ -50,7 +50,7 @@ class EquipmentCollection(object):
         fields: Optional[set[str]] = None,
         exclude: Optional[dict[str, set[str]]] = None,
     ):
-        self.pieces: dict[str, PieceData] = {}
+        # self.pieces: dict[str, PieceData] = {}
         self._name_field = name_field
         self._fields: Optional[set[str]] = None  # get all of them
         if fields is not None:
@@ -58,55 +58,54 @@ class EquipmentCollection(object):
             self._fields.add(self._name_field)
         self._exclude = exclude
 
-    def is_row_excluded(self, row: dict[str, str]) -> bool:
+    def piece(self, row: dict[str, str]) -> Optional[tuple[str, PieceData]]:
         if self._exclude:
-            for attribute, value in self._exclude.items():
-                if row.get(attribute, "") in value:
-                    return True
-        return False
+            for attribute, excluded_values in self._exclude.items():
+                if row.get(attribute, "") in excluded_values:
+                    LOG.debug(
+                        f"Skipping excluded piece of equipment: {repr(row)}"
+                    )
+                    return None
+        attributes: dict[str, str] = {}
+        statistics: dict[str, float] = {}
+        name = ""
+        for key, value in row.items():
+            if value:
+                if key == self._name_field:
+                    name = value
+                elif self._fields is None or key in self._fields:
+                    try:
+                        float_value = float(value)
+                        if float_value != 0.0:
+                            statistics[key] = float_value
+                    except ValueError:
+                        attributes[key] = value
+        if not name:
+            raise ValueError(f"row requires non-empty name: {repr(row)}")
+        # if name in self.pieces:
+        #    LOG.warning(f"Replacing existing piece of equipment: {name}")
+        return (name, PieceData(attributes=attributes, statistics=statistics))
 
-    def process_row(self, row: dict[str, str]) -> None:
-        if self.is_row_excluded(row):
-            LOG.debug(f"Skipping excluded piece of equipment: {repr(row)}")
-        else:
-            attributes: dict[str, str] = {}
-            statistics: dict[str, float] = {}
-            name = ""
-            for key, value in row.items():
-                if value:
-                    if key == self._name_field:
-                        name = value
-                    elif self._fields is None or key in self._fields:
-                        try:
-                            float_value = float(value)
-                            if float_value != 0.0:
-                                statistics[key] = float_value
-                        except ValueError:
-                            attributes[key] = value
-            if not name:
-                raise ValueError(f"row requires non-empty name: {repr(row)}")
-            if name in self.pieces:
-                LOG.warning(f"Replacing existing piece of equipment: {name}")
-            self.pieces[name] = PieceData(
-                attributes=attributes, statistics=statistics
-            )
-
-    def process_csv(
+    def csv(
         self,
         path: Optional[Union[str, PathLike[str]]] = None,
         content: Optional[str] = None,
-    ) -> None:
+    ) -> Generator[tuple[str, PieceData], None, None]:
         if path is not None:
             with open(path, mode="r", newline="") as csv_file:
                 for row in csv.DictReader(csv_file):
-                    self.process_row(row)
+                    result = self.piece(row)
+                    if result is not None:
+                        yield result
         if content is not None:
             for row in csv.DictReader(_iterate_lines(content)):
-                self.process_row(row)
+                result = self.piece(row)
+                if result is not None:
+                    yield result
 
-    def process_builtin_game(
+    def builtin_game(
         self, game: str, *, data_sets: Optional[set[str]] = None
-    ) -> None:
+    ) -> Generator[tuple[str, PieceData], None, None]:
         game_package = f"{__package__}.{_as_package_name(game)}"
         if data_sets is None:
             data_sets = set()
@@ -122,16 +121,16 @@ class EquipmentCollection(object):
                     LOG.debug(f"Loading data: {package} {filename}")
                     data = pkgutil.get_data(package, filename)
                     if data is not None:
-                        self.process_csv(
+                        yield from self.csv(
                             content=data.decode(json.detect_encoding(data))
                         )
 
-    def process_custom_game(
+    def custom_game(
         self,
         path: Union[str, PathLike[str]],
         *,
         data_sets: Optional[set[str]] = None,
-    ) -> None:
+    ) -> Generator[tuple[str, PieceData], None, None]:
         if data_sets is None:
             data_sets = set()
         for data_directory in itertools.chain(
@@ -140,4 +139,4 @@ class EquipmentCollection(object):
             for data_file in data_directory.iterdir():
                 if data_file.suffix.lower() == ".csv":
                     LOG.debug(f"Loading custom data: {data_file}")
-                    self.process_csv(path=data_file)
+                    yield from self.csv(path=data_file)
