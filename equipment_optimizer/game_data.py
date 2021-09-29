@@ -120,7 +120,7 @@ class EquipmentDataReader(object):
         ):
             for filename in importlib.resources.contents(package):
                 if Path(filename).suffix.lower() == ".csv":
-                    LOG.debug(f"Loading data: {package} {filename}")
+                    LOG.debug(f"Loading buitin game: {package} {filename}")
                     data = pkgutil.get_data(package, filename)
                     if data is not None:
                         yield from self.csv_content(
@@ -140,5 +140,5 @@ class EquipmentDataReader(object):
         ):
             for data_file in data_directory.iterdir():
                 if data_file.suffix.lower() == ".csv":
-                    LOG.debug(f"Loading custom data: {data_file}")
+                    LOG.debug(f"Loading custom game: {data_file}")
                     yield from self.csv_file(data_file)
