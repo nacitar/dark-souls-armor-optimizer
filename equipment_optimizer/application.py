@@ -129,21 +129,21 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     )
 
     if args.input_directory:
-        data_generator = equipment_data_reader.custom_game(
+        equipment_generator = equipment_data_reader.custom_game(
             args.input_directory, data_sets=args.data_sets
         )
     else:
-        data_generator = equipment_data_reader.builtin_game(
+        equipment_generator = equipment_data_reader.builtin_game(
             game=args.game, data_sets=args.data_sets
         )
 
     equipment_data: dict[str, PieceData] = {}
     by_position: dict[str, set[str]] = {}
-    for name, data in data_generator:
+    for name, piece_data in equipment_generator:
         if name in equipment_data:
             LOG.warning(f"Replacing existing piece of equipment: {name}")
-        equipment_data[name] = data
-        position = data.get_attribute(args.position_field)
+        equipment_data[name] = piece_data
+        position = piece_data.get_attribute(args.position_field)
         if position:
             by_position.setdefault(position, set()).add(name)
     print(by_position)
