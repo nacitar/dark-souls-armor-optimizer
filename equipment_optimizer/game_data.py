@@ -64,12 +64,12 @@ class EquipmentReader(object):
                     return True
         return False
 
-    def pieces(self, rows: Iterable[dict[str, str]]) -> Generator[tuple[str, PieceData], None, None]:
+    def pieces(
+        self, rows: Iterable[dict[str, str]]
+    ) -> Generator[tuple[str, PieceData], None, None]:
         for row in rows:
             if self._is_piece_excluded(row):
-                LOG.debug(
-                    f"Skipping excluded piece of equipment: {repr(row)}"
-                )
+                LOG.debug(f"Skipping excluded piece of equipment: {repr(row)}")
                 continue
             attributes: dict[str, str] = {}
             statistics: dict[str, float] = {}
@@ -87,7 +87,10 @@ class EquipmentReader(object):
                             attributes[key] = value
             if not name:
                 raise ValueError(f"row requires non-empty name: {repr(row)}")
-            yield (name, PieceData(attributes=attributes, statistics=statistics))
+            yield (
+                name,
+                PieceData(attributes=attributes, statistics=statistics),
+            )
 
     def csv_file(
         self,
