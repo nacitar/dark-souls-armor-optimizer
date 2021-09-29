@@ -57,18 +57,18 @@ class EquipmentDataReader(object):
             self._fields.add(self._name_field)
         self._exclude = exclude
 
-    def _is_piece_excluded(self, row: dict[str, str]) -> bool:
+    def _is_row_excluded(self, row: dict[str, str]) -> bool:
         if self._exclude:
             for attribute, excluded_values in self._exclude.items():
                 if row.get(attribute, "") in excluded_values:
                     return True
         return False
 
-    def pieces(
+    def rows(
         self, rows: Iterable[dict[str, str]]
     ) -> Generator[tuple[str, PieceData], None, None]:
         for row in rows:
-            if self._is_piece_excluded(row):
+            if self._is_row_excluded(row):
                 LOG.debug(f"Skipping excluded piece of equipment: {repr(row)}")
                 continue
             attributes: dict[str, str] = {}
@@ -97,13 +97,13 @@ class EquipmentDataReader(object):
         path: Union[str, PathLike[str]],
     ) -> Generator[tuple[str, PieceData], None, None]:
         with open(path, mode="r", newline="") as csv_file:
-            yield from self.pieces(csv.DictReader(csv_file))
+            yield from self.rows(csv.DictReader(csv_file))
 
     def csv_content(
         self,
         content: str,
     ) -> Generator[tuple[str, PieceData], None, None]:
-        yield from self.pieces(csv.DictReader(_iterate_lines(content)))
+        yield from self.rows(csv.DictReader(_iterate_lines(content)))
 
     def builtin_game(
         self, game: str, *, data_sets: Optional[set[str]] = None
