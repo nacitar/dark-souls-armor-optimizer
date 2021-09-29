@@ -4,7 +4,7 @@ from typing import Optional, Sequence
 import logging
 import argparse
 import re
-from .game_data.collection import EquipmentReader
+from .game_data import EquipmentReader
 
 LOG = logging.getLogger(__name__)
 

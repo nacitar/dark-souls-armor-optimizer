@@ -13,7 +13,7 @@ import csv
 LOG = logging.getLogger(__name__)
 
 
-def _as_package_name(name: str) -> str:
+def _as_package(name: str) -> str:
     return re.sub(r"[^a-z0-9_]", "_", name.lower())
 
 
@@ -106,13 +106,13 @@ class EquipmentReader(object):
     def builtin_game(
         self, game: str, *, data_sets: Optional[set[str]] = None
     ) -> Generator[tuple[str, PieceData], None, None]:
-        game_package = f"{__package__}.{_as_package_name(game)}"
+        game_package = f"{__package__}.builtin_game_data.{_as_package(game)}"
         if data_sets is None:
             data_sets = set()
         for package in itertools.chain(
             (game_package,),
             (
-                f"{game_package}.{_as_package_name(data_set)}"
+                f"{game_package}.{_as_package(data_set)}"
                 for data_set in data_sets
             ),
         ):
