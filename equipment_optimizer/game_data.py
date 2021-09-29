@@ -2,7 +2,7 @@ import importlib.resources
 import pkgutil
 import itertools
 import logging
-from typing import Optional, Generator, Union
+from typing import Optional, Generator, Union, Iterable
 from pathlib import Path
 from os import PathLike
 import re
@@ -57,50 +57,50 @@ class EquipmentReader(object):
             self._fields.add(self._name_field)
         self._exclude = exclude
 
-    def piece(self, row: dict[str, str]) -> Optional[tuple[str, PieceData]]:
+    def _is_piece_excluded(self, row: dict[str, str]) -> bool:
         if self._exclude:
             for attribute, excluded_values in self._exclude.items():
                 if row.get(attribute, "") in excluded_values:
-                    LOG.debug(
-                        f"Skipping excluded piece of equipment: {repr(row)}"
-                    )
-                    return None
-        attributes: dict[str, str] = {}
-        statistics: dict[str, float] = {}
-        name = ""
-        for key, value in row.items():
-            if value:
-                if key == self._name_field:
-                    name = value
-                elif self._fields is None or key in self._fields:
-                    try:
-                        float_value = float(value)
-                        if float_value != 0.0:
-                            statistics[key] = float_value
-                    except ValueError:
-                        attributes[key] = value
-        if not name:
-            raise ValueError(f"row requires non-empty name: {repr(row)}")
-        return (name, PieceData(attributes=attributes, statistics=statistics))
+                    return True
+        return False
+
+    def pieces(self, rows: Iterable[dict[str, str]]) -> Generator[tuple[str, PieceData], None, None]:
+        for row in rows:
+            if self._is_piece_excluded(row):
+                LOG.debug(
+                    f"Skipping excluded piece of equipment: {repr(row)}"
+                )
+                continue
+            attributes: dict[str, str] = {}
+            statistics: dict[str, float] = {}
+            name = ""
+            for key, value in row.items():
+                if value:
+                    if key == self._name_field:
+                        name = value
+                    elif self._fields is None or key in self._fields:
+                        try:
+                            float_value = float(value)
+                            if float_value != 0.0:
+                                statistics[key] = float_value
+                        except ValueError:
+                            attributes[key] = value
+            if not name:
+                raise ValueError(f"row requires non-empty name: {repr(row)}")
+            yield (name, PieceData(attributes=attributes, statistics=statistics))
 
     def csv_file(
         self,
         path: Union[str, PathLike[str]],
     ) -> Generator[tuple[str, PieceData], None, None]:
         with open(path, mode="r", newline="") as csv_file:
-            for row in csv.DictReader(csv_file):
-                result = self.piece(row)
-                if result is not None:
-                    yield result
+            yield from self.pieces(csv.DictReader(csv_file))
 
     def csv_content(
         self,
         content: str,
     ) -> Generator[tuple[str, PieceData], None, None]:
-        for row in csv.DictReader(_iterate_lines(content)):
-            result = self.piece(row)
-            if result is not None:
-                yield result
+        yield from self.pieces(csv.DictReader(_iterate_lines(content)))
 
     def builtin_game(
         self, game: str, *, data_sets: Optional[set[str]] = None
