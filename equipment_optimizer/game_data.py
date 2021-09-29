@@ -42,7 +42,7 @@ class PieceData(object):
         )
 
 
-class EquipmentReader(object):
+class EquipmentDataReader(object):
     def __init__(
         self,
         *,

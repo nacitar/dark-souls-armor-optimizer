@@ -4,7 +4,7 @@ from typing import Optional, Sequence
 import logging
 import argparse
 import re
-from .game_data import EquipmentReader
+from .game_data import EquipmentDataReader, PieceData
 
 LOG = logging.getLogger(__name__)
 
@@ -122,23 +122,27 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     if args.exclude_sets is not None:
         exclude[args.set_field] = args.exclude_sets
 
-    equipment_reader = EquipmentReader(
+    equipment_data_reader = EquipmentDataReader(
         name_field=args.name_field,
         fields=args.fields,
         exclude=exclude,
     )
 
     if args.input_directory:
-        data_generator = equipment_reader.custom_game(
+        data_generator = equipment_data_reader.custom_game(
             args.input_directory, data_sets=args.data_sets
         )
     else:
-        data_generator = equipment_reader.builtin_game(
+        data_generator = equipment_data_reader.builtin_game(
             game=args.game, data_sets=args.data_sets
         )
 
+    equipment_data: dict[str, PieceData] = {}
     by_position: dict[str, set[str]] = {}
     for name, data in data_generator:
+        if name in equipment_data:
+            LOG.warning(f"Replacing existing piece of equipment: {name}")
+        equipment_data[name] = data
         position = data.get_attribute(args.position_field)
         if position:
             by_position.setdefault(position, set()).add(name)
