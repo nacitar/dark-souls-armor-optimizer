@@ -4,7 +4,7 @@ from typing import Optional, Sequence
 import logging
 import argparse
 import re
-from .game_data import EquipmentDataReader, PieceData
+from .game_data import EquipmentDataReader, EquipmentData
 
 LOG = logging.getLogger(__name__)
 
@@ -137,13 +137,13 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             game=args.game, data_sets=args.data_sets
         )
 
-    equipment_data: dict[str, PieceData] = {}
+    equipment_database: dict[str, EquipmentData] = {}
     by_position: dict[str, set[str]] = {}
-    for name, piece_data in equipment_generator:
-        if name in equipment_data:
+    for name, equipment_data in equipment_generator:
+        if name in equipment_database:
             LOG.warning(f"Replacing existing piece of equipment: {name}")
-        equipment_data[name] = piece_data
-        position = piece_data.get_attribute(args.position_field)
+        equipment_database[name] = equipment_data
+        position = equipment_data.get_attribute(args.position_field)
         if position:
             by_position.setdefault(position, set()).add(name)
     print(by_position)

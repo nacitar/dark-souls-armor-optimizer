@@ -23,7 +23,7 @@ def _iterate_lines(value: str) -> Generator[str, None, None]:
     )
 
 
-class PieceData(object):
+class EquipmentData(object):
     def __init__(
         self, *, attributes: dict[str, str], statistics: dict[str, float]
     ):
@@ -66,7 +66,7 @@ class EquipmentDataReader(object):
 
     def rows(
         self, rows: Iterable[dict[str, str]]
-    ) -> Generator[tuple[str, PieceData], None, None]:
+    ) -> Generator[tuple[str, EquipmentData], None, None]:
         for row in rows:
             if self._is_row_excluded(row):
                 LOG.debug(f"Skipping excluded piece of equipment: {repr(row)}")
@@ -89,25 +89,25 @@ class EquipmentDataReader(object):
                 raise ValueError(f"row requires non-empty name: {repr(row)}")
             yield (
                 name,
-                PieceData(attributes=attributes, statistics=statistics),
+                EquipmentData(attributes=attributes, statistics=statistics),
             )
 
     def csv_file(
         self,
         path: Union[str, PathLike[str]],
-    ) -> Generator[tuple[str, PieceData], None, None]:
+    ) -> Generator[tuple[str, EquipmentData], None, None]:
         with open(path, mode="r", newline="") as csv_file:
             yield from self.rows(csv.DictReader(csv_file))
 
     def csv_content(
         self,
         content: str,
-    ) -> Generator[tuple[str, PieceData], None, None]:
+    ) -> Generator[tuple[str, EquipmentData], None, None]:
         yield from self.rows(csv.DictReader(_iterate_lines(content)))
 
     def builtin_game(
         self, game: str, *, data_sets: Optional[set[str]] = None
-    ) -> Generator[tuple[str, PieceData], None, None]:
+    ) -> Generator[tuple[str, EquipmentData], None, None]:
         game_package = f"{__package__}.builtin_game_data.{_as_package(game)}"
         if data_sets is None:
             data_sets = set()
@@ -132,7 +132,7 @@ class EquipmentDataReader(object):
         path: Union[str, PathLike[str]],
         *,
         data_sets: Optional[set[str]] = None,
-    ) -> Generator[tuple[str, PieceData], None, None]:
+    ) -> Generator[tuple[str, EquipmentData], None, None]:
         if data_sets is None:
             data_sets = set()
         for data_directory in itertools.chain(
