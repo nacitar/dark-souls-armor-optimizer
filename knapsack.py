@@ -29,12 +29,12 @@ logger = logging.getLogger(__name__)
 # A weight that incorporates a modifier
 @functools.total_ordering
 class KnapsackWeight(object):
-    def __init__(self, cost, modifier = 1.0):
+    def __init__(self, cost, modifier=1.0):
         self.cost = cost
         self.modifier = modifier
 
     def has_modifier(self):
-        return (self.modifier != 1.0)
+        return self.modifier != 1.0
 
     # to simplify __hash__ and __eq__
     def __key(self):
@@ -51,15 +51,19 @@ class KnapsackWeight(object):
     def __lt__(self, other):
         if isinstance(other, type(self)):
             # sort by cost then inverted modifier.  smallest cost, largest modifier.
-            return (self.cost < other.cost or
-                self.cost == other.cost and self.modifier > other.modifier)
+            return (
+                self.cost < other.cost
+                or self.cost == other.cost
+                and self.modifier > other.modifier
+            )
         return NotImplemented
 
     def __add__(self, other):
         if isinstance(other, type(self)):
             return KnapsackWeight(
-                    cost = self.cost + other.cost,
-                    modifier = self.modifier * other.modifier)
+                cost=self.cost + other.cost,
+                modifier=self.modifier * other.modifier,
+            )
         return NotImplemented
 
     def __str__(self):
@@ -71,11 +75,12 @@ class KnapsackWeight(object):
     def __repr__(self):
         return self.__str__()
 
+
 @functools.total_ordering
 class KnapsackItem(object):
     def __init__(self, weight, value, name, alternatives=None):
         if not isinstance(weight, KnapsackWeight):
-            weight = KnapsackWeight(cost = weight)
+            weight = KnapsackWeight(cost=weight)
         self.weight = weight
         self.value = value
         if not isinstance(name, tuple) and name is not None:
@@ -86,52 +91,69 @@ class KnapsackItem(object):
         self.alternatives = alternatives
 
     def has_weight_modifier(self):
-        return (self.weight.modifier != 1.0)
+        return self.weight.modifier != 1.0
 
     def without_weight_modifiers(self, max_weight_cost, extra_weight_cost):
         if not extra_weight_cost and not self.weight.has_modifier():
             return self
         return type(self)(
-                weight = KnapsackWeight(
-                        # convert the cost into a percentage of the weight
-                        cost = (self.weight.cost + extra_weight_cost) / (max_weight_cost * self.weight.modifier),
-                        modifier = 1.0),
-                value = self.value,
-                name = self.name,
-                alternatives = self.alternatives)
+            weight=KnapsackWeight(
+                # convert the cost into a percentage of the weight
+                cost=(self.weight.cost + extra_weight_cost)
+                / (max_weight_cost * self.weight.modifier),
+                modifier=1.0,
+            ),
+            value=self.value,
+            name=self.name,
+            alternatives=self.alternatives,
+        )
 
     def __add__(self, other):
         return type(self)(
-                weight = self.weight + other.weight,
-                value = self.value + other.value,
-                # filter None out so special items that are
-                # unnamed could be used to make new items from existing
-                # ones with adjusted values. Also needed for supporting
-                # type(self).ZERO
-                name = sum(filter(None, (self.name, other.name)), ()),
-                alternatives = set(itertools.chain(self.alternatives, other.alternatives)))
+            weight=self.weight + other.weight,
+            value=self.value + other.value,
+            # filter None out so special items that are
+            # unnamed could be used to make new items from existing
+            # ones with adjusted values. Also needed for supporting
+            # type(self).ZERO
+            name=sum(filter(None, (self.name, other.name)), ()),
+            alternatives=set(
+                itertools.chain(self.alternatives, other.alternatives)
+            ),
+        )
 
     def __eq__(self, other):
-        return (self.weight == other.weight and self.value == other.value
-                and self.name == other.name)
+        return (
+            self.weight == other.weight
+            and self.value == other.value
+            and self.name == other.name
+        )
 
     def __lt__(self, other):
         # sort by weight then inverted value
         # the dominate() algorithm requires this sort order
-        return (self.weight < other.weight or
-                self.weight == other.weight and self.value > other.value or
-                self.value == other.value and self.name < other.name)
+        return (
+            self.weight < other.weight
+            or self.weight == other.weight
+            and self.value > other.value
+            or self.value == other.value
+            and self.name < other.name
+        )
 
     def __str__(self):
         # the str usages here are turning tuples into strings, with quotes and all
-        display_name = ' SWAPPABLE '.join(itertools.chain([str(self.name)], map(str, self.alternatives)))
+        display_name = " SWAPPABLE ".join(
+            itertools.chain([str(self.name)], map(str, self.alternatives))
+        )
         return f"({self.value}) [{self.weight}] {display_name}"
 
     # So dict values of this type print
     def __repr__(self):
         return self.__str__()
+
+
 # Static members
-KnapsackItem.ZERO = KnapsackItem(weight = 0.0, value = 0.0, name=None)
+KnapsackItem.ZERO = KnapsackItem(weight=0.0, value=0.0, name=None)
 
 # This is essentially a lookup table/buffer to remember the highest value item with a
 # modifier greater than or equal to the modifier of the item currently being processed.
@@ -189,11 +211,18 @@ class BestKnapsackItemForModifierGTE(object):
         return self._dict[self._keys[index]]
 
     def lookup_modifier(self, modifier):
-        return self.lookup(KnapsackItem(weight=KnapsackWeight(cost=None, modifier=modifier), value=None, name=None))
+        return self.lookup(
+            KnapsackItem(
+                weight=KnapsackWeight(cost=None, modifier=modifier),
+                value=None,
+                name=None,
+            )
+        )
 
     # for diagnostic purposes
     def sorted(self):
         return sorted(self._dict.items(), key=lambda item: item[0])
+
 
 class KnapsackSolution(object):
     def __init__(self, items=None, sort=True):
@@ -201,25 +230,33 @@ class KnapsackSolution(object):
             raise TypeError("items must be a list(KnapSackItem)")
         if sort:
             items = sorted(items)
-        self.items = { item.weight: item for item in items }
+        self.items = {item.weight: item for item in items}
         self._sorted_weights = list(self.items.keys())
 
     def __len__(self):
         return len(self.items)
 
     def best_for_cost(self, cost, count=1):
-        weight = KnapsackWeight(cost = cost)
+        weight = KnapsackWeight(cost=cost)
         index = bisect.bisect_right(self._sorted_weights, weight) - 1
         if index == -1:
             return None
-        end = index+1
-        return [self.items[weight] for weight in reversed(self._sorted_weights[max(end - count, 0):end])]
+        end = index + 1
+        return [
+            self.items[weight]
+            for weight in reversed(
+                self._sorted_weights[max(end - count, 0) : end]
+            )
+        ]
+
 
 # NOTE: count is a request; if there aren't enough items left after pruning to provide that many selections, less slots will be provided.
 class KnapsackItemSlot(object):
     # ensures the items are sorted, unless they are to be
     # assumed already sorted because sort=False
-    def __init__(self, items, count=1, allow_duplicates=False, sort=True, debug=0):
+    def __init__(
+        self, items, count=1, allow_duplicates=False, sort=True, debug=0
+    ):
         self.debug = debug
         self._has_modifiers = False
 
@@ -247,13 +284,22 @@ class KnapsackItemSlot(object):
                     alternative = False
 
                     if possible_dominator is not None:
-                        if (item.value < possible_dominator.value
-                                or item.value == possible_dominator.value and item.weight > possible_dominator.weight):
+                        if (
+                            item.value < possible_dominator.value
+                            or item.value == possible_dominator.value
+                            and item.weight > possible_dominator.weight
+                        ):
                             dominated = lesser_item_count.get(item.name, 0) + 1
                             lesser_item_count[item.name] = dominated
-                    if (last_top_survivor is not None and item.value == last_top_survivor.value
-                            and item.weight == last_top_survivor.weight):  # checks modifier too
-                        dominated = lesser_item_count.get(last_top_survivor.name, 0) + 1
+                    if (
+                        last_top_survivor is not None
+                        and item.value == last_top_survivor.value
+                        and item.weight == last_top_survivor.weight
+                    ):  # checks modifier too
+                        dominated = (
+                            lesser_item_count.get(last_top_survivor.name, 0)
+                            + 1
+                        )
                         lesser_item_count[last_top_survivor.name] = dominated
                         alternative = True
 
@@ -267,16 +313,22 @@ class KnapsackItemSlot(object):
                         if dominated + 1 > count:
                             if alternative:
                                 if self.debug > 1:
-                                    print(f"COMBINED: {item.name} is an equal alternative to {last_top_survivor.name}")
+                                    print(
+                                        f"COMBINED: {item.name} is an equal alternative to {last_top_survivor.name}"
+                                    )
                                 last_top_survivor.alternatives.add(item.name)
                             else:
                                 if self.debug > 1:
-                                    print(f"REMOVED: {item.name} is dominated by {possible_dominator.name}")
+                                    print(
+                                        f"REMOVED: {item.name} is dominated by {possible_dominator.name}"
+                                    )
                             del items[index]
                             continue
                         else:
                             if self.debug > 1:
-                                print(f"KEPT: {item.weight} {item.name} after comparing with {possible_dominator.name}")
+                                print(
+                                    f"KEPT: {item.weight} {item.name} after comparing with {possible_dominator.name}"
+                                )
                     else:
                         last_top_survivor = item
                         best_for_modifier_gte.add(item)
@@ -287,44 +339,65 @@ class KnapsackItemSlot(object):
                     index += 1
 
                 if self.debug > 0:
-                    print(f"Entries removed due to being suboptimal: {before_dominance -len(items)}")
+                    print(
+                        f"Entries removed due to being suboptimal: {before_dominance -len(items)}"
+                    )
                 possible_slots = min(len(items), count)
                 if possible_slots > 1:
                     count = 1
                     if not allow_duplicates:
-                        items = [ sum(items, KnapsackItem.ZERO)
-                            for items in itertools.combinations(items, r = possible_slots) ]
+                        items = [
+                            sum(items, KnapsackItem.ZERO)
+                            for items in itertools.combinations(
+                                items, r=possible_slots
+                            )
+                        ]
                     else:
-                        items = [ sum(items, KnapsackItem.ZERO)
-                            for items in itertools.product(*([items]*possible_slots)) ]
+                        items = [
+                            sum(items, KnapsackItem.ZERO)
+                            for items in itertools.product(
+                                *([items] * possible_slots)
+                            )
+                        ]
                     continue  # run it again to reduce the combinations
                 break
             # in sorted order
-            self.items = items  #{ item.weight: item for item in items }
+            self.items = items  # { item.weight: item for item in items }
         else:
             raise TypeError("items must be a list(KnapSackItem)")
 
     def __len__(self):
         return len(self.items)
 
-    def solution_by_weight_percentage(self, max_weight_cost, extra_weight_cost):
+    def solution_by_weight_percentage(
+        self, max_weight_cost, extra_weight_cost
+    ):
         if not self._has_modifiers and extra_weight_cost == 0.0:
             items = self.items
         else:
-            without_weight_modifiers = type(self)(items = [ item.without_weight_modifiers(
-                        max_weight_cost=max_weight_cost, extra_weight_cost=extra_weight_cost)
-                        for item in self.items ])
+            without_weight_modifiers = type(self)(
+                items=[
+                    item.without_weight_modifiers(
+                        max_weight_cost=max_weight_cost,
+                        extra_weight_cost=extra_weight_cost,
+                    )
+                    for item in self.items
+                ]
+            )
             items = without_weight_modifiers.items
         # already sorted
-        return KnapsackSolution(items = items, sort=False)
+        return KnapsackSolution(items=items, sort=False)
 
     def __add__(self, other):
         if isinstance(other, type(self)):
             return type(self)(
-                        items = [first_item + second_item
-                                    for first_item, second_item in itertools.product(
-                                            self.items,
-                                            other.items)])
+                items=[
+                    first_item + second_item
+                    for first_item, second_item in itertools.product(
+                        self.items, other.items
+                    )
+                ]
+            )
         return NotImplemented
 
     @classmethod
@@ -338,9 +411,12 @@ class KnapsackItemSlot(object):
             slots_iter = iter(slots)
             # replace the slice, so that any extra slot without a pair
             # still sits at the end of the list
-            slots[:len(slots) // 2 * 2] = [first_slot + second_slot
-                    for first_slot, second_slot in zip(*[slots_iter] * 2)]
+            slots[: len(slots) // 2 * 2] = [
+                first_slot + second_slot
+                for first_slot, second_slot in zip(*[slots_iter] * 2)
+            ]
         return slots[0]
+
 
 class EquipmentCollection(object):
     def __init__(self):
@@ -354,28 +430,36 @@ class EquipmentCollection(object):
 
     def add_raw_collection(self, data):
         for name, section in data.items():
-            entries = section.get('entries')
+            entries = section.get("entries")
             if entries:  # present and non-empty
-                defaults = section.get('defaults')
+                defaults = section.get("defaults")
                 if defaults is not None:
                     # make entries incorporate the defaults
-                    entries = {entry_name: collections.ChainMap(statistics, defaults)
-                            for entry_name, statistics in entries.items()}
+                    entries = {
+                        entry_name: collections.ChainMap(statistics, defaults)
+                        for entry_name, statistics in entries.items()
+                    }
                 if name in self._sections:
-                    existing_keys = set(self._sections.keys()).intersection(entries.keys())
+                    existing_keys = set(self._sections.keys()).intersection(
+                        entries.keys()
+                    )
                     if existing_keys:
-                        logger.warning(f'Overwriting existing entries for section "{name}": {existing_keys}')
+                        logger.warning(
+                            f'Overwriting existing entries for section "{name}": {existing_keys}'
+                        )
                     self._sections[name].update(entries)
                 else:
                     self._sections[name] = entries
 
     def add_collection_json(self, path):
-        with open(path, 'r') as handle:
+        with open(path, "r") as handle:
             data = json.load(handle)
         self.add_raw_collection(data)
 
     # helper
-    def __get_section_settings_defaults(self, name, count=1, allow_duplicates=False):
+    def __get_section_settings_defaults(
+        self, name, count=1, allow_duplicates=False
+    ):
         return (self[name], count, allow_duplicates)
 
     def __get_section_settings(self, section_arg):
@@ -383,20 +467,29 @@ class EquipmentCollection(object):
             section_arg = (section_arg,)
         return self.__get_section_settings_defaults(*section_arg)
 
-    def to_knapsack_item_slot(self, sections, weight_key, weight_modifier_key, value_key):
-        return KnapsackItemSlot.combine_in_pairs([
+    def to_knapsack_item_slot(
+        self, sections, weight_key, weight_modifier_key, value_key
+    ):
+        return KnapsackItemSlot.combine_in_pairs(
+            [
                 KnapsackItemSlot(
-                    items = [
+                    items=[
                         KnapsackItem(
-                            weight = KnapsackWeight(
+                            weight=KnapsackWeight(
                                 # Assignment expression; python 3.8+
-                                cost = (statistics := section[name])[weight_key],
-                                modifier = statistics[weight_modifier_key]),
-                            value = statistics[value_key],
-                            name = name)
-                        for name in section.keys() ],
-                    count = count,
-                    allow_duplicates = allow_duplicates)
-                for section, count, allow_duplicates in map(self.__get_section_settings, sections)
-                ])
-
+                                cost=(statistics := section[name])[weight_key],
+                                modifier=statistics[weight_modifier_key],
+                            ),
+                            value=statistics[value_key],
+                            name=name,
+                        )
+                        for name in section.keys()
+                    ],
+                    count=count,
+                    allow_duplicates=allow_duplicates,
+                )
+                for section, count, allow_duplicates in map(
+                    self.__get_section_settings, sections
+                )
+            ]
+        )
