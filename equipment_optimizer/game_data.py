@@ -24,7 +24,7 @@ def iterate_lines(value: str) -> Generator[str, None, None]:
     )
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, eq=False)
 class PieceData(object):
     statistics: dict[str, float]
     attributes: dict[str, str]
