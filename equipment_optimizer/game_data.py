@@ -14,11 +14,11 @@ from dataclasses import dataclass
 LOG = logging.getLogger(__name__)
 
 
-def _as_package(name: str) -> str:
+def to_package_name(name: str) -> str:
     return re.sub(r"[^a-z0-9_]", "_", name.lower())
 
 
-def _iterate_lines(value: str) -> Generator[str, None, None]:
+def iterate_lines(value: str) -> Generator[str, None, None]:
     return (
         line.group(0) for line in re.finditer(r"[^\n]*\r?\n|[^\n]+$", value)
     )
@@ -31,6 +31,8 @@ class PieceData(object):
 
 
 class PieceReader(object):
+    BUILTIN_GAME_DATA_PACKAGE = f"{__package__}.builtin_game_data"
+
     def __init__(
         self,
         *,
@@ -91,18 +93,21 @@ class PieceReader(object):
         self,
         content: str,
     ) -> Generator[tuple[str, PieceData], None, None]:
-        yield from self.rows(csv.DictReader(_iterate_lines(content)))
+        yield from self.rows(csv.DictReader(iterate_lines(content)))
 
     def builtin_game(
         self, game: str, *, data_sets: Optional[set[str]] = None
     ) -> Generator[tuple[str, PieceData], None, None]:
-        game_package = f"{__package__}.builtin_game_data.{_as_package(game)}"
+        game_package = (
+            self.__class__.BUILTIN_GAME_DATA_PACKAGE
+            + f".{to_package_name(game)}"
+        )
         if data_sets is None:
             data_sets = set()
         for package in itertools.chain(
             (game_package,),
             (
-                f"{game_package}.{_as_package(data_set)}"
+                f"{game_package}.{to_package_name(data_set)}"
                 for data_set in data_sets
             ),
         ):
