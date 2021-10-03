@@ -4,7 +4,7 @@ from typing import Optional, Sequence
 import logging
 import argparse
 import re
-from .game_data import EquipmentDataReader, EquipmentData
+from .game_data import PieceReader, PieceData
 
 LOG = logging.getLogger(__name__)
 
@@ -122,28 +122,26 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     if args.exclude_sets is not None:
         exclude[args.set_field] = args.exclude_sets
 
-    equipment_data_reader = EquipmentDataReader(
-        name_field=args.name_field,
-        fields=args.fields,
-        exclude=exclude,
+    piece_reader = PieceReader(
+        name_field=args.name_field, fields=args.fields, exclude=exclude
     )
 
     if args.input_directory:
-        equipment_generator = equipment_data_reader.custom_game(
+        piece_generator = piece_reader.custom_game(
             args.input_directory, data_sets=args.data_sets
         )
     else:
-        equipment_generator = equipment_data_reader.builtin_game(
+        piece_generator = piece_reader.builtin_game(
             game=args.game, data_sets=args.data_sets
         )
 
-    equipment_database: dict[str, EquipmentData] = {}
+    equipment_database: dict[str, PieceData] = {}
     by_position: dict[str, set[str]] = {}
-    for name, equipment_data in equipment_generator:
+    for name, piece_data in piece_generator:
         if name in equipment_database:
             LOG.warning(f"Replacing existing piece of equipment: {name}")
-        equipment_database[name] = equipment_data
-        position = equipment_data.get_attribute(args.position_field)
+        equipment_database[name] = piece_data
+        position = piece_data.attributes.get(args.position_field)
         if position:
             by_position.setdefault(position, set()).add(name)
     print(by_position)

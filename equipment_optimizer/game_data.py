@@ -8,6 +8,7 @@ from os import PathLike
 import re
 import json
 import csv
+from dataclasses import dataclass
 
 
 LOG = logging.getLogger(__name__)
@@ -23,26 +24,13 @@ def _iterate_lines(value: str) -> Generator[str, None, None]:
     )
 
 
-class EquipmentData(object):
-    def __init__(
-        self, *, attributes: dict[str, str], statistics: dict[str, float]
-    ):
-        self.attributes: dict[str, str] = attributes
-        self.statistics: dict[str, float] = statistics
-
-    def get_statistic(self, statistic: str) -> float:
-        return self.statistics.get(statistic, 0.0)
-
-    def get_attribute(self, attribute: str) -> str:
-        return self.attributes.get(attribute, "")
-
-    def __repr__(self) -> str:
-        return repr(
-            {"attributes": self.attributes, "statistics": self.statistics}
-        )
+@dataclass(frozen=True)
+class PieceData(object):
+    statistics: dict[str, float]
+    attributes: dict[str, str]
 
 
-class EquipmentDataReader(object):
+class PieceReader(object):
     def __init__(
         self,
         *,
@@ -55,20 +43,20 @@ class EquipmentDataReader(object):
         if fields is not None:
             self._fields = set(fields)
             self._fields.add(self._name_field)
-        self._exclude = exclude
+        self.exclude = exclude
 
-    def _is_row_excluded(self, row: dict[str, str]) -> bool:
-        if self._exclude:
-            for attribute, excluded_values in self._exclude.items():
+    def is_row_excluded(self, row: dict[str, str]) -> bool:
+        if self.exclude:
+            for attribute, excluded_values in self.exclude.items():
                 if row.get(attribute, "") in excluded_values:
                     return True
         return False
 
     def rows(
         self, rows: Iterable[dict[str, str]]
-    ) -> Generator[tuple[str, EquipmentData], None, None]:
+    ) -> Generator[tuple[str, PieceData], None, None]:
         for row in rows:
-            if self._is_row_excluded(row):
+            if self.is_row_excluded(row):
                 LOG.debug(f"Skipping excluded piece of equipment: {repr(row)}")
                 continue
             attributes: dict[str, str] = {}
@@ -89,25 +77,25 @@ class EquipmentDataReader(object):
                 raise ValueError(f"row requires non-empty name: {repr(row)}")
             yield (
                 name,
-                EquipmentData(attributes=attributes, statistics=statistics),
+                PieceData(statistics=statistics, attributes=attributes),
             )
 
     def csv_file(
         self,
         path: Union[str, PathLike[str]],
-    ) -> Generator[tuple[str, EquipmentData], None, None]:
+    ) -> Generator[tuple[str, PieceData], None, None]:
         with open(path, mode="r", newline="") as csv_file:
             yield from self.rows(csv.DictReader(csv_file))
 
     def csv_content(
         self,
         content: str,
-    ) -> Generator[tuple[str, EquipmentData], None, None]:
+    ) -> Generator[tuple[str, PieceData], None, None]:
         yield from self.rows(csv.DictReader(_iterate_lines(content)))
 
     def builtin_game(
         self, game: str, *, data_sets: Optional[set[str]] = None
-    ) -> Generator[tuple[str, EquipmentData], None, None]:
+    ) -> Generator[tuple[str, PieceData], None, None]:
         game_package = f"{__package__}.builtin_game_data.{_as_package(game)}"
         if data_sets is None:
             data_sets = set()
@@ -134,7 +122,7 @@ class EquipmentDataReader(object):
         path: Union[str, PathLike[str]],
         *,
         data_sets: Optional[set[str]] = None,
-    ) -> Generator[tuple[str, EquipmentData], None, None]:
+    ) -> Generator[tuple[str, PieceData], None, None]:
         if data_sets is None:
             data_sets = set()
         for data_directory in itertools.chain(
