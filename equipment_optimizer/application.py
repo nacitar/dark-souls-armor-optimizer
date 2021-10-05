@@ -4,7 +4,7 @@ from typing import Optional, Sequence
 import logging
 import argparse
 import re
-from .game_data import PieceReader, PieceData
+from . import game_data
 
 LOG = logging.getLogger(__name__)
 
@@ -68,22 +68,27 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument(
         "--name-field",
         default="name",
-        help="The name of the field that holds the name of the piece.",
+        help="The name of the field holding the name of the piece.",
     )
     parser.add_argument(
         "--position-field",
         default="position",
-        help="The name of the field that holds the position of the piece.",
+        help="The name of the field holding the position of the piece.",
     )
     parser.add_argument(
         "--weight-field",
         default="weight",
-        help="The name of the field that holds the weight of the piece.",
+        help="The name of the field holding the weight of the piece.",
+    )
+    parser.add_argument(
+        "--weight-modifier-field",
+        default="weight_modifier",
+        help="The name of the field holding the weight modifier of the piece.",
     )
     parser.add_argument(
         "--set-field",
         default="set",
-        help="The name of the field that holds the name of the piece's set.",
+        help="The name of the field holding the name of the piece's set.",
     )
     parser.add_argument(
         "--exclude-sets",
@@ -112,9 +117,10 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     logging.getLogger().setLevel(args.verbose)
 
     if args.fields:
-        args.fields.add(args.maximize)
+        args.fields.update(args.maximize)
         args.fields.add(args.position_field)
         args.fields.add(args.weight_field)
+        args.fields.add(args.weight_modifier_field)
 
     exclude = {}
     if args.exclude_pieces is not None:
@@ -122,26 +128,26 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     if args.exclude_sets is not None:
         exclude[args.set_field] = args.exclude_sets
 
-    piece_reader = PieceReader(
+    game_data_reader = game_data.Reader(
         name_field=args.name_field, fields=args.fields, exclude=exclude
     )
 
     if args.input_directory:
-        piece_generator = piece_reader.custom_game(
+        game_data_generator = game_data_reader.custom_game(
             args.input_directory, data_sets=args.data_sets
         )
     else:
-        piece_generator = piece_reader.builtin_game(
+        game_data_generator = game_data_reader.builtin_game(
             game=args.game, data_sets=args.data_sets
         )
 
-    equipment_database: dict[str, PieceData] = {}
+    equipment_database: dict[str, game_data.Data] = {}
     by_position: dict[str, set[str]] = {}
-    for name, piece_data in piece_generator:
+    for name, data in game_data_generator:
         if name in equipment_database:
             LOG.warning(f"Replacing existing piece of equipment: {name}")
-        equipment_database[name] = piece_data
-        position = piece_data.attributes.get(args.position_field)
+        equipment_database[name] = data
+        position = data.textual.get(args.position_field)
         if position:
             by_position.setdefault(position, set()).add(name)
     print(by_position)
