@@ -10,26 +10,26 @@ LOG = logging.getLogger(__name__)
 @total_ordering
 @dataclass(frozen=True)
 class Metrics(object):
-    cost: float
-    modifier: float
+    weight: float
+    weight_modifier: float
     value: float
 
     def __lt__(self, other: Metrics) -> bool:
-        """sorts by: smallest cost, largest modifier, largest value"""
+        """sorts by: smallest weight, largest weight_modifier, largest value"""
         return (
-            self.cost < other.cost
-            or self.cost == other.cost
+            self.weight < other.weight
+            or self.weight == other.weight
             and (
-                self.modifier > other.modifier
-                or self.modifier == other.modifier
+                self.weight_modifier > other.weight_modifier
+                or self.weight_modifier == other.weight_modifier
                 and self.value > other.value
             )
         )
 
     def __add__(self, other: Metrics) -> Metrics:
         return Metrics(
-            cost=self.cost + other.cost,
-            modifier=self.modifier + other.modifier,
+            weight=self.weight + other.weight,
+            weight_modifier=self.weight_modifier + other.weight_modifier,
             value=self.value + other.value,
         )
 
