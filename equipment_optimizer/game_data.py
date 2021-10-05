@@ -36,6 +36,7 @@ class FieldData(object):
 #
 # Fields are already removed by the "exclude" value, but this is only done to
 # use less memory and is applied AFTER the full dict is prepared.
+# https://github.com/python/cpython/blob/main/Lib/csv.py#L80
 class Reader(object):
     BUILTIN_GAME_DATA_PACKAGE = f"{__package__}.builtin_game_data"
 
