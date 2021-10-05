@@ -25,7 +25,7 @@ def iterate_lines(value: str) -> Generator[str, None, None]:
 
 
 @dataclass(frozen=True, eq=False)
-class Data(object):
+class FieldData(object):
     numeric: dict[str, float]
     textual: dict[str, str]
 
@@ -62,7 +62,7 @@ class Reader(object):
 
     def rows(
         self, rows: Iterable[dict[str, str]]
-    ) -> Generator[tuple[str, Data], None, None]:
+    ) -> Generator[tuple[str, FieldData], None, None]:
         for row in rows:
             if self.is_row_excluded(row):
                 LOG.debug(f"Skipping excluded piece of equipment: {repr(row)}")
@@ -85,25 +85,25 @@ class Reader(object):
                 raise ValueError(f"row requires non-empty name: {repr(row)}")
             yield (
                 name,
-                Data(numeric=numeric, textual=textual),
+                FieldData(numeric=numeric, textual=textual),
             )
 
     def csv_file(
         self,
         path: Union[str, PathLike[str]],
-    ) -> Generator[tuple[str, Data], None, None]:
+    ) -> Generator[tuple[str, FieldData], None, None]:
         with open(path, mode="r", newline="") as csv_file:
             yield from self.rows(csv.DictReader(csv_file))
 
     def csv_content(
         self,
         content: str,
-    ) -> Generator[tuple[str, Data], None, None]:
+    ) -> Generator[tuple[str, FieldData], None, None]:
         yield from self.rows(csv.DictReader(iterate_lines(content)))
 
     def builtin_game(
         self, game: str, *, data_sets: Optional[set[str]] = None
-    ) -> Generator[tuple[str, Data], None, None]:
+    ) -> Generator[tuple[str, FieldData], None, None]:
         game_package = (
             self.__class__.BUILTIN_GAME_DATA_PACKAGE
             + f".{argument_to_package_name(game)}"
@@ -133,7 +133,7 @@ class Reader(object):
         path: Union[str, PathLike[str]],
         *,
         data_sets: Optional[set[str]] = None,
-    ) -> Generator[tuple[str, Data], None, None]:
+    ) -> Generator[tuple[str, FieldData], None, None]:
         if data_sets is None:
             data_sets = set()
         for data_directory in itertools.chain(

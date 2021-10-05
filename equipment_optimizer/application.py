@@ -141,13 +141,13 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             game=args.game, data_sets=args.data_sets
         )
 
-    equipment_database: dict[str, game_data.Data] = {}
+    equipment_database: dict[str, game_data.FieldData] = {}
     by_position: dict[str, set[str]] = {}
-    for name, data in game_data_generator:
+    for name, field_data in game_data_generator:
         if name in equipment_database:
             LOG.warning(f"Replacing existing piece of equipment: {name}")
-        equipment_database[name] = data
-        position = data.textual.get(args.position_field)
+        equipment_database[name] = field_data
+        position = field_data.textual.get(args.position_field)
         if position:
             by_position.setdefault(position, set()).add(name)
     print(by_position)
