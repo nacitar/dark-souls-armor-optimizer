@@ -141,7 +141,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             game=args.game, data_sets=args.data_sets
         )
 
-    equipment_database: dict[str, game_data.FieldData] = {}
+    equipment_database: dict[str, game_data.Data] = {}
     by_position: dict[str, set[str]] = {}
     for name, field_data in game_data_generator:
         if name in equipment_database:

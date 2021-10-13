@@ -9,7 +9,7 @@ LOG = logging.getLogger(__name__)
 
 @total_ordering
 @dataclass(frozen=True)
-class Metrics(object):
+class Metrics:
     weight: float
     weight_modifier: float
     value: float
@@ -35,13 +35,13 @@ class Metrics(object):
 
 
 @dataclass(frozen=True)
-class Piece(object):
+class Piece:
     name: str
     alternatives: set[str]
 
 
 @dataclass(frozen=True)
-class Equipment(object):
+class Equipment:
     pieces: list[Piece]
     metrics: Metrics
 
