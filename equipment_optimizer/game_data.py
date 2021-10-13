@@ -86,21 +86,16 @@ class Reader:
                 raise ValueError(
                     f"entry requires non-empty name: {repr(entry)}"
                 )
-            yield (
-                name,
-                Data(numeric=numeric, textual=textual),
-            )
+            yield (name, Data(numeric=numeric, textual=textual))
 
     def csv_file(
-        self,
-        path: Union[str, PathLike[str]],
+        self, path: Union[str, PathLike[str]]
     ) -> Generator[tuple[str, Data], None, None]:
         with open(path, mode="r", newline="") as csv_file:
             yield from self.entries(csv.DictReader(csv_file))
 
     def csv_content(
-        self,
-        content: str,
+        self, content: str
     ) -> Generator[tuple[str, Data], None, None]:
         yield from self.entries(csv.DictReader(iterate_lines(content)))
 
