@@ -2,7 +2,7 @@ import importlib.resources
 import pkgutil
 import itertools
 import logging
-from typing import Optional, Generator, Union, Iterable
+from typing import Optional, Generator, Union, Iterable, NamedTuple
 from pathlib import Path
 from os import PathLike
 import re
@@ -30,6 +30,11 @@ class Data:
     textual: dict[str, str]
 
 
+class Entry(NamedTuple):
+    name: str
+    data: Data
+
+
 # A small improvement gain could possibly be had by avoiding csv.DictReader and
 # parsing in a way that doesn't include all fields.  This would likely be
 # difficult to implement faster too so the gain is mostly theoretical.
@@ -54,24 +59,24 @@ class Reader:
             self._fields.add(self._name_field)
         self.exclude = exclude
 
-    def is_entry_excluded(self, entry: dict[str, str]) -> bool:
+    def is_row_excluded(self, row: dict[str, str]) -> bool:
         if self.exclude:
             for field, excluded_values in self.exclude.items():
-                if entry.get(field, "") in excluded_values:
+                if row.get(field, "") in excluded_values:
                     return True
         return False
 
-    def entries(
-        self, entries: Iterable[dict[str, str]]
-    ) -> Generator[tuple[str, Data], None, None]:
-        for entry in entries:
-            if self.is_entry_excluded(entry):
-                LOG.debug(f"Skipping excluded entry: {repr(entry)}")
+    def rows(
+        self, rows: Iterable[dict[str, str]]
+    ) -> Generator[Entry, None, None]:
+        for row in rows:
+            if self.is_row_excluded(row):
+                LOG.debug(f"Skipping excluded row: {repr(row)}")
                 continue
             textual: dict[str, str] = {}
             numeric: dict[str, float] = {}
             name = ""
-            for key, value in entry.items():
+            for key, value in row.items():
                 if value:
                     if key == self._name_field:
                         name = value
@@ -83,25 +88,21 @@ class Reader:
                         except ValueError:
                             textual[key] = value
             if not name:
-                raise ValueError(
-                    f"entry requires non-empty name: {repr(entry)}"
-                )
-            yield (name, Data(numeric=numeric, textual=textual))
+                raise ValueError(f"row requires non-empty name: {repr(row)}")
+            yield Entry(name=name, data=Data(numeric=numeric, textual=textual))
 
     def csv_file(
         self, path: Union[str, PathLike[str]]
-    ) -> Generator[tuple[str, Data], None, None]:
+    ) -> Generator[Entry, None, None]:
         with open(path, mode="r", newline="") as csv_file:
-            yield from self.entries(csv.DictReader(csv_file))
+            yield from self.rows(csv.DictReader(csv_file))
 
-    def csv_content(
-        self, content: str
-    ) -> Generator[tuple[str, Data], None, None]:
-        yield from self.entries(csv.DictReader(iterate_lines(content)))
+    def csv_content(self, content: str) -> Generator[Entry, None, None]:
+        yield from self.rows(csv.DictReader(iterate_lines(content)))
 
     def builtin_game(
         self, game: str, *, data_sets: Optional[set[str]] = None
-    ) -> Generator[tuple[str, Data], None, None]:
+    ) -> Generator[Entry, None, None]:
         game_package = (
             self.__class__.BUILTIN_GAME_DATA_PACKAGE
             + f".{sanitize_package_name(game)}"
@@ -131,7 +132,7 @@ class Reader:
         path: Union[str, PathLike[str]],
         *,
         data_sets: Optional[set[str]] = None,
-    ) -> Generator[tuple[str, Data], None, None]:
+    ) -> Generator[Entry, None, None]:
         if data_sets is None:
             data_sets = set()
         for data_directory in itertools.chain(
