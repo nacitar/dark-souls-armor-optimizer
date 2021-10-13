@@ -2,7 +2,7 @@ import importlib.resources
 import pkgutil
 import itertools
 import logging
-from typing import Optional, Generator, Union, Iterable, NamedTuple
+from typing import Optional, Generator, Union, Iterable
 from pathlib import Path
 from os import PathLike
 import re
@@ -30,7 +30,8 @@ class Data:
     textual: dict[str, str]
 
 
-class Entry(NamedTuple):
+@dataclass(frozen=True, eq=False)
+class Entry:
     name: str
     data: Data
 
