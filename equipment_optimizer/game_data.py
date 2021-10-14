@@ -26,8 +26,8 @@ def iterate_lines(value: str) -> Generator[str, None, None]:
 
 @dataclass(frozen=True, eq=False)
 class Data:
-    numeric: dict[str, float]
-    textual: dict[str, str]
+    statistics: dict[str, float]
+    attributes: dict[str, str]
 
 
 @dataclass(frozen=True, eq=False)
@@ -74,8 +74,8 @@ class Reader:
             if self.is_row_excluded(row):
                 LOG.debug(f"Skipping excluded row: {repr(row)}")
                 continue
-            textual: dict[str, str] = {}
-            numeric: dict[str, float] = {}
+            attributes: dict[str, str] = {}
+            statistics: dict[str, float] = {}
             name = ""
             for key, value in row.items():
                 if value:
@@ -85,12 +85,15 @@ class Reader:
                         try:
                             float_value = float(value)
                             if float_value != 0.0:
-                                numeric[key] = float_value
+                                statistics[key] = float_value
                         except ValueError:
-                            textual[key] = value
+                            attributes[key] = value
             if not name:
                 raise ValueError(f"row requires non-empty name: {repr(row)}")
-            yield Entry(name=name, data=Data(numeric=numeric, textual=textual))
+            yield Entry(
+                name=name,
+                data=Data(statistics=statistics, attributes=attributes),
+            )
 
     def csv_file(
         self, path: Union[str, PathLike[str]]
