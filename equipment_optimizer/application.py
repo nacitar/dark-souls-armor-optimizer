@@ -147,7 +147,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         if entry.name in equipment_database:
             LOG.warning(f"Replacing existing piece of equipment: {entry.name}")
         equipment_database[entry.name] = entry.data
-        position = entry.data.attributes.get(args.position_field)
+        position = entry.data.textual_fields.get(args.position_field)
         if position:
             by_position.setdefault(position, set()).add(entry.name)
     print(by_position)
