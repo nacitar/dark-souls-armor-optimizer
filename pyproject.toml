@@ -20,6 +20,7 @@ black = "^21.8b0"
 
 [tool.poetry.scripts]
 equipment-optimizer = "equipment_optimizer.__main__:main"
+quote-csv-strings = "equipment_optimizer.quote_csv_strings:main"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

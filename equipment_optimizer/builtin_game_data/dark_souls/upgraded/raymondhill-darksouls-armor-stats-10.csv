@@ -1,215 +1,215 @@
-set,position,name,bleed,curse,fire,lightning,magic,physical,poise,poison,weight,weight_modifier,health_modifier,stamina_modifier,stamina_regeneration
-Naked,Head,Naked Head,0,0,0,0,0,0,0,0,0,0,0,0,0
-Naked,Torso,Naked Torso,0,0,0,0,0,0,0,0,0,0,0,0,0
-Naked,Arms,Naked Arms,0,0,0,0,0,0,0,0,0,0,0,0,0
-Naked,Legs,Naked Legs,0,0,0,0,0,0,0,0,0,0,0,0,0
-Warrior,Head,Standard Helm+10,12.6,0,19.4,7.3,19.4,33.9,5,11.2,3.5,0,0,0,0
-Warrior,Torso,Hard Leather Armor+10,32.2,0,31.5,55.7,48.4,62.9,0,28,5.9,0,0,0,0
-Warrior,Arms,Hard Leather Gauntlets+10,19.6,0,16.9,31.5,29,31.5,0,16.8,3.5,0,0,0,0
-Warrior,Legs,Hard Leather Boots+10,19.6,0,16.9,31.5,29,31.5,0,16.8,3.5,0,0,0,0
-Knight,Head,Knight Helm+10,12.6,0,19.4,12.1,14.5,33.9,8,8.4,4.2,0,0,0,0
-Knight,Torso,Knight Armor+10,32.2,0,43.6,31.5,38.7,89.5,20,22.4,10.9,0,0,0,0
-Knight,Arms,Knight Gauntlets+10,11.2,0,19.4,9.7,16.9,41.1,6,7,3.5,0,0,0,0
-Knight,Legs,Knight Leggings+10,19.6,0,26.6,19.4,24.2,53.2,12,12.6,6.4,0,0,0,0
-Wanderer,Head,Wanderer Hood+10,11.2,0,24.2,21.8,19.4,21.8,0,11.2,1.4,0,0,0,0
-Wanderer,Torso,Wanderer Coat+10,29.4,0,62.9,55.7,50.8,55.7,0,29.4,3.5,0,0,0,0
-Wanderer,Arms,Wanderer Manchette+10,18.2,0,36.3,31.5,29,33.9,0,18.2,2.1,0,0,0,0
-Wanderer,Legs,Wanderer Boots+10,18.2,0,36.3,31.5,29,33.9,0,18.2,2.1,0,0,0,0
-Thief,Head,Thief Mask+10,12.6,0,12.1,14.5,19.4,21.8,0,16.8,1.2,0,0,0,0
-Thief,Torso,Black Leather Armor+10,32.2,0,33.9,38.7,48.4,55.7,0,43.4,3.1,0,0,0,0
-Thief,Arms,Black Leather Gloves+10,19.6,0,19.4,21.8,29,31.5,0,25.2,1.8,0,0,0,0
-Thief,Legs,Black Leather Boots+10,32.2,0,31.5,36.3,46,29,0,43.4,3,0,0,0,0
-Bandit,Head,Brigand Hood+10,11.2,0,12.1,14.5,19.4,21.8,0,11.2,1.2,0,0,0,0
-Bandit,Torso,Brigand Armor+10,28,0,31.5,41.1,48.4,55.7,0,28,3.1,0,0,0,0
-Bandit,Arms,Brigand Gauntlets+10,16.8,0,19.4,24.2,29,33.9,0,16.8,1.8,0,0,0,0
-Bandit,Legs,Brigand Trousers+10,16.8,0,19.4,24.2,29,33.9,0,16.8,1.8,0,0,0,0
-Hunter,Head,Pharis' Hat+10,8.4,0,16.9,14.5,12.1,16.9,0,7,1.2,0,0,0,0
-Hunter,Torso,Leather Armor+10,29.4,0,29,55.7,48.4,58.1,0,28,4.7,0,0,0,0
-Hunter,Arms,Leather Gloves+10,18.2,0,14.5,31.5,29,29,0,16.8,2.8,0,0,0,0
-Hunter,Legs,Leather Boots+10,18.2,0,14.5,31.5,29,29,0,16.8,2.8,0,0,0,0
-Sorcerer,Head,Sorcerer Hat+10,8.4,0,12.1,14.5,24.2,19.4,0,7,0.9,0,0,0,0
-Sorcerer,Torso,Sorcerer Cloak+10,22.4,0,31.5,41.1,65.3,48.4,0,16.8,2.3,0,0,0,0
-Sorcerer,Arms,Sorcerer Gauntlets+10,12.6,0,19.4,24.2,38.7,29,0,9.8,1.4,0,0,0,0
-Sorcerer,Legs,Sorcerer Boots+10,12.6,0,19.4,24.2,38.7,29,0,9.8,1.4,0,0,0,0
-Pyromancer,Head,Tattered Cloth Hood+10,12.6,1.4,29,14.5,21.8,19.4,0,32.2,1.1,0,0,0,0
-Pyromancer,Torso,Tattered Cloth Robe+10,32.2,2.8,72.6,41.1,55.7,50.8,0,82.6,2.7,0,0,0,0
-Pyromancer,Arms,Tattered Cloth Manchette+10,19.6,1.4,43.6,24.2,33.9,29,0,49,1.6,0,0,0,0
-Pyromancer,Legs,Heavy Boots+10,19.6,1.4,43.6,24.2,33.9,29,0,49,1.6,0,0,0,0
-Cleric,Head,Priest's Hat+10,12.6,0,12.1,16.9,21.8,19.4,0,11.2,1.2,0,0,0,0
-Cleric,Torso,Holy Robe+10,33.6,0,33.9,46,55.7,53.2,0,28,4,0,0,0,0
-Cleric,Arms,Traveling Gloves+10,7,0,7.3,9.7,12.1,12.1,0,5.6,0.7,0,0,0,0
-Cleric,Legs,Holy Trousers+10,21,0,19.4,29,36.3,33.9,0,18.2,2,0,0,0,0
-Antiquated,Head,Crown of Dusk,5,20,2,6,11,5,0,5,0.4,0,0,0,0
-Antiquated,Torso,Antiquated Dress+5,17.8,33,9.3,29.5,51.1,21.7,0,17.8,1,0,0,0,0
-Antiquated,Arms,Antiquated Gloves+5,10.2,20.3,4.6,17.1,29.5,12.4,0,10.2,0.6,0,0,0,0
-Antiquated,Legs,Antiquated Skirt+5,25.4,66,26.4,32.6,54.3,23.3,0,25.4,3,0,0,0,0
-Big Hat,Head,Big Hat+5,16.5,0,10.8,26.4,66.7,21.7,0,16.5,3,0,0,0,0
-Big Hat,Torso,Sage Robe+5,62.2,0,44.9,54.3,43.4,63.6,0,62.2,4,0,0,0,0
-Big Hat,Arms,Traveling Gloves+10,7,0,7.3,9.7,12.1,12.1,0,5.6,0.7,0,0,0,0
-Big Hat,Legs,Travelling Boots+10,19.6,0,19.4,24.2,38.7,29,0,19.6,1.6,0,0,0,0
-Black,Head,Mask of Velka+5,11.4,25.4,15.5,10.8,18.6,18.6,0,11.4,2.5,0,0,0,0
-Black,Torso,Black Cleric Robe+5,27.9,16.5,38.7,29.4,44.9,35.6,0,27.9,3.9,0,0,0,0
-Black,Arms,Black Manchette+5,12.7,6.4,17,13.9,21.7,17,0,12.7,1.8,0,0,0,0
-Black,Legs,Black Tights+5,19,11.4,26.3,20.1,34.1,24.8,0,19,2.8,0,0,0,0
-Black Sorcerer,Head,Black Sorcerer Hat+10,16.8,2.8,19.4,19.4,26.6,12.1,0,16.8,0.7,0,0,0,0
-Black Sorcerer,Torso,Black Sorcerer Cloak+10,43.4,5.6,50.8,50.8,67.8,31.5,0,43.4,1.8,0,0,0,0
-Black Sorcerer,Arms,Black Sorcerer Gauntlets+10,25.2,2.8,29,29,41.1,19.4,0,25.2,1,0,0,0,0
-Black Sorcerer,Legs,Black Sorcerer Boots+10,25.2,2.8,29,29,41.1,19.4,0,25.2,1,0,0,0,0
-Chain,Head,Chain Helm+10,14,0,19.4,7.3,24.2,29,5,8.4,3,0,0,0,0
-Chain,Torso,Chain Armor+10,28,0,38.7,16.9,50.8,72.6,9,16.8,6,0,0,0,0
-Chain,Arms,Leather Gauntlets+10,16.8,0,19.4,9.7,24.2,29,5,9.8,3.6,0,0,0,0
-Chain,Legs,Chain Leggings+10,21,0,29,12.1,33.9,43.6,7,12.6,4.6,0,0,0,0
-Crimson,Head,Mask of the Sealer+5,10.2,10.2,10.8,14,18.6,18.6,0,10.2,1.5,0,0,0,0
-Crimson,Torso,Crimson Robe+5,26.7,26.7,29.5,37.2,51.1,49.6,0,26.7,3.9,0,0,0,0
-Crimson,Arms,Crimson Gloves+5,5.1,5.1,6.2,7.8,10.8,10.8,0,5.1,0.8,0,0,0,0
-Crimson,Legs,Crimson Waistcloth+5,24.1,24.1,26.4,32.6,44.9,44.9,0,24.1,3.5,0,0,0,0
-Dingy,Head,Dingy Hood+10,13,13,12,15,19,15,0,10,0.8,0,0,0,0
-Dingy,Torso,Dingy Robe+10,49,49,46,60.5,79.9,55.7,0,36.4,3,0,0,0,0
-Dingy,Arms,Dingy Gloves+10,20,20,19,24,32,22,0,14,1.2,0,0,0,0
-Dingy,Legs,Blood-Stained Skirt+10,40.6,40.6,38.7,50.8,65.3,31.5,0,30.8,2.5,0,0,0,0
-Gold-Hemmed Black,Head,Gold-Hemmed Black Hood,16,0,22,8,15,11,0,36,1.4,0,0,0,0
-Gold-Hemmed Black,Torso,Gold-Hemmed Black Cloak,40,0,58,21,38,31,0,94,3.5,0,0,0,0
-Gold-Hemmed Black,Arms,Gold-Hemmed Black Gloves,14,0,24,8,13,12,0,32,1.2,0,0,0,0
-Gold-Hemmed Black,Legs,Gold-Hemmed Black Skirt,32,0,49,17,27,23,0,78,3,0,0,0,0
-Hollow Soldier,Head,Hollow Soldier Helm+10,9.8,0,14.5,9.7,14.5,24.2,5,7,3,0,0,0,0
-Hollow Soldier,Torso,Hollow Soldier Armor+10,25.2,0,41.1,24.2,38.7,62.9,12,18.2,7.8,0,0,0,0
-Hollow Soldier,Legs,Hollow Soldier Waistcloth+10,14,0,19.4,14.5,19.4,31.5,7,8.4,1.5,0,0,0,0
-Hollow Thief,Head,Hollow Thief's Hood+10,8.4,0,12.1,16.9,19.4,19.4,0,15.4,1.1,0,0,0,0
-Hollow Thief,Torso,Hollow Thief's Leather Armor+10,21,0,31.5,43.6,48.4,50.8,0,40.6,2.8,0,0,0,0
-Hollow Thief,Legs,Hollow Thief's Tights+10,12.6,0,19.4,24.2,26.6,29,0,23.8,1.7,0,0,0,0
-Hollow Warrior,Head,Hollow Warrior Helm+10,7,0,12.1,14.5,14.5,24.2,3,7,2.6,0,0,0,0
-Hollow Warrior,Torso,Hollow Warrior Armor+10,18.2,0,29,41.1,38.7,58.1,8,18.2,6.6,0,0,0,0
-Hollow Warrior,Legs,Hollow Warrior Waistcloth+10,8.4,0,14.5,19.4,19.4,31.5,5,8.4,1.4,0,0,0,0
-Maiden,Head,Maiden Hood+10,12.6,4.2,12.1,14.5,19.4,16.9,0,9.8,0.8,0,0,0,0
-Maiden,Torso,Maiden Robe+10,32.2,11.2,31.5,41.1,53.2,46,0,25.2,2,0,0,0,0
-Maiden,Arms,Maiden Gloves+10,19.6,7,19.4,24.2,31.5,26.6,0,14,1.2,0,0,0,0
-Maiden,Legs,Maiden Skirt+10,40.6,14,38.7,50.8,65.3,33.9,0,30.8,2.5,0,0,0,0
-Moonlight,Head,Crown of the Dark Sun,9,12,6,6,12,12,0,9,3,0,0,0,0
-Moonlight,Torso,Moonlight Robe,23,31,17,17,31,20,0,23,3.1,0,0,0,0
-Moonlight,Arms,Moonlight Gloves,4,5,3,3,5,3,0,4,0.5,0,0,0,0
-Moonlight,Legs,Moonlight Waistcloth,14,18,10,10,18,12,0,14,1.8,0,0,0,0
-Painting Guardian,Head,Painting Guardian Hood+5,15.2,7.6,17.1,12.4,48.1,4.6,0,38.1,0.6,0,0,0,0
-Painting Guardian,Torso,Painting Guardian Robe+5,40.6,20.3,44.9,32.6,52.7,14,0,99.1,1.6,0,0,0,0
-Painting Guardian,Arms,Painting Guardian Gloves+5,22.9,12.7,26.4,18.6,34.1,9.3,0,58.4,0.9,0,0,0,0
-Painting Guardian,Legs,Painting Guardian Waistcloth+5,26.7,12.7,34.1,32.6,46.5,34.1,0,64.8,4,0,0,0,0
-Gwyn,Head,Crown of the Great Lord,15,20,21,21,16,16,0,8,3,0,0,0,0
-Gwyn,Torso,Robe of the Great Lord,30,40,41,41,32,32,0,15,6,0,0,0,0
-Gwyn,Arms,Bracelet of the Great Lord,14,18,19,19,15,15,0,18,2.8,0,0,0,0
-Gwyn,Legs,Anklet of the Great Lord,14,18,19,19,15,15,0,18,2.8,0,0,0,0
-Shadow,Head,Shadow Mask+5,19,0,9.3,9.3,7.8,14,0,22.9,0.9,0,0,0,0
-Shadow,Torso,Shadow Garb+5,49.5,0,24.8,26.4,18.6,35.6,0,59.7,2.3,0,0,0,0
-Shadow,Arms,Shadow Gauntlets+5,29.2,0,14,15.5,10.8,20.2,0,35.6,1.4,0,0,0,0
-Shadow,Legs,Shadow Leggings+5,29.2,0,14,15.5,10.8,20.2,0,35.6,1.4,0,0,0,0
-Witch,Head,Witch Hat+5,12.7,14,9.3,10.8,18.6,14,0,12.7,1.1,0,0,0,0
-Witch,Torso,Witch Cloak+5,45.7,15.2,31,40.3,66.7,51.1,0,45.7,4,0,0,0,0
-Witch,Arms,Witch Gloves+5,20.3,7.6,14,17.1,27.9,21.7,0,20.3,1.7,0,0,0,0
-Witch,Legs,Witch Skirt+5,29.2,10.2,18.6,26.4,41.9,26.4,0,35.6,2.5,0,0,0,0
-Adventurer,Head,Helm of the Wise,11,18,13,10,12,18,8,7,5.1,0,0,0,0
-Adventurer,Torso,Armor of the Glorious,28,24,34,25,31,47,20,19,13.3,0,0,0,0
-Adventurer,Arms,Gauntlets Of The Vanquisher,6,4,7,6,7,11,4,5,3,0,0,0,0
-Adventurer,Legs,Boots Of The Explorer,8,5,11,7,10,14,6,6,4,0,0,0,0
-Balder,Head,Balder Helm+10,11.2,0,19.4,14.5,14.5,33.9,6,8.4,4.2,0,0,0,0
-Balder,Torso,Balder Armor+10,28,0,43.6,36.3,36.3,89.5,16,22.4,10.9,0,0,0,0
-Balder,Arms,Balder Gauntlets+10,8.4,0,19.4,12.1,16.9,41.1,5,7,3.5,0,0,0,0
-Balder,Legs,Balder Leggings+10,16.8,0,29,21.8,24.2,53.2,9,12.6,6.4,0,0,0,0
-Black Iron,Head,Black Iron Helm+5,21.6,6.4,29.5,12.4,17.1,41.9,12,12.7,6,0,0,0,0
-Black Iron,Torso,Black Iron Armor+5,54.6,16.5,79,32.5,46.5,105.4,31,31.7,15.6,0,0,0,0
-Black Iron,Arms,Black Iron Gauntlets+5,31.7,10.2,46.5,20.2,26.4,62,18,17.8,9.2,0,0,0,0
-Black Iron,Legs,Black Iron Leggings+5,31.7,10.2,46.5,20.2,26.4,62,18,17.8,9.2,0,0,0,0
-Black Knight,Head,Black Knight Helm+5,15.2,0,27.9,9.3,17.1,32.6,8,7.6,5,0,0,0,0
-Black Knight,Torso,Black Knight Armor+5,40.6,0,74.4,26.4,44.9,88.4,21,19,13,0,0,0,0
-Black Knight,Arms,Black Knight Gauntlets+5,19,0,35.6,12.4,21.7,40.3,10,10.2,6,0,0,0,0
-Black Knight,Legs,Black Knight Leggings+5,21.6,0,40.3,14,23.3,46.5,11,11.4,7,0,0,0,0
-Brass,Head,Brass Helm+5,14,7.6,17,17,18.6,34.1,8,11.4,5.1,0,0,0,0
-Brass,Torso,Brass Armor+5,30.5,14,38.7,38.7,41.8,74.4,16,25.4,10.9,0,0,0,0
-Brass,Arms,Brass Gauntlets+5,15.2,7.6,18.6,18.6,21.7,37.2,8,12.7,5.4,0,0,0,0
-Brass,Legs,Brass Leggings+5,17.8,8.9,23.3,23.3,24.8,40.3,9,15.2,6.4,0,0,0,0
-Catarina,Head,Catarina Helm+5,16.5,0,20.1,10.8,18.6,34.1,8,11.4,4.5,0,0,0,0
-Catarina,Torso,Catarina Armor+5,43.2,0,57.3,29.4,48,88.3,21,30.5,11.7,0,0,0,0
-Catarina,Arms,Catarina Gauntlets+5,26.7,0,32.6,18.6,27.9,52.7,13,16.5,6.9,0,0,0,0
-Catarina,Legs,Catarina Leggings+5,26.7,0,32.5,18.6,27.9,52.7,13,16.5,6.9,0,0,0,0
-Crystalline,Head,Crystalline Helm,6,0,6,2,8,25,6,0,4.2,0,0,0,0
-Crystalline,Torso,Crystalline Armor,15,0,15,7,21,59,16,0,10.9,0,0,0,0
-Crystalline,Arms,Crystalline Gauntlets,9,0,9,4,12,37,9,0,6.4,0,0,0,0
-Crystalline,Legs,Crystalline Leggings,9,0,9,4,12,37,9,0,6.4,0,0,0,0
-Eastern,Head,Eastern Helm+5,19,0,18.6,10.8,9.3,26.4,8,14,4.7,0,0,0,0
-Eastern,Torso,Eastern Armor+5,48.3,0,51.1,27.9,23.3,69.8,20,35.6,12.3,0,0,0,0
-Eastern,Arms,Eastern Gauntlets+5,6.3,0,6.2,3.1,1.6,9.3,2,5.1,1.5,0,0,0,0
-Eastern,Legs,Eastern Leggings+5,15.2,0,17.1,9.3,7.8,23.3,6,12.7,4,0,0,0,0
-Elite Knight,Head,Elite Knight Helm+10,12.6,0,19.4,14.5,16.9,36.3,6,8.4,4.5,0,0,0,0
-Elite Knight,Torso,Elite Knight Armor+10,32.2,0,43.6,36.3,41.1,94.4,15,22.4,11.7,0,0,0,0
-Elite Knight,Arms,Elite Knight Gauntlets+10,9.8,0,19.4,12.1,16.9,43.6,4,7,3.7,0,0,0,0
-Elite Knight,Legs,Elite Knight Leggings+10,19.6,0,26.6,21.8,26.6,55.7,9,12.6,6.9,0,0,0,0
-Giant,Head,Giant Helm+5,16.5,0,29.5,20.2,20.2,41.9,14,10.2,6.3,0,0,0,0
-Giant,Torso,Giant Armor+5,40.6,0,74.4,51.1,49.6,111.6,35,24.1,16.4,0,0,0,0
-Giant,Arms,Giant Gauntlets+5,24.1,0,44.9,29.5,29.5,63.6,21,14,9.7,0,0,0,0
-Giant,Legs,Giant Leggings+5,24.1,0,44.9,29.5,29.5,63.6,21,14,9.7,0,0,0,0
-Havel,Head,Havel's Helm,18,9,22,18,22,36,18,4,7.5,0,0,0,0
-Havel,Torso,Havel's Armor,45,22,54,49,56,92,47,11,19.5,0,0,0,0
-Havel,Arms,Havel's Gauntlets,27,13,32,29,32,54,28,5,11.5,0,0,0,0
-Havel,Legs,Havel's Leggings,27,13,32,29,32,54,28,5,11.5,0,0,0,0
-Heavy Cleric,Head,Cleric Helm+10,13,0,19,15,22,36,8,8,4.8,0,0,0,0
-Heavy Cleric,Torso,Cleric Armor+10,32,0,51,36,56,97,20,22,12.5,0,0,0,0
-Heavy Cleric,Arms,Cleric Gauntlets+10,20,0,29,22,32,58,12,13,7.4,0,0,0,0
-Heavy Cleric,Legs,Cleric Leggings+10,20,0,29,22,32,58,12,13,7.4,0,0,0,0
-Channelers,Head,Six-Eyed Helm of the Channelers,15,0,17,13,18,20,5,13,3.9,0,0,0,0
-Channelers,Torso,Robe of the Channelers,38,0,45,35,45,53,12,33,10.1,0,0,0,0
-Channelers,Arms,Gauntlets of the Channelers,12,0,13,10,13,17,3,10,3,0,0,0,0
-Channelers,Legs,Waistcloth of the Channelers,23,0,27,20,27,32,7,20,6,0,0,0,0
-Silver Knight,Head,Silver Knight Helm+5,11.4,1.3,17.1,21.7,15.5,32.6,8,6.3,4.8,0,0,0,0
-Silver Knight,Torso,Silver Knight Armor+5,30.5,2.5,44.9,52.7,40.3,80.6,19,15.2,12,0,0,0,0
-Silver Knight,Arms,Silver Knight Gauntlets+5,14,1.3,21.7,24.8,18.6,38.8,9,7.6,5.5,0,0,0,0
-Silver Knight,Legs,Silver Knight Leggings+5,17.8,1.3,24.8,29.5,23.3,43.4,11,8.9,6.5,0,0,0,0
-Steel,Head,Steel Helm+10,12.6,0,19.4,12.1,19.4,38.7,9,8.4,5.4,0,0,0,0
-Steel,Torso,Steel Armor+10,32.2,0,50.8,31.5,53.2,101.6,23,22.4,14,0,0,0,0
-Steel,Arms,Steel Gauntlets+10,20,0,29,14,32,61,14,13,8.3,0,0,0,0
-Steel,Legs,Steel Leggings+10,20,0,29,14,32,61,14,13,8.3,0,0,0,0
-Stone,Head,Stone Helm,17,0,21,21,17,35,15,6,6.8,0,0,0,0
-Stone,Torso,Stone Armor,45,0,54,54,45,91,39,16,17.6,0,0,0,0
-Stone,Arms,Stone Gauntlets,27,0,33,33,27,54,23,10,10.4,0,0,0,0
-Stone,Legs,Stone Leggings,27,0,33,33,27,54,23,10,10.4,0,0,0,0
-Golem,Head,Golem Helm,17,0,16,6,17,35,13,12,6.3,0,0,0,0
-Golem,Torso,Golem Armor,45,0,41,17,45,91,33,31,16.4,0,0,0,0
-Golem,Arms,Golem Gauntlets,27,0,23,10,25,54,20,17,9.7,0,0,0,0
-Golem,Legs,Golem Leggings,27,0,23,10,25,54,20,17,9.7,0,0,0,0
-Iron and Sun,Head,Iron Helm+10,17,3,24,22,24,34,8,11,4.5,0,0,0,0
-Iron and Sun,Torso,Armor of the Sun+10,16,14,51,46,51,85,16,22,9,0,0,0,0
-Iron and Sun,Arms,Iron Bracelet+10,15,3,24,22,24,41,7,10,4.3,0,0,0,0
-Iron and Sun,Legs,Iron Leggings+10,20,3,29,27,29,51,9,13,5.3,0,0,0,0
-Ornstein,Head,Ornstein's Helm,18,8,22,18,16,32,9,8,5.5,0,0,0,0
-Ornstein,Torso,Ornstein's Armor,38,18,46,40,36,70,19,18,12,0,0,0,0
-Ornstein,Arms,Ornstein's Gauntlets,12,6,16,14,12,29,6,6,4,0,0,0,0
-Ornstein,Legs,Ornstein's Leggings,22,12,28,24,20,40,11,12,7,0,0,0,0
-Paladin,Head,Paladin Helm+5,16.5,27.9,20.2,10.8,18.6,34.1,8,11.4,5,0,0,0,0
-Paladin,Torso,Paladin Armor+5,43.2,72.4,57.4,29.5,48.1,91.5,20,30.5,12.9,0,0,0,0
-Paladin,Arms,Paladin Gauntlets+5,26.7,43.2,32.6,18.6,29.5,54.3,12,16.5,7.6,0,0,0,0
-Paladin,Legs,Paladin Leggings+5,26.7,43.2,32.6,18.6,29.5,54.3,12,16.5,7.6,0,0,0,0
-Favor,Head,Helm of Favor+5,14,10,17,11,16,28,8,10,4.5,0,0,0,0
-Favor,Torso,Embraced Armor of Favor+5,36,28,47,30,36,74,20,28,11.7,0,0,0,0
-Favor,Arms,Gauntlets of Favor+5,14,13,19,12,16,33,8,13,5,0,0,0,0
-Favor,Legs,Leggings of Favor+5,19,18,28,17,22,43,11,18,6.9,0,0,0,0
-Thorns,Head,Helm of Thorns+5,12.7,0,18.6,12.4,15.5,26.4,6,8.9,4.1,0,0,0,0
-Thorns,Torso,Armor of Thorns+5,33,0,51.1,31,43.4,69.8,16,22.9,10.5,0,0,0,0
-Thorns,Arms,Gauntlets of Thorns+5,20.3,0,27.9,18.6,24.8,40.3,9,12.7,6.2,0,0,0,0
-Thorns,Legs,Leggings of Thorns+5,20.3,0,27.9,18.6,24.8,40.3,9,12.7,6.2,0,0,0,0
-Smough,Head,Smough's Helm,21,5,26,21,19,40,14,12,6.8,0,0,0,0
-Smough,Torso,Smough's Armor,54,9,66,59,52,106,35,28,17.6,0,0,0,0
-Smough,Arms,Smough's Gauntlets,33,5,40,33,31,61,21,16,10.4,0,0,0,0
-Smough,Legs,Smough's Leggings,33,5,40,33,31,61,21,16,10.4,0,0,0,0
-Dark,Head,Dark Mask+5,15.2,0,18.6,15.5,18.6,27.9,6,10.2,3.8,0,0,0,0
-Dark,Torso,Dark Armor+5,38.1,0,48.1,41.9,46.5,69.8,16,26.7,9.8,0,0,0,0
-Dark,Arms,Dark Gauntlets+5,22.9,0,27.9,23.3,27.9,41.9,9,15.2,5.8,0,0,0,0
-Dark,Legs,Dark Leggings+5,22.9,0,27.9,23.3,27.9,41.9,9,15.2,5.8,0,0,0,0
-Xanthous,Head,Xanthous Crown+5,10.2,44.4,4.6,12.4,23.3,27.9,0,14,5,0,0,0,0
-Xanthous,Torso,Xanthous Overcoat+5,27.9,0,10.8,35.6,57.4,49.6,0,36.8,3.9,0,0,0,0
-Xanthous,Arms,Xanthous Gloves+5,15.2,0,6.2,21.7,34.1,27.9,0,22.9,2.3,0,0,0,0
-Xanthous,Legs,Xanthous Waistcloth+5,27.9,0,10.8,35.6,60.5,49.6,0,38.1,4,0,0,0,0
-,Head,Mask of the Father,6,0,6,8,10,6,0,0,1.2,0.05,0,0,0
-,Head,Mask of the Mother,10,0,6,8,12,6,0,0,1.2,0,0.1,0,0
-,Head,Mask of the Child,6,0,8,10,10,6,0,0,1.2,0,0,0,10
-,Head,Fang Boar Helm+5,16.5,0,6.2,6.2,7.8,40.3,12,10.2,8,0,0,0,0
-,Head,Gargoyle Helm+5,27.9,0,23.3,23.3,23.3,23.3,8,24.1,3.5,0,0,0,0
-,Head,Sunlight Maggot,0,0,24,13,5,6,0,0,1.4,0,0,0,0
-,Head,Sack+10,16.8,0,19.4,9.7,14.5,14.5,0,14,0.6,0,0,0,0
-,Head,Royal Helm+10,22,0,24,15,24,39,8,17,4.5,0,0,0,0
-,Head,Symbol of Avarice,10,0,2,2,8,21,15,0,10,0,0,0,0
+"set","position","name","bleed","curse","fire","lightning","magic","physical","poise","poison","weight","weight_modifier","health_modifier","stamina_modifier","stamina_regeneration"
+"Naked","Head","Naked Head",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"Naked","Torso","Naked Torso",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"Naked","Arms","Naked Arms",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"Naked","Legs","Naked Legs",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"Warrior","Head","Standard Helm+10",12.6,0.0,19.4,7.3,19.4,33.9,5.0,11.2,3.5,0.0,0.0,0.0,0.0
+"Warrior","Torso","Hard Leather Armor+10",32.2,0.0,31.5,55.7,48.4,62.9,0.0,28.0,5.9,0.0,0.0,0.0,0.0
+"Warrior","Arms","Hard Leather Gauntlets+10",19.6,0.0,16.9,31.5,29.0,31.5,0.0,16.8,3.5,0.0,0.0,0.0,0.0
+"Warrior","Legs","Hard Leather Boots+10",19.6,0.0,16.9,31.5,29.0,31.5,0.0,16.8,3.5,0.0,0.0,0.0,0.0
+"Knight","Head","Knight Helm+10",12.6,0.0,19.4,12.1,14.5,33.9,8.0,8.4,4.2,0.0,0.0,0.0,0.0
+"Knight","Torso","Knight Armor+10",32.2,0.0,43.6,31.5,38.7,89.5,20.0,22.4,10.9,0.0,0.0,0.0,0.0
+"Knight","Arms","Knight Gauntlets+10",11.2,0.0,19.4,9.7,16.9,41.1,6.0,7.0,3.5,0.0,0.0,0.0,0.0
+"Knight","Legs","Knight Leggings+10",19.6,0.0,26.6,19.4,24.2,53.2,12.0,12.6,6.4,0.0,0.0,0.0,0.0
+"Wanderer","Head","Wanderer Hood+10",11.2,0.0,24.2,21.8,19.4,21.8,0.0,11.2,1.4,0.0,0.0,0.0,0.0
+"Wanderer","Torso","Wanderer Coat+10",29.4,0.0,62.9,55.7,50.8,55.7,0.0,29.4,3.5,0.0,0.0,0.0,0.0
+"Wanderer","Arms","Wanderer Manchette+10",18.2,0.0,36.3,31.5,29.0,33.9,0.0,18.2,2.1,0.0,0.0,0.0,0.0
+"Wanderer","Legs","Wanderer Boots+10",18.2,0.0,36.3,31.5,29.0,33.9,0.0,18.2,2.1,0.0,0.0,0.0,0.0
+"Thief","Head","Thief Mask+10",12.6,0.0,12.1,14.5,19.4,21.8,0.0,16.8,1.2,0.0,0.0,0.0,0.0
+"Thief","Torso","Black Leather Armor+10",32.2,0.0,33.9,38.7,48.4,55.7,0.0,43.4,3.1,0.0,0.0,0.0,0.0
+"Thief","Arms","Black Leather Gloves+10",19.6,0.0,19.4,21.8,29.0,31.5,0.0,25.2,1.8,0.0,0.0,0.0,0.0
+"Thief","Legs","Black Leather Boots+10",32.2,0.0,31.5,36.3,46.0,29.0,0.0,43.4,3.0,0.0,0.0,0.0,0.0
+"Bandit","Head","Brigand Hood+10",11.2,0.0,12.1,14.5,19.4,21.8,0.0,11.2,1.2,0.0,0.0,0.0,0.0
+"Bandit","Torso","Brigand Armor+10",28.0,0.0,31.5,41.1,48.4,55.7,0.0,28.0,3.1,0.0,0.0,0.0,0.0
+"Bandit","Arms","Brigand Gauntlets+10",16.8,0.0,19.4,24.2,29.0,33.9,0.0,16.8,1.8,0.0,0.0,0.0,0.0
+"Bandit","Legs","Brigand Trousers+10",16.8,0.0,19.4,24.2,29.0,33.9,0.0,16.8,1.8,0.0,0.0,0.0,0.0
+"Hunter","Head","Pharis' Hat+10",8.4,0.0,16.9,14.5,12.1,16.9,0.0,7.0,1.2,0.0,0.0,0.0,0.0
+"Hunter","Torso","Leather Armor+10",29.4,0.0,29.0,55.7,48.4,58.1,0.0,28.0,4.7,0.0,0.0,0.0,0.0
+"Hunter","Arms","Leather Gloves+10",18.2,0.0,14.5,31.5,29.0,29.0,0.0,16.8,2.8,0.0,0.0,0.0,0.0
+"Hunter","Legs","Leather Boots+10",18.2,0.0,14.5,31.5,29.0,29.0,0.0,16.8,2.8,0.0,0.0,0.0,0.0
+"Sorcerer","Head","Sorcerer Hat+10",8.4,0.0,12.1,14.5,24.2,19.4,0.0,7.0,0.9,0.0,0.0,0.0,0.0
+"Sorcerer","Torso","Sorcerer Cloak+10",22.4,0.0,31.5,41.1,65.3,48.4,0.0,16.8,2.3,0.0,0.0,0.0,0.0
+"Sorcerer","Arms","Sorcerer Gauntlets+10",12.6,0.0,19.4,24.2,38.7,29.0,0.0,9.8,1.4,0.0,0.0,0.0,0.0
+"Sorcerer","Legs","Sorcerer Boots+10",12.6,0.0,19.4,24.2,38.7,29.0,0.0,9.8,1.4,0.0,0.0,0.0,0.0
+"Pyromancer","Head","Tattered Cloth Hood+10",12.6,1.4,29.0,14.5,21.8,19.4,0.0,32.2,1.1,0.0,0.0,0.0,0.0
+"Pyromancer","Torso","Tattered Cloth Robe+10",32.2,2.8,72.6,41.1,55.7,50.8,0.0,82.6,2.7,0.0,0.0,0.0,0.0
+"Pyromancer","Arms","Tattered Cloth Manchette+10",19.6,1.4,43.6,24.2,33.9,29.0,0.0,49.0,1.6,0.0,0.0,0.0,0.0
+"Pyromancer","Legs","Heavy Boots+10",19.6,1.4,43.6,24.2,33.9,29.0,0.0,49.0,1.6,0.0,0.0,0.0,0.0
+"Cleric","Head","Priest's Hat+10",12.6,0.0,12.1,16.9,21.8,19.4,0.0,11.2,1.2,0.0,0.0,0.0,0.0
+"Cleric","Torso","Holy Robe+10",33.6,0.0,33.9,46.0,55.7,53.2,0.0,28.0,4.0,0.0,0.0,0.0,0.0
+"Cleric","Arms","Traveling Gloves+10",7.0,0.0,7.3,9.7,12.1,12.1,0.0,5.6,0.7,0.0,0.0,0.0,0.0
+"Cleric","Legs","Holy Trousers+10",21.0,0.0,19.4,29.0,36.3,33.9,0.0,18.2,2.0,0.0,0.0,0.0,0.0
+"Antiquated","Head","Crown of Dusk",5.0,20.0,2.0,6.0,11.0,5.0,0.0,5.0,0.4,0.0,0.0,0.0,0.0
+"Antiquated","Torso","Antiquated Dress+5",17.8,33.0,9.3,29.5,51.1,21.7,0.0,17.8,1.0,0.0,0.0,0.0,0.0
+"Antiquated","Arms","Antiquated Gloves+5",10.2,20.3,4.6,17.1,29.5,12.4,0.0,10.2,0.6,0.0,0.0,0.0,0.0
+"Antiquated","Legs","Antiquated Skirt+5",25.4,66.0,26.4,32.6,54.3,23.3,0.0,25.4,3.0,0.0,0.0,0.0,0.0
+"Big Hat","Head","Big Hat+5",16.5,0.0,10.8,26.4,66.7,21.7,0.0,16.5,3.0,0.0,0.0,0.0,0.0
+"Big Hat","Torso","Sage Robe+5",62.2,0.0,44.9,54.3,43.4,63.6,0.0,62.2,4.0,0.0,0.0,0.0,0.0
+"Big Hat","Arms","Traveling Gloves+10",7.0,0.0,7.3,9.7,12.1,12.1,0.0,5.6,0.7,0.0,0.0,0.0,0.0
+"Big Hat","Legs","Travelling Boots+10",19.6,0.0,19.4,24.2,38.7,29.0,0.0,19.6,1.6,0.0,0.0,0.0,0.0
+"Black","Head","Mask of Velka+5",11.4,25.4,15.5,10.8,18.6,18.6,0.0,11.4,2.5,0.0,0.0,0.0,0.0
+"Black","Torso","Black Cleric Robe+5",27.9,16.5,38.7,29.4,44.9,35.6,0.0,27.9,3.9,0.0,0.0,0.0,0.0
+"Black","Arms","Black Manchette+5",12.7,6.4,17.0,13.9,21.7,17.0,0.0,12.7,1.8,0.0,0.0,0.0,0.0
+"Black","Legs","Black Tights+5",19.0,11.4,26.3,20.1,34.1,24.8,0.0,19.0,2.8,0.0,0.0,0.0,0.0
+"Black Sorcerer","Head","Black Sorcerer Hat+10",16.8,2.8,19.4,19.4,26.6,12.1,0.0,16.8,0.7,0.0,0.0,0.0,0.0
+"Black Sorcerer","Torso","Black Sorcerer Cloak+10",43.4,5.6,50.8,50.8,67.8,31.5,0.0,43.4,1.8,0.0,0.0,0.0,0.0
+"Black Sorcerer","Arms","Black Sorcerer Gauntlets+10",25.2,2.8,29.0,29.0,41.1,19.4,0.0,25.2,1.0,0.0,0.0,0.0,0.0
+"Black Sorcerer","Legs","Black Sorcerer Boots+10",25.2,2.8,29.0,29.0,41.1,19.4,0.0,25.2,1.0,0.0,0.0,0.0,0.0
+"Chain","Head","Chain Helm+10",14.0,0.0,19.4,7.3,24.2,29.0,5.0,8.4,3.0,0.0,0.0,0.0,0.0
+"Chain","Torso","Chain Armor+10",28.0,0.0,38.7,16.9,50.8,72.6,9.0,16.8,6.0,0.0,0.0,0.0,0.0
+"Chain","Arms","Leather Gauntlets+10",16.8,0.0,19.4,9.7,24.2,29.0,5.0,9.8,3.6,0.0,0.0,0.0,0.0
+"Chain","Legs","Chain Leggings+10",21.0,0.0,29.0,12.1,33.9,43.6,7.0,12.6,4.6,0.0,0.0,0.0,0.0
+"Crimson","Head","Mask of the Sealer+5",10.2,10.2,10.8,14.0,18.6,18.6,0.0,10.2,1.5,0.0,0.0,0.0,0.0
+"Crimson","Torso","Crimson Robe+5",26.7,26.7,29.5,37.2,51.1,49.6,0.0,26.7,3.9,0.0,0.0,0.0,0.0
+"Crimson","Arms","Crimson Gloves+5",5.1,5.1,6.2,7.8,10.8,10.8,0.0,5.1,0.8,0.0,0.0,0.0,0.0
+"Crimson","Legs","Crimson Waistcloth+5",24.1,24.1,26.4,32.6,44.9,44.9,0.0,24.1,3.5,0.0,0.0,0.0,0.0
+"Dingy","Head","Dingy Hood+10",13.0,13.0,12.0,15.0,19.0,15.0,0.0,10.0,0.8,0.0,0.0,0.0,0.0
+"Dingy","Torso","Dingy Robe+10",49.0,49.0,46.0,60.5,79.9,55.7,0.0,36.4,3.0,0.0,0.0,0.0,0.0
+"Dingy","Arms","Dingy Gloves+10",20.0,20.0,19.0,24.0,32.0,22.0,0.0,14.0,1.2,0.0,0.0,0.0,0.0
+"Dingy","Legs","Blood-Stained Skirt+10",40.6,40.6,38.7,50.8,65.3,31.5,0.0,30.8,2.5,0.0,0.0,0.0,0.0
+"Gold-Hemmed Black","Head","Gold-Hemmed Black Hood",16.0,0.0,22.0,8.0,15.0,11.0,0.0,36.0,1.4,0.0,0.0,0.0,0.0
+"Gold-Hemmed Black","Torso","Gold-Hemmed Black Cloak",40.0,0.0,58.0,21.0,38.0,31.0,0.0,94.0,3.5,0.0,0.0,0.0,0.0
+"Gold-Hemmed Black","Arms","Gold-Hemmed Black Gloves",14.0,0.0,24.0,8.0,13.0,12.0,0.0,32.0,1.2,0.0,0.0,0.0,0.0
+"Gold-Hemmed Black","Legs","Gold-Hemmed Black Skirt",32.0,0.0,49.0,17.0,27.0,23.0,0.0,78.0,3.0,0.0,0.0,0.0,0.0
+"Hollow Soldier","Head","Hollow Soldier Helm+10",9.8,0.0,14.5,9.7,14.5,24.2,5.0,7.0,3.0,0.0,0.0,0.0,0.0
+"Hollow Soldier","Torso","Hollow Soldier Armor+10",25.2,0.0,41.1,24.2,38.7,62.9,12.0,18.2,7.8,0.0,0.0,0.0,0.0
+"Hollow Soldier","Legs","Hollow Soldier Waistcloth+10",14.0,0.0,19.4,14.5,19.4,31.5,7.0,8.4,1.5,0.0,0.0,0.0,0.0
+"Hollow Thief","Head","Hollow Thief's Hood+10",8.4,0.0,12.1,16.9,19.4,19.4,0.0,15.4,1.1,0.0,0.0,0.0,0.0
+"Hollow Thief","Torso","Hollow Thief's Leather Armor+10",21.0,0.0,31.5,43.6,48.4,50.8,0.0,40.6,2.8,0.0,0.0,0.0,0.0
+"Hollow Thief","Legs","Hollow Thief's Tights+10",12.6,0.0,19.4,24.2,26.6,29.0,0.0,23.8,1.7,0.0,0.0,0.0,0.0
+"Hollow Warrior","Head","Hollow Warrior Helm+10",7.0,0.0,12.1,14.5,14.5,24.2,3.0,7.0,2.6,0.0,0.0,0.0,0.0
+"Hollow Warrior","Torso","Hollow Warrior Armor+10",18.2,0.0,29.0,41.1,38.7,58.1,8.0,18.2,6.6,0.0,0.0,0.0,0.0
+"Hollow Warrior","Legs","Hollow Warrior Waistcloth+10",8.4,0.0,14.5,19.4,19.4,31.5,5.0,8.4,1.4,0.0,0.0,0.0,0.0
+"Maiden","Head","Maiden Hood+10",12.6,4.2,12.1,14.5,19.4,16.9,0.0,9.8,0.8,0.0,0.0,0.0,0.0
+"Maiden","Torso","Maiden Robe+10",32.2,11.2,31.5,41.1,53.2,46.0,0.0,25.2,2.0,0.0,0.0,0.0,0.0
+"Maiden","Arms","Maiden Gloves+10",19.6,7.0,19.4,24.2,31.5,26.6,0.0,14.0,1.2,0.0,0.0,0.0,0.0
+"Maiden","Legs","Maiden Skirt+10",40.6,14.0,38.7,50.8,65.3,33.9,0.0,30.8,2.5,0.0,0.0,0.0,0.0
+"Moonlight","Head","Crown of the Dark Sun",9.0,12.0,6.0,6.0,12.0,12.0,0.0,9.0,3.0,0.0,0.0,0.0,0.0
+"Moonlight","Torso","Moonlight Robe",23.0,31.0,17.0,17.0,31.0,20.0,0.0,23.0,3.1,0.0,0.0,0.0,0.0
+"Moonlight","Arms","Moonlight Gloves",4.0,5.0,3.0,3.0,5.0,3.0,0.0,4.0,0.5,0.0,0.0,0.0,0.0
+"Moonlight","Legs","Moonlight Waistcloth",14.0,18.0,10.0,10.0,18.0,12.0,0.0,14.0,1.8,0.0,0.0,0.0,0.0
+"Painting Guardian","Head","Painting Guardian Hood+5",15.2,7.6,17.1,12.4,48.1,4.6,0.0,38.1,0.6,0.0,0.0,0.0,0.0
+"Painting Guardian","Torso","Painting Guardian Robe+5",40.6,20.3,44.9,32.6,52.7,14.0,0.0,99.1,1.6,0.0,0.0,0.0,0.0
+"Painting Guardian","Arms","Painting Guardian Gloves+5",22.9,12.7,26.4,18.6,34.1,9.3,0.0,58.4,0.9,0.0,0.0,0.0,0.0
+"Painting Guardian","Legs","Painting Guardian Waistcloth+5",26.7,12.7,34.1,32.6,46.5,34.1,0.0,64.8,4.0,0.0,0.0,0.0,0.0
+"Gwyn","Head","Crown of the Great Lord",15.0,20.0,21.0,21.0,16.0,16.0,0.0,8.0,3.0,0.0,0.0,0.0,0.0
+"Gwyn","Torso","Robe of the Great Lord",30.0,40.0,41.0,41.0,32.0,32.0,0.0,15.0,6.0,0.0,0.0,0.0,0.0
+"Gwyn","Arms","Bracelet of the Great Lord",14.0,18.0,19.0,19.0,15.0,15.0,0.0,18.0,2.8,0.0,0.0,0.0,0.0
+"Gwyn","Legs","Anklet of the Great Lord",14.0,18.0,19.0,19.0,15.0,15.0,0.0,18.0,2.8,0.0,0.0,0.0,0.0
+"Shadow","Head","Shadow Mask+5",19.0,0.0,9.3,9.3,7.8,14.0,0.0,22.9,0.9,0.0,0.0,0.0,0.0
+"Shadow","Torso","Shadow Garb+5",49.5,0.0,24.8,26.4,18.6,35.6,0.0,59.7,2.3,0.0,0.0,0.0,0.0
+"Shadow","Arms","Shadow Gauntlets+5",29.2,0.0,14.0,15.5,10.8,20.2,0.0,35.6,1.4,0.0,0.0,0.0,0.0
+"Shadow","Legs","Shadow Leggings+5",29.2,0.0,14.0,15.5,10.8,20.2,0.0,35.6,1.4,0.0,0.0,0.0,0.0
+"Witch","Head","Witch Hat+5",12.7,14.0,9.3,10.8,18.6,14.0,0.0,12.7,1.1,0.0,0.0,0.0,0.0
+"Witch","Torso","Witch Cloak+5",45.7,15.2,31.0,40.3,66.7,51.1,0.0,45.7,4.0,0.0,0.0,0.0,0.0
+"Witch","Arms","Witch Gloves+5",20.3,7.6,14.0,17.1,27.9,21.7,0.0,20.3,1.7,0.0,0.0,0.0,0.0
+"Witch","Legs","Witch Skirt+5",29.2,10.2,18.6,26.4,41.9,26.4,0.0,35.6,2.5,0.0,0.0,0.0,0.0
+"Adventurer","Head","Helm of the Wise",11.0,18.0,13.0,10.0,12.0,18.0,8.0,7.0,5.1,0.0,0.0,0.0,0.0
+"Adventurer","Torso","Armor of the Glorious",28.0,24.0,34.0,25.0,31.0,47.0,20.0,19.0,13.3,0.0,0.0,0.0,0.0
+"Adventurer","Arms","Gauntlets Of The Vanquisher",6.0,4.0,7.0,6.0,7.0,11.0,4.0,5.0,3.0,0.0,0.0,0.0,0.0
+"Adventurer","Legs","Boots Of The Explorer",8.0,5.0,11.0,7.0,10.0,14.0,6.0,6.0,4.0,0.0,0.0,0.0,0.0
+"Balder","Head","Balder Helm+10",11.2,0.0,19.4,14.5,14.5,33.9,6.0,8.4,4.2,0.0,0.0,0.0,0.0
+"Balder","Torso","Balder Armor+10",28.0,0.0,43.6,36.3,36.3,89.5,16.0,22.4,10.9,0.0,0.0,0.0,0.0
+"Balder","Arms","Balder Gauntlets+10",8.4,0.0,19.4,12.1,16.9,41.1,5.0,7.0,3.5,0.0,0.0,0.0,0.0
+"Balder","Legs","Balder Leggings+10",16.8,0.0,29.0,21.8,24.2,53.2,9.0,12.6,6.4,0.0,0.0,0.0,0.0
+"Black Iron","Head","Black Iron Helm+5",21.6,6.4,29.5,12.4,17.1,41.9,12.0,12.7,6.0,0.0,0.0,0.0,0.0
+"Black Iron","Torso","Black Iron Armor+5",54.6,16.5,79.0,32.5,46.5,105.4,31.0,31.7,15.6,0.0,0.0,0.0,0.0
+"Black Iron","Arms","Black Iron Gauntlets+5",31.7,10.2,46.5,20.2,26.4,62.0,18.0,17.8,9.2,0.0,0.0,0.0,0.0
+"Black Iron","Legs","Black Iron Leggings+5",31.7,10.2,46.5,20.2,26.4,62.0,18.0,17.8,9.2,0.0,0.0,0.0,0.0
+"Black Knight","Head","Black Knight Helm+5",15.2,0.0,27.9,9.3,17.1,32.6,8.0,7.6,5.0,0.0,0.0,0.0,0.0
+"Black Knight","Torso","Black Knight Armor+5",40.6,0.0,74.4,26.4,44.9,88.4,21.0,19.0,13.0,0.0,0.0,0.0,0.0
+"Black Knight","Arms","Black Knight Gauntlets+5",19.0,0.0,35.6,12.4,21.7,40.3,10.0,10.2,6.0,0.0,0.0,0.0,0.0
+"Black Knight","Legs","Black Knight Leggings+5",21.6,0.0,40.3,14.0,23.3,46.5,11.0,11.4,7.0,0.0,0.0,0.0,0.0
+"Brass","Head","Brass Helm+5",14.0,7.6,17.0,17.0,18.6,34.1,8.0,11.4,5.1,0.0,0.0,0.0,0.0
+"Brass","Torso","Brass Armor+5",30.5,14.0,38.7,38.7,41.8,74.4,16.0,25.4,10.9,0.0,0.0,0.0,0.0
+"Brass","Arms","Brass Gauntlets+5",15.2,7.6,18.6,18.6,21.7,37.2,8.0,12.7,5.4,0.0,0.0,0.0,0.0
+"Brass","Legs","Brass Leggings+5",17.8,8.9,23.3,23.3,24.8,40.3,9.0,15.2,6.4,0.0,0.0,0.0,0.0
+"Catarina","Head","Catarina Helm+5",16.5,0.0,20.1,10.8,18.6,34.1,8.0,11.4,4.5,0.0,0.0,0.0,0.0
+"Catarina","Torso","Catarina Armor+5",43.2,0.0,57.3,29.4,48.0,88.3,21.0,30.5,11.7,0.0,0.0,0.0,0.0
+"Catarina","Arms","Catarina Gauntlets+5",26.7,0.0,32.6,18.6,27.9,52.7,13.0,16.5,6.9,0.0,0.0,0.0,0.0
+"Catarina","Legs","Catarina Leggings+5",26.7,0.0,32.5,18.6,27.9,52.7,13.0,16.5,6.9,0.0,0.0,0.0,0.0
+"Crystalline","Head","Crystalline Helm",6.0,0.0,6.0,2.0,8.0,25.0,6.0,0.0,4.2,0.0,0.0,0.0,0.0
+"Crystalline","Torso","Crystalline Armor",15.0,0.0,15.0,7.0,21.0,59.0,16.0,0.0,10.9,0.0,0.0,0.0,0.0
+"Crystalline","Arms","Crystalline Gauntlets",9.0,0.0,9.0,4.0,12.0,37.0,9.0,0.0,6.4,0.0,0.0,0.0,0.0
+"Crystalline","Legs","Crystalline Leggings",9.0,0.0,9.0,4.0,12.0,37.0,9.0,0.0,6.4,0.0,0.0,0.0,0.0
+"Eastern","Head","Eastern Helm+5",19.0,0.0,18.6,10.8,9.3,26.4,8.0,14.0,4.7,0.0,0.0,0.0,0.0
+"Eastern","Torso","Eastern Armor+5",48.3,0.0,51.1,27.9,23.3,69.8,20.0,35.6,12.3,0.0,0.0,0.0,0.0
+"Eastern","Arms","Eastern Gauntlets+5",6.3,0.0,6.2,3.1,1.6,9.3,2.0,5.1,1.5,0.0,0.0,0.0,0.0
+"Eastern","Legs","Eastern Leggings+5",15.2,0.0,17.1,9.3,7.8,23.3,6.0,12.7,4.0,0.0,0.0,0.0,0.0
+"Elite Knight","Head","Elite Knight Helm+10",12.6,0.0,19.4,14.5,16.9,36.3,6.0,8.4,4.5,0.0,0.0,0.0,0.0
+"Elite Knight","Torso","Elite Knight Armor+10",32.2,0.0,43.6,36.3,41.1,94.4,15.0,22.4,11.7,0.0,0.0,0.0,0.0
+"Elite Knight","Arms","Elite Knight Gauntlets+10",9.8,0.0,19.4,12.1,16.9,43.6,4.0,7.0,3.7,0.0,0.0,0.0,0.0
+"Elite Knight","Legs","Elite Knight Leggings+10",19.6,0.0,26.6,21.8,26.6,55.7,9.0,12.6,6.9,0.0,0.0,0.0,0.0
+"Giant","Head","Giant Helm+5",16.5,0.0,29.5,20.2,20.2,41.9,14.0,10.2,6.3,0.0,0.0,0.0,0.0
+"Giant","Torso","Giant Armor+5",40.6,0.0,74.4,51.1,49.6,111.6,35.0,24.1,16.4,0.0,0.0,0.0,0.0
+"Giant","Arms","Giant Gauntlets+5",24.1,0.0,44.9,29.5,29.5,63.6,21.0,14.0,9.7,0.0,0.0,0.0,0.0
+"Giant","Legs","Giant Leggings+5",24.1,0.0,44.9,29.5,29.5,63.6,21.0,14.0,9.7,0.0,0.0,0.0,0.0
+"Havel","Head","Havel's Helm",18.0,9.0,22.0,18.0,22.0,36.0,18.0,4.0,7.5,0.0,0.0,0.0,0.0
+"Havel","Torso","Havel's Armor",45.0,22.0,54.0,49.0,56.0,92.0,47.0,11.0,19.5,0.0,0.0,0.0,0.0
+"Havel","Arms","Havel's Gauntlets",27.0,13.0,32.0,29.0,32.0,54.0,28.0,5.0,11.5,0.0,0.0,0.0,0.0
+"Havel","Legs","Havel's Leggings",27.0,13.0,32.0,29.0,32.0,54.0,28.0,5.0,11.5,0.0,0.0,0.0,0.0
+"Heavy Cleric","Head","Cleric Helm+10",13.0,0.0,19.0,15.0,22.0,36.0,8.0,8.0,4.8,0.0,0.0,0.0,0.0
+"Heavy Cleric","Torso","Cleric Armor+10",32.0,0.0,51.0,36.0,56.0,97.0,20.0,22.0,12.5,0.0,0.0,0.0,0.0
+"Heavy Cleric","Arms","Cleric Gauntlets+10",20.0,0.0,29.0,22.0,32.0,58.0,12.0,13.0,7.4,0.0,0.0,0.0,0.0
+"Heavy Cleric","Legs","Cleric Leggings+10",20.0,0.0,29.0,22.0,32.0,58.0,12.0,13.0,7.4,0.0,0.0,0.0,0.0
+"Channelers","Head","Six-Eyed Helm of the Channelers",15.0,0.0,17.0,13.0,18.0,20.0,5.0,13.0,3.9,0.0,0.0,0.0,0.0
+"Channelers","Torso","Robe of the Channelers",38.0,0.0,45.0,35.0,45.0,53.0,12.0,33.0,10.1,0.0,0.0,0.0,0.0
+"Channelers","Arms","Gauntlets of the Channelers",12.0,0.0,13.0,10.0,13.0,17.0,3.0,10.0,3.0,0.0,0.0,0.0,0.0
+"Channelers","Legs","Waistcloth of the Channelers",23.0,0.0,27.0,20.0,27.0,32.0,7.0,20.0,6.0,0.0,0.0,0.0,0.0
+"Silver Knight","Head","Silver Knight Helm+5",11.4,1.3,17.1,21.7,15.5,32.6,8.0,6.3,4.8,0.0,0.0,0.0,0.0
+"Silver Knight","Torso","Silver Knight Armor+5",30.5,2.5,44.9,52.7,40.3,80.6,19.0,15.2,12.0,0.0,0.0,0.0,0.0
+"Silver Knight","Arms","Silver Knight Gauntlets+5",14.0,1.3,21.7,24.8,18.6,38.8,9.0,7.6,5.5,0.0,0.0,0.0,0.0
+"Silver Knight","Legs","Silver Knight Leggings+5",17.8,1.3,24.8,29.5,23.3,43.4,11.0,8.9,6.5,0.0,0.0,0.0,0.0
+"Steel","Head","Steel Helm+10",12.6,0.0,19.4,12.1,19.4,38.7,9.0,8.4,5.4,0.0,0.0,0.0,0.0
+"Steel","Torso","Steel Armor+10",32.2,0.0,50.8,31.5,53.2,101.6,23.0,22.4,14.0,0.0,0.0,0.0,0.0
+"Steel","Arms","Steel Gauntlets+10",20.0,0.0,29.0,14.0,32.0,61.0,14.0,13.0,8.3,0.0,0.0,0.0,0.0
+"Steel","Legs","Steel Leggings+10",20.0,0.0,29.0,14.0,32.0,61.0,14.0,13.0,8.3,0.0,0.0,0.0,0.0
+"Stone","Head","Stone Helm",17.0,0.0,21.0,21.0,17.0,35.0,15.0,6.0,6.8,0.0,0.0,0.0,0.0
+"Stone","Torso","Stone Armor",45.0,0.0,54.0,54.0,45.0,91.0,39.0,16.0,17.6,0.0,0.0,0.0,0.0
+"Stone","Arms","Stone Gauntlets",27.0,0.0,33.0,33.0,27.0,54.0,23.0,10.0,10.4,0.0,0.0,0.0,0.0
+"Stone","Legs","Stone Leggings",27.0,0.0,33.0,33.0,27.0,54.0,23.0,10.0,10.4,0.0,0.0,0.0,0.0
+"Golem","Head","Golem Helm",17.0,0.0,16.0,6.0,17.0,35.0,13.0,12.0,6.3,0.0,0.0,0.0,0.0
+"Golem","Torso","Golem Armor",45.0,0.0,41.0,17.0,45.0,91.0,33.0,31.0,16.4,0.0,0.0,0.0,0.0
+"Golem","Arms","Golem Gauntlets",27.0,0.0,23.0,10.0,25.0,54.0,20.0,17.0,9.7,0.0,0.0,0.0,0.0
+"Golem","Legs","Golem Leggings",27.0,0.0,23.0,10.0,25.0,54.0,20.0,17.0,9.7,0.0,0.0,0.0,0.0
+"Iron and Sun","Head","Iron Helm+10",17.0,3.0,24.0,22.0,24.0,34.0,8.0,11.0,4.5,0.0,0.0,0.0,0.0
+"Iron and Sun","Torso","Armor of the Sun+10",16.0,14.0,51.0,46.0,51.0,85.0,16.0,22.0,9.0,0.0,0.0,0.0,0.0
+"Iron and Sun","Arms","Iron Bracelet+10",15.0,3.0,24.0,22.0,24.0,41.0,7.0,10.0,4.3,0.0,0.0,0.0,0.0
+"Iron and Sun","Legs","Iron Leggings+10",20.0,3.0,29.0,27.0,29.0,51.0,9.0,13.0,5.3,0.0,0.0,0.0,0.0
+"Ornstein","Head","Ornstein's Helm",18.0,8.0,22.0,18.0,16.0,32.0,9.0,8.0,5.5,0.0,0.0,0.0,0.0
+"Ornstein","Torso","Ornstein's Armor",38.0,18.0,46.0,40.0,36.0,70.0,19.0,18.0,12.0,0.0,0.0,0.0,0.0
+"Ornstein","Arms","Ornstein's Gauntlets",12.0,6.0,16.0,14.0,12.0,29.0,6.0,6.0,4.0,0.0,0.0,0.0,0.0
+"Ornstein","Legs","Ornstein's Leggings",22.0,12.0,28.0,24.0,20.0,40.0,11.0,12.0,7.0,0.0,0.0,0.0,0.0
+"Paladin","Head","Paladin Helm+5",16.5,27.9,20.2,10.8,18.6,34.1,8.0,11.4,5.0,0.0,0.0,0.0,0.0
+"Paladin","Torso","Paladin Armor+5",43.2,72.4,57.4,29.5,48.1,91.5,20.0,30.5,12.9,0.0,0.0,0.0,0.0
+"Paladin","Arms","Paladin Gauntlets+5",26.7,43.2,32.6,18.6,29.5,54.3,12.0,16.5,7.6,0.0,0.0,0.0,0.0
+"Paladin","Legs","Paladin Leggings+5",26.7,43.2,32.6,18.6,29.5,54.3,12.0,16.5,7.6,0.0,0.0,0.0,0.0
+"Favor","Head","Helm of Favor+5",14.0,10.0,17.0,11.0,16.0,28.0,8.0,10.0,4.5,0.0,0.0,0.0,0.0
+"Favor","Torso","Embraced Armor of Favor+5",36.0,28.0,47.0,30.0,36.0,74.0,20.0,28.0,11.7,0.0,0.0,0.0,0.0
+"Favor","Arms","Gauntlets of Favor+5",14.0,13.0,19.0,12.0,16.0,33.0,8.0,13.0,5.0,0.0,0.0,0.0,0.0
+"Favor","Legs","Leggings of Favor+5",19.0,18.0,28.0,17.0,22.0,43.0,11.0,18.0,6.9,0.0,0.0,0.0,0.0
+"Thorns","Head","Helm of Thorns+5",12.7,0.0,18.6,12.4,15.5,26.4,6.0,8.9,4.1,0.0,0.0,0.0,0.0
+"Thorns","Torso","Armor of Thorns+5",33.0,0.0,51.1,31.0,43.4,69.8,16.0,22.9,10.5,0.0,0.0,0.0,0.0
+"Thorns","Arms","Gauntlets of Thorns+5",20.3,0.0,27.9,18.6,24.8,40.3,9.0,12.7,6.2,0.0,0.0,0.0,0.0
+"Thorns","Legs","Leggings of Thorns+5",20.3,0.0,27.9,18.6,24.8,40.3,9.0,12.7,6.2,0.0,0.0,0.0,0.0
+"Smough","Head","Smough's Helm",21.0,5.0,26.0,21.0,19.0,40.0,14.0,12.0,6.8,0.0,0.0,0.0,0.0
+"Smough","Torso","Smough's Armor",54.0,9.0,66.0,59.0,52.0,106.0,35.0,28.0,17.6,0.0,0.0,0.0,0.0
+"Smough","Arms","Smough's Gauntlets",33.0,5.0,40.0,33.0,31.0,61.0,21.0,16.0,10.4,0.0,0.0,0.0,0.0
+"Smough","Legs","Smough's Leggings",33.0,5.0,40.0,33.0,31.0,61.0,21.0,16.0,10.4,0.0,0.0,0.0,0.0
+"Dark","Head","Dark Mask+5",15.2,0.0,18.6,15.5,18.6,27.9,6.0,10.2,3.8,0.0,0.0,0.0,0.0
+"Dark","Torso","Dark Armor+5",38.1,0.0,48.1,41.9,46.5,69.8,16.0,26.7,9.8,0.0,0.0,0.0,0.0
+"Dark","Arms","Dark Gauntlets+5",22.9,0.0,27.9,23.3,27.9,41.9,9.0,15.2,5.8,0.0,0.0,0.0,0.0
+"Dark","Legs","Dark Leggings+5",22.9,0.0,27.9,23.3,27.9,41.9,9.0,15.2,5.8,0.0,0.0,0.0,0.0
+"Xanthous","Head","Xanthous Crown+5",10.2,44.4,4.6,12.4,23.3,27.9,0.0,14.0,5.0,0.0,0.0,0.0,0.0
+"Xanthous","Torso","Xanthous Overcoat+5",27.9,0.0,10.8,35.6,57.4,49.6,0.0,36.8,3.9,0.0,0.0,0.0,0.0
+"Xanthous","Arms","Xanthous Gloves+5",15.2,0.0,6.2,21.7,34.1,27.9,0.0,22.9,2.3,0.0,0.0,0.0,0.0
+"Xanthous","Legs","Xanthous Waistcloth+5",27.9,0.0,10.8,35.6,60.5,49.6,0.0,38.1,4.0,0.0,0.0,0.0,0.0
+"","Head","Mask of the Father",6.0,0.0,6.0,8.0,10.0,6.0,0.0,0.0,1.2,0.05,0.0,0.0,0.0
+"","Head","Mask of the Mother",10.0,0.0,6.0,8.0,12.0,6.0,0.0,0.0,1.2,0.0,0.1,0.0,0.0
+"","Head","Mask of the Child",6.0,0.0,8.0,10.0,10.0,6.0,0.0,0.0,1.2,0.0,0.0,0.0,10.0
+"","Head","Fang Boar Helm+5",16.5,0.0,6.2,6.2,7.8,40.3,12.0,10.2,8.0,0.0,0.0,0.0,0.0
+"","Head","Gargoyle Helm+5",27.9,0.0,23.3,23.3,23.3,23.3,8.0,24.1,3.5,0.0,0.0,0.0,0.0
+"","Head","Sunlight Maggot",0.0,0.0,24.0,13.0,5.0,6.0,0.0,0.0,1.4,0.0,0.0,0.0,0.0
+"","Head","Sack+10",16.8,0.0,19.4,9.7,14.5,14.5,0.0,14.0,0.6,0.0,0.0,0.0,0.0
+"","Head","Royal Helm+10",22.0,0.0,24.0,15.0,24.0,39.0,8.0,17.0,4.5,0.0,0.0,0.0,0.0
+"","Head","Symbol of Avarice",10.0,0.0,2.0,2.0,8.0,21.0,15.0,0.0,10.0,0.0,0.0,0.0,0.0

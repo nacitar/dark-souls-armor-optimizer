@@ -122,14 +122,16 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         args.fields.add(args.weight_field)
         args.fields.add(args.weight_modifier_field)
 
-    exclude = {}
+    exclude_textual_field_values = {}
     if args.exclude_pieces is not None:
-        exclude[args.name_field] = args.exclude_pieces
+        exclude_textual_field_values[args.name_field] = args.exclude_pieces
     if args.exclude_sets is not None:
-        exclude[args.set_field] = args.exclude_sets
+        exclude_textual_field_values[args.set_field] = args.exclude_sets
 
     game_data_reader = game_data.Reader(
-        name_field=args.name_field, fields=args.fields, exclude=exclude
+        name_field=args.name_field,
+        fields=args.fields,
+        exclude_textual_field_values=exclude_textual_field_values,
     )
 
     if args.input_directory:

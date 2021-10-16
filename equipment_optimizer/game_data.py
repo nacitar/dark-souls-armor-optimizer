@@ -2,7 +2,7 @@ import importlib.resources
 import pkgutil
 import itertools
 import logging
-from typing import Optional, Generator, Union, Iterable
+from typing import Optional, Generator, Union, Iterable, cast
 from pathlib import Path
 from os import PathLike
 import re
@@ -36,13 +36,13 @@ class Entry:
     data: Data
 
 
-# A small improvement gain could possibly be had by avoiding csv.DictReader and
-# parsing in a way that doesn't include all fields.  This would likely be
-# difficult to implement faster too so the gain is mostly theoretical.
-#
-# Fields are already removed by the "exclude" value, but this is only done to
-# use less memory and is applied AFTER the full dict is prepared.
-# https://github.com/python/cpython/blob/main/Lib/csv.py#L80
+# Supports reading dicts of strings and floats.  Any other type, including int
+# is not supported and an exception will be thrown when encountered.
+# Ultimately, float values are the most compatible for the problem space and
+# are necessary for many games.  The input formats supported do not need to be
+# vast and general, and imposing these requirements adds much simplicity
+# provided that enough validations are performed that users are informed when
+# they provide invalid data.
 class Reader:
     BUILTIN_GAME_DATA_PACKAGE = f"{__package__}.builtin_game_data"
 
@@ -51,45 +51,65 @@ class Reader:
         *,
         name_field: str = "name",
         fields: Optional[set[str]] = None,
-        exclude: Optional[dict[str, set[str]]] = None,
+        exclude_numeric_field_values: Optional[dict[str, set[float]]] = None,
+        exclude_textual_field_values: Optional[dict[str, set[str]]] = None,
     ):
         self._name_field = name_field
         self._fields: Optional[set[str]] = None  # get all of them
         if fields is not None:
             self._fields = set(fields)
             self._fields.add(self._name_field)
-        self.exclude = exclude
+        self.exclude_numeric_field_values = exclude_numeric_field_values
+        self.exclude_textual_field_values = exclude_textual_field_values
 
-    def is_row_excluded(self, row: dict[str, str]) -> bool:
-        if self.exclude:
-            for field, excluded_values in self.exclude.items():
-                if row.get(field, "") in excluded_values:
-                    return True
+    def is_row_excluded(self, row: dict[str, Union[str, float]]) -> bool:
+        for exclude_field_values, expected_value_type in (
+            (self.exclude_numeric_field_values, float),
+            (self.exclude_textual_field_values, str),
+        ):
+            if exclude_field_values:
+                for field, excluded_values in exclude_field_values.items():
+                    value = row.get(field)
+                    if isinstance(value, expected_value_type):
+                        if value in excluded_values:
+                            return True
+                    else:
+                        raise TypeError(
+                            "field with exclusions has unexpected type:"
+                            f" {repr(field)} is of type {type(value)}"
+                            f" but is expected to be {expected_value_type}"
+                        )
         return False
 
-    def rows(
-        self, rows: Iterable[dict[str, str]]
-    ) -> Generator[Entry, None, None]:
+    def rows(self, rows: Iterable[dict[str, Union[str, float]]]):
         for row in rows:
             if self.is_row_excluded(row):
                 LOG.debug(f"Skipping excluded row: {repr(row)}")
                 continue
+            name = ""
             textual_fields: dict[str, str] = {}
             numeric_fields: dict[str, float] = {}
-            name = ""
-            for key, value in row.items():
+            for field in self._fields if self._fields else row.keys():
+                value = row.get(field)
                 if value:
-                    if key == self._name_field:
-                        name = value
-                    elif self._fields is None or key in self._fields:
-                        try:
-                            float_value = float(value)
-                            if float_value != 0.0:
-                                numeric_fields[key] = float_value
-                        except ValueError:
-                            textual_fields[key] = value
+                    if field == self._name_field:
+                        if isinstance(value, str):
+                            name = value
+                        else:
+                            raise TypeError(
+                                f"name field is not a str: {value}"
+                            )
+                    elif isinstance(value, float):
+                        numeric_fields[field] = value
+                    elif isinstance(value, str):
+                        textual_fields[field] = value
+                    else:
+                        raise TypeError(
+                            "field has invalid value type: "
+                            f" {repr(field)} is of type {type(value)}"
+                        )
             if not name:
-                raise ValueError(f"row requires non-empty name: {repr(row)}")
+                raise ValueError(f"row has empty or missing name: {repr(row)}")
             yield Entry(
                 name=name,
                 data=Data(
@@ -98,14 +118,26 @@ class Reader:
                 ),
             )
 
+    @staticmethod
+    def _csv_dict_reader(
+        lines: Iterable[str],
+    ) -> Iterable[dict[str, Union[str, float]]]:
+        # csv.QUOTE_NONNUMERIC means that the dicts returned can have both str
+        # and float values, however the type hints wrongly only allow for str
+        # values.  Casting to correct the type hint for the intended usage.
+        return cast(
+            Iterable[dict[str, Union[str, float]]],
+            csv.DictReader(lines, quoting=csv.QUOTE_NONNUMERIC),
+        )
+
     def csv_file(
         self, path: Union[str, PathLike[str]]
     ) -> Generator[Entry, None, None]:
         with open(path, mode="r", newline="") as csv_file:
-            yield from self.rows(csv.DictReader(csv_file))
+            yield from self.rows(Reader._csv_dict_reader(csv_file))
 
     def csv_content(self, content: str) -> Generator[Entry, None, None]:
-        yield from self.rows(csv.DictReader(iterate_lines(content)))
+        yield from self.rows(Reader._csv_dict_reader(iterate_lines(content)))
 
     def builtin_game(
         self, game: str, *, data_sets: Optional[set[str]] = None
