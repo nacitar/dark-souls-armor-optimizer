@@ -1,14 +1,13 @@
 import importlib.resources
-import pkgutil
 import itertools
 import logging
 from typing import Optional, Generator, Union, Iterable, cast
 from pathlib import Path
 from os import PathLike
 import re
-import json
 import csv
 from dataclasses import dataclass
+from importlib.resources import open_text as open_text_resource
 
 
 LOG = logging.getLogger(__name__)
@@ -130,14 +129,17 @@ class Reader:
             csv.DictReader(lines, quoting=csv.QUOTE_NONNUMERIC),
         )
 
+    def csv_lines(self, lines: Iterable[str]) -> Generator[Entry, None, None]:
+        yield from self.rows(Reader._csv_dict_reader(lines))
+
     def csv_file(
         self, path: Union[str, PathLike[str]]
     ) -> Generator[Entry, None, None]:
         with open(path, mode="r", newline="") as csv_file:
-            yield from self.rows(Reader._csv_dict_reader(csv_file))
+            yield from self.csv_lines(csv_file)
 
     def csv_content(self, content: str) -> Generator[Entry, None, None]:
-        yield from self.rows(Reader._csv_dict_reader(iterate_lines(content)))
+        yield from self.csv_lines(iterate_lines(content))
 
     def builtin_game(
         self, game: str, *, data_sets: Optional[set[str]] = None
@@ -160,11 +162,8 @@ class Reader:
                     LOG.debug(
                         f"Loading builtin game data: {package} {filename}"
                     )
-                    data = pkgutil.get_data(package, filename)
-                    if data is not None:
-                        yield from self.csv_content(
-                            data.decode(json.detect_encoding(data))
-                        )
+                    with open_text_resource(package, filename) as csv_file:
+                        yield from self.csv_lines(csv_file)
 
     def custom_game(
         self,
