@@ -16,7 +16,7 @@ sortedcontainers = "^2.4.0"
 pytest = "^5.2"
 flake8 = "^3.9.2"
 mypy = "^0.910"
-black = "^21.8b0"
+black = "^22.3.0"
 
 [tool.poetry.scripts]
 equipment-optimizer = "equipment_optimizer.__main__:main"

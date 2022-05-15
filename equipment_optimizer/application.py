@@ -5,6 +5,7 @@ import logging
 import argparse
 import re
 from . import game_data
+from .optimizer import Configuration, Database, optimize
 
 LOG = logging.getLogger(__name__)
 
@@ -128,6 +129,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     if args.exclude_sets is not None:
         exclude_textual_field_values[args.set_field] = args.exclude_sets
 
+    # TODO: exclude positions
+
     game_data_reader = game_data.Reader(
         name_field=args.name_field,
         fields=args.fields,
@@ -143,16 +146,18 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             game=args.game, data_sets=args.data_sets
         )
 
-    equipment_database: dict[str, game_data.Data] = {}
-    by_position: dict[str, set[str]] = {}
-    for entry in game_data_generator:
-        if entry.name in equipment_database:
-            LOG.warning(f"Replacing existing piece of equipment: {entry.name}")
-        equipment_database[entry.name] = entry.data
-        position = entry.data.textual_fields.get(args.position_field)
-        if position:
-            by_position.setdefault(position, set()).add(entry.name)
-    print(by_position)
+    database = Database(
+        Configuration(
+            value_field=args.maximize[0],
+            position_field=args.position_field,
+            weight_field=args.weight_field,
+            weight_modifier_field=args.weight_modifier_field,
+        )
+    )
+    database.add_entries(game_data_generator)
+
+    optimize(database, ["Head", "Torso", "Arms", "Legs", "Fingers", "Fingers"])
+
     return 0
 
 
