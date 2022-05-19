@@ -109,6 +109,30 @@ class Database:
         )
 
 
+@dataclass(kw_only=True)
+class Extents:
+    minimum_weight: float = 0.0
+    maximum_weight_multiplier: float = 1.0
+
+    def __add__(self, other: Extents) -> Extents:
+        return Extents(
+            minimum_weight=self.minimum_weight + other.minimum_weight,
+            maximum_weight_multiplier=(
+                self.maximum_weight_multiplier
+                * other.maximum_weight_multiplier
+            ),
+        )
+
+    def __sub__(self, other: Extents) -> Extents:
+        return Extents(
+            minimum_weight=self.minimum_weight - other.minimum_weight,
+            maximum_weight_multiplier=(
+                self.maximum_weight_multiplier
+                / other.maximum_weight_multiplier
+            ),
+        )
+
+
 class SolutionSet:
     def __init__(self, solutions: Iterable[Solution], count: int):
         self.count = count
@@ -126,21 +150,31 @@ class SolutionSet:
         self.solutions: list[Solution] = sorted(
             solutions, key=sort_by_metrics_and_measure_extents
         )
-        self.maximum_weight_multiplier = math.prod(weight_multiplier_heap)
-        self.minimum_weight = minimum_weight
+        self.extents = Extents(
+            minimum_weight=minimum_weight,
+            maximum_weight_multiplier=math.prod(weight_multiplier_heap),
+        )
 
-    def filter(self, maximum_other_weights: float):
-        # TODO: need to know own capacity
-        # - N max weights where N is the number of items in that position
-        pass
+    def filter(
+        self,
+        *,
+        maximum_weight: float,
+        used_weight: float,
+        full_extents: Extents,
+    ) -> Generator[Solution, None, None]:
+        external_extents = full_extents - self.extents
+        for solution in self.solutions:
+            # TODO: actually filter down the solutions!
+            # TODO: how is count handled in the result?
+            # how will I make a copy?
+            yield solution
 
 
 class Optimizer:
     def __init__(
         self, *, database: Database, value_field: str, positions: list[str]
     ):
-        self.maximum_weight_multiplier = 1.0
-        self.minimum_weight = 0.0
+        self.full_extents = Extents()
         self.solution_sets: list[SolutionSet] = []
         for position, count in Counter(positions).items():
             solution_set = SolutionSet(
@@ -149,27 +183,14 @@ class Optimizer:
                 ),
                 count=count,
             )
-            self.maximum_weight_multiplier *= (
-                solution_set.maximum_weight_multiplier
-            )
-            self.minimum_weight += solution_set.minimum_weight
+            self.full_extents += solution_set.extents
             self.solution_sets.append(solution_set)
 
     def optimize(self, *, maximum_weight: float, used_weight: float):
+        # TODO: everything...
         for solution_set in self.solution_sets:
-            # max increase in weight multipler possible from other positions.
-            maximum_external_weight_multiplier = (
-                self.maximum_weight_multiplier
-                / solution_set.maximum_weight_multiplier
-            )
-            # almost certainly 0, but negative weighted items could exist
-            minimum_external_weight = (
-                self.minimum_weight - solution_set.minimum_weight
-            )
-            # The above metrics can be used to check if the most advantageous
-            # extremes possibly could possibly fit, because if not they can be
-            # removed from the data set without much complexity to check.
-            print(
-                solution_set.maximum_weight_multiplier,
-                maximum_external_weight_multiplier,
+            solution_set.filter(
+                maximum_weight=maximum_weight,
+                used_weight=used_weight,
+                full_extents=self.full_extents,
             )
