@@ -5,7 +5,7 @@ import logging
 import argparse
 import re
 from . import game_data
-from .optimizer import Configuration, Database, optimize
+from .optimizer import Database, Optimizer
 
 LOG = logging.getLogger(__name__)
 
@@ -147,16 +147,19 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         )
 
     database = Database(
-        Configuration(
-            value_field=args.maximize[0],
-            position_field=args.position_field,
-            weight_field=args.weight_field,
-            weight_modifier_field=args.weight_modifier_field,
-        )
+        position_field=args.position_field,
+        weight_field=args.weight_field,
+        weight_modifier_field=args.weight_modifier_field,
     )
     database.add_entries(game_data_generator)
 
-    optimize(database, ["Head", "Torso", "Arms", "Legs", "Fingers", "Fingers"])
+    optimizer = Optimizer(
+        database=database,
+        value_field=args.maximize[0],
+        positions=["Head", "Torso", "Arms", "Legs", "Fingers", "Fingers"],
+    )
+
+    optimizer.optimize(max_weight=51.0, used_weight=2.0)
 
     return 0
 
