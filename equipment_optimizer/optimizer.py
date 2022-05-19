@@ -113,21 +113,23 @@ class SolutionSet:
     def __init__(self, solutions: Iterable[Solution], count: int):
         self.count = count
         weight_multiplier_heap: list[float] = [1.0] * self.count
+        minimum_weight = 0.0
 
-        def sort_by_metrics_and_track_weight_multipliers(
-            solution: Solution,
-        ) -> Metrics:
+        def sort_by_metrics_and_measure_extents(solution: Solution) -> Metrics:
+            nonlocal minimum_weight
             heapq.heappushpop(
                 weight_multiplier_heap, solution.metrics.weight_multiplier
             )
+            minimum_weight = min(solution.metrics.weight, minimum_weight)
             return solution.metrics
 
         self.solutions: list[Solution] = sorted(
-            solutions, key=sort_by_metrics_and_track_weight_multipliers
+            solutions, key=sort_by_metrics_and_measure_extents
         )
-        self.max_weight_multiplier = math.prod(weight_multiplier_heap)
+        self.maximum_weight_multiplier = math.prod(weight_multiplier_heap)
+        self.minimum_weight = minimum_weight
 
-    def filter(self, max_other_weights: float):
+    def filter(self, maximum_other_weights: float):
         # TODO: need to know own capacity
         # - N max weights where N is the number of items in that position
         pass
@@ -137,7 +139,8 @@ class Optimizer:
     def __init__(
         self, *, database: Database, value_field: str, positions: list[str]
     ):
-        self.max_weight_multiplier = 1.0
+        self.maximum_weight_multiplier = 1.0
+        self.minimum_weight = 0.0
         self.solution_sets: list[SolutionSet] = []
         for position, count in Counter(positions).items():
             solution_set = SolutionSet(
@@ -146,16 +149,27 @@ class Optimizer:
                 ),
                 count=count,
             )
-            self.max_weight_multiplier *= solution_set.max_weight_multiplier
+            self.maximum_weight_multiplier *= (
+                solution_set.maximum_weight_multiplier
+            )
+            self.minimum_weight += solution_set.minimum_weight
             self.solution_sets.append(solution_set)
 
-    def optimize(self, *, max_weight: float, used_weight: float):
+    def optimize(self, *, maximum_weight: float, used_weight: float):
         for solution_set in self.solution_sets:
             # max increase in weight multipler possible from other positions.
-            max_external_weight_multiplier = (
-                self.max_weight_multiplier / solution_set.max_weight_multiplier
+            maximum_external_weight_multiplier = (
+                self.maximum_weight_multiplier
+                / solution_set.maximum_weight_multiplier
             )
+            # almost certainly 0, but negative weighted items could exist
+            minimum_external_weight = (
+                self.minimum_weight - solution_set.minimum_weight
+            )
+            # The above metrics can be used to check if the most advantageous
+            # extremes possibly could possibly fit, because if not they can be
+            # removed from the data set without much complexity to check.
             print(
-                solution_set.max_weight_multiplier,
-                max_external_weight_multiplier,
+                solution_set.maximum_weight_multiplier,
+                maximum_external_weight_multiplier,
             )

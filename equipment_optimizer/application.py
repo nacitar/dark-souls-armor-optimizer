@@ -159,7 +159,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         positions=["Head", "Torso", "Arms", "Legs", "Fingers", "Fingers"],
     )
 
-    optimizer.optimize(max_weight=51.0, used_weight=2.0)
+    optimizer.optimize(maximum_weight=51.0, used_weight=2.0)
 
     return 0
 
