@@ -11,13 +11,13 @@ authors = ["Jacob McIntosh <nacitar.sevaht@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 sortedcontainers = "^2.4.0"
-poetryup = "^0.8.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"
 flake8 = "^4.0.1"
 mypy = "^0.961"
 black = "^22.3.0"
+poetryup = "^0.8.0"
 
 [tool.poetry.scripts]
 equipment-optimizer = "equipment_optimizer.__main__:main"
